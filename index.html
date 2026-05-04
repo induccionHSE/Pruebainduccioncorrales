@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inducción HSEQ – Planta Corrales</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ======= VARIABLES ======= */
+    :root {
+      --azul-oscuro: #002b49;
+      --azul-medio: #005A9C;
+      --azul-claro: #007BFF;
+      --azul-bright: #0096FF;
+      --fondo: #eef2f7;
+      --texto: #2c3e50;
+      --naranja: #ff8c00;
+      --naranja-bright: #ffb300;
+      --blanco: #ffffff;
+      --verde: #28a745;
+      --verde-bright: #00c853;
+      --rojo: #dc3545;
+      --gris-claro: #dee2e8;
+      --gris-medio: #8d99ae;
+      --shadow-xs: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.12), 0 5px 10px -5px rgba(0,0,0,0.06);
+      --shadow-lg: 0 20px 40px -10px rgba(0,43,73,0.2);
+      --radio: 14px;
+      --radio-lg: 20px;
+      --header-h: 68px;
+      --progress-h: 5px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.65;
+      background-color: var(--fondo);
+      margin: 0; padding: 0;
+      color: var(--texto);
+      min-height: 100vh;
+    }
+
+    /* ======= HEADER ======= */
+    header {
+      background: linear-gradient(110deg, var(--azul-oscuro) 0%, #004080 50%, var(--azul-medio) 100%);
+      color: var(--blanco);
+      padding: 0 24px;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+
+    .header-left { display: flex; align-items: center; gap: 14px; }
+
+    .header-badge {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
+      padding: 4px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      backdrop-filter: blur(4px);
+      white-space: nowrap;
+    }
+
+    .header-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.3px;
+      display: none;
+    }
+
+    .header-section-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      opacity: 0.85;
+      max-width: 260px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .header-logos {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logos img {
+      height: 42px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: var(--blanco);
+      padding: 5px 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+
+    /* ======= BARRA DE PROGRESO ======= */
+    #barraProgreso {
+      height: var(--progress-h);
+      background: linear-gradient(90deg, var(--naranja) 0%, var(--naranja-bright) 60%, #ffe066 100%);
+      width: 0%;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: sticky;
+      top: var(--header-h);
+      z-index: 1001;
+      box-shadow: 0 2px 8px rgba(255,140,0,0.4);
+    }
+
+    /* ======= NAV DOTS (lateral) ======= */
+    #navDots {
+      position: fixed;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 900;
+    }
+
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(0,43,73,0.2);
+      cursor: pointer;
+      transition: all var(--transition);
+      border: none;
+      padding: 0;
+    }
+
+    .nav-dot:hover {
+      background: var(--azul-medio);
+      transform: scale(1.4);
+    }
+
+    .nav-dot.active {
+      background: var(--naranja);
+      transform: scale(1.5);
+      box-shadow: 0 0 0 3px rgba(255,140,0,0.25);
+    }
+
+    /* ======= CONTENEDOR ======= */
+    .container {
+      background-color: var(--blanco);
+      padding: 44px 48px;
+      max-width: 980px;
+      margin: 28px auto 90px;
+      border-radius: var(--radio-lg);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--azul-medio), var(--naranja), var(--azul-claro));
+    }
+
+    /* ======= SECCIONES ======= */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    section { display: none; }
+    section.active {
+      display: block;
+      animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* ======= SECCIÓN INTRO ESPECIAL ======= */
+    .intro-hero {
+      text-align: center;
+      padding: 20px 0 30px;
+    }
+    .intro-hero .logo-grande {
+      width: 170px;
+      margin-bottom: 28px;
+      filter: drop-shadow(0 4px 12px rgba(0,90,156,0.2));
+      animation: floatSlow 4s ease-in-out infinite;
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-8px); }
+    }
+    .intro-hero h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--azul-oscuro);
+      margin: 0 0 8px;
+      line-height: 1.2;
+    }
+    .intro-hero h1 span { color: var(--naranja); }
+    .intro-hero .subtitle {
+      color: var(--gris-medio);
+      font-size: 1rem;
+      margin-bottom: 32px;
+    }
+    .intro-stats {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .stat-pill {
+      background: linear-gradient(135deg, #eef6ff, #ddeeff);
+      border: 1px solid #c0ddf9;
+      border-radius: 50px;
+      padding: 10px 22px;
+      text-align: center;
+    }
+    .stat-pill strong { display: block; font-size: 1.5rem; font-weight: 800; color: var(--azul-medio); line-height: 1; }
+    .stat-pill span { font-size: 0.72rem; color: var(--gris-medio); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .intro-obligatorio {
+      background: linear-gradient(135deg, #fff8e1, #fff3cd);
+      border: 1px solid #ffd54f;
+      border-left: 5px solid var(--naranja);
+      border-radius: var(--radio);
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+    .intro-obligatorio .ico { font-size: 2rem; flex-shrink: 0; }
+    .intro-obligatorio p { margin: 0; font-size: 0.95rem; color: #5d4e00; }
+    .intro-obligatorio p strong { color: #3d3000; }
+
+    .welcome-footer {
+      background: linear-gradient(135deg, #e8f5e9, #d4edda);
+      border-radius: var(--radio);
+      padding: 16px;
+      color: #155724;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* ======= TITULOS ======= */
+    h2 {
+      color: var(--azul-oscuro);
+      font-weight: 800;
+      font-size: 1.45rem;
+      margin: 0 0 22px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--gris-claro);
+      position: relative;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 55px; height: 3px;
+      background: linear-gradient(90deg, var(--naranja), var(--naranja-bright));
+      border-radius: 2px;
+    }
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, var(--azul-medio), var(--azul-claro));
+      color: white;
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-right: 10px;
+      vertical-align: middle;
+      flex-shrink: 0;
+      box-shadow: 0 3px 8px rgba(0,90,156,0.3);
+    }
+    h4 { margin: 0 0 10px; color: var(--azul-oscuro); font-weight: 700; font-size: 0.97rem; }
+    a { color: var(--azul-claro); text-decoration: none; font-weight: 600; transition: color var(--transition); }
+    a:hover { color: var(--azul-oscuro); text-decoration: underline; }
+    ul { padding-left: 20px; margin-bottom: 14px; }
+    li { margin-bottom: 7px; }
+    p { margin-top: 0; }
+
+    /* ======= MASCOTA FLOTANTE ======= */
+    .mascota {
+      float: right;
+      width: 64px;
+      margin: 0 0 18px 20px;
+    }
+    .mascota img {
+      width: 100%;
+      animation: floatSlow 3.5s ease-in-out infinite;
+    }
+
+    /* ======= IMAGEN SECCIÓN ======= */
+    .imagen-seccion { text-align: center; margin: 22px 0; }
+    .imagen-seccion img {
+      max-width: 100%; height: auto; max-height: 380px;
+      border-radius: var(--radio);
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition);
+    }
+    .imagen-seccion img:hover { transform: scale(1.015); }
+
+    .plano-container {
+      text-align: center;
+      border: 2px dashed var(--azul-claro);
+      padding: 14px;
+      background: #f5f9ff;
+      border-radius: var(--radio);
+      margin-bottom: 22px;
+    }
+    .plano-container img { width: 100%; max-height: 480px; object-fit: contain; }
+
+    /* ======= CARDS ======= */
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--gris-claro);
+      border-left: 5px solid var(--azul-claro);
+      padding: 20px 22px;
+      margin-bottom: 18px;
+      border-radius: var(--radio);
+      box-shadow: var(--shadow-xs);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .card-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      background: #eef6ff;
+    }
+
+    /* ======= ACORDEÓN ======= */
+    details {
+      background: #ffffff;
+      border: 1px solid var(--gris-claro);
+      border-left: 5px solid var(--azul-medio);
+      padding: 16px 18px;
+      margin-bottom: 10px;
+      border-radius: var(--radio);
+      cursor: pointer;
+      box-shadow: var(--shadow-xs);
+      transition: all var(--transition);
+    }
+    details:hover { background: #f8fbff; border-left-color: var(--azul-claro); }
+    details summary {
+      font-weight: 600;
+      font-size: 0.97rem;
+      color: var(--azul-oscuro);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      gap: 10px;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::after {
+      content: '›';
+      font-size: 1.3rem;
+      font-weight: 300;
+      transform: rotate(90deg);
+      transition: transform var(--transition);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+    details[open] summary::after { transform: rotate(270deg); opacity: 1; }
+    details[open] {
+      border-left-color: var(--naranja);
+      background: #fffcf5;
+      box-shadow: var(--shadow-sm);
+    }
+    details > p, details > ul { margin-top: 12px; font-size: 0.93rem; }
+
+    /* ======= RISK CARDS ======= */
+    .risk-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 8px;
+    }
+    .risk-alto { background: #ffe0e0; color: #c62828; }
+    .risk-medio { background: #fff3e0; color: #e65100; }
+    .risk-preventiva {
+      background: #e8f5e9; color: #2e7d32;
+      font-size: 0.75rem; font-weight: 600;
+      padding: 6px 12px;
+      border-radius: var(--radio);
+      border-radius: var(--radio);
+      margin-top: 8px;
+      display: block;
+    }
+
+    /* ======= REGLAS DE ORO ======= */
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .rule-card {
+      background: #ffffff;
+      border: 1px solid var(--gris-claro);
+      border-top: 4px solid var(--azul-oscuro);
+      padding: 22px 20px;
+      border-radius: var(--radio);
+      box-shadow: var(--shadow-xs);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    .rule-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-top-color: var(--naranja);
+    }
+    .rule-num {
+      position: absolute;
+      top: -14px; left: 18px;
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-medio));
+      color: white;
+      border-radius: 50%;
+      font-size: 0.8rem;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 3px 8px rgba(0,43,73,0.4);
+    }
+    .rule-card h4 {
+      font-size: 0.93rem;
+      color: var(--azul-oscuro);
+      padding-top: 4px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--gris-claro);
+    }
+    .rule-card ul { padding-left: 16px; margin: 0; font-size: 0.88rem; color: #555; }
+    .rule-card li { margin-bottom: 6px; }
+
+    /* ======= EXTINTORES ======= */
+    .extintor-container {
+      display: flex; flex-wrap: wrap; gap: 18px; justify-content: center;
+    }
+    .extintor-card {
+      flex: 1 1 250px; max-width: 300px;
+      border-radius: var(--radio);
+      padding: 22px 18px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      background: white;
+      border: 1px solid var(--gris-claro);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .extintor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+    .ext-abc { border-bottom: 5px solid #f9c922; }
+    .ext-co2 { border-bottom: 5px solid #e60000; }
+    .ext-agua { border-bottom: 5px solid #27ae60; }
+    .extintor-card img {
+      height: 120px; object-fit: contain; margin-top: 14px;
+      transition: transform var(--transition);
+    }
+    .extintor-card:hover img { transform: scale(1.12); }
+    .extintor-uso {
+      font-size: 0.82rem; color: #666;
+      background: #f8f9fa; border-radius: 8px;
+      padding: 6px 10px; margin-top: 10px;
+    }
+    .alerta-extintor {
+      background: linear-gradient(135deg, #fff8e1, #fff3cd);
+      color: #856404;
+      border: 1px solid #ffd54f;
+      border-left: 5px solid var(--naranja);
+      padding: 14px 18px;
+      border-radius: var(--radio);
+      font-weight: 600;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.92rem;
+    }
+
+    /* ======= CHECKLIST ======= */
+    .checklist-list { list-style: none; padding: 0; margin-bottom: 0; }
+    .checklist-list li {
+      margin-bottom: 10px;
+      background: #fff;
+      padding: 13px 16px;
+      border: 1px solid var(--gris-claro);
+      border-radius: var(--radio);
+      display: flex;
+      align-items: center;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .checklist-list li:hover { background: #f8fbff; border-color: var(--azul-claro); }
+    .checklist-list li.checked-ok {
+      background: #f0fff4;
+      border-color: var(--verde);
+    }
+    .checklist-list label { cursor: pointer; width: 100%; display: flex; align-items: center; gap: 12px; font-size: 0.94rem; }
+    .checklist-list input[type=checkbox] {
+      width: 20px; height: 20px; flex-shrink: 0;
+      accent-color: var(--verde);
+      cursor: pointer;
+    }
+    .checklist-progress {
+      background: var(--gris-claro);
+      border-radius: 50px; height: 8px;
+      margin-bottom: 18px; overflow: hidden;
+    }
+    .checklist-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--verde), var(--verde-bright));
+      border-radius: 50px;
+      transition: width 0.4s ease;
+    }
+    .checklist-count {
+      font-size: 0.82rem; color: var(--gris-medio);
+      text-align: right; margin-bottom: 6px;
+    }
+
+    .advertencia-checklist {
+      background: #fff5f5; color: #c53030;
+      padding: 14px 18px;
+      border: 1px solid #feb2b2;
+      border-left: 5px solid var(--rojo);
+      border-radius: var(--radio);
+      margin-top: 18px;
+      font-weight: 600;
+      animation: shake 0.4s;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%       { transform: translateX(-5px); }
+      60%       { transform: translateX(5px); }
+    }
+
+    /* ======= EMERGENCIA ======= */
+    .emergency-banner {
+      background: linear-gradient(135deg, #dc3545, #b71c1c);
+      color: white;
+      padding: 18px 22px;
+      border-radius: var(--radio);
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 4px 16px rgba(220,53,69,0.4);
+      animation: pulse-border 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse-border {
+      0%, 100% { box-shadow: 0 4px 16px rgba(220,53,69,0.4); }
+      50%       { box-shadow: 0 4px 30px rgba(220,53,69,0.7); }
+    }
+    .emergency-banner .e-ico { font-size: 2.2rem; flex-shrink: 0; }
+    .emergency-banner .e-text { font-size: 0.95rem; font-weight: 500; }
+    .emergency-banner .e-text strong { font-size: 1.1rem; display: block; margin-bottom: 2px; }
+
+    .emergency-steps {
+      counter-reset: estep;
+      list-style: none;
+      padding: 0;
+    }
+    .emergency-steps li {
+      counter-increment: estep;
+      position: relative;
+      padding: 14px 16px 14px 58px;
+      background: white;
+      border: 1px solid var(--gris-claro);
+      border-radius: var(--radio);
+      margin-bottom: 10px;
+      font-size: 0.94rem;
+      transition: transform var(--transition);
+    }
+    .emergency-steps li:hover { transform: translateX(4px); }
+    .emergency-steps li::before {
+      content: counter(estep);
+      position: absolute;
+      left: 16px; top: 50%; transform: translateY(-50%);
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg, var(--rojo), #b71c1c);
+      color: white;
+      border-radius: 50%;
+      font-weight: 800; font-size: 0.85rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ======= AMBIENTAL ======= */
+    .residuo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .residuo-card {
+      border-radius: var(--radio);
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-xs);
+      transition: transform var(--transition);
+    }
+    .residuo-card:hover { transform: scale(1.03); }
+    .residuo-card .r-ico { font-size: 2rem; margin-bottom: 6px; }
+    .residuo-card h4 { font-size: 0.88rem; margin-bottom: 4px; }
+    .residuo-card p { font-size: 0.82rem; margin: 0; }
+    .r-blanco { background: #f8f9fa; border: 2px solid #adb5bd; color: #333; }
+    .r-verde  { background: #e8f5e9; border: 2px solid #4caf50; color: #1b5e20; }
+    .r-negro  { background: #212529; border: 2px solid #000; color: #f8f9fa; }
+    .r-rojo   { background: #fff5f5; border: 2px solid var(--rojo); color: #7f1d1d; }
+
+    /* ======= PERMISOS/ATS ======= */
+    .proceso-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 18px;
+    }
+    .paso-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding-bottom: 18px;
+      position: relative;
+    }
+    .paso-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 18px; top: 40px;
+      width: 2px;
+      bottom: 0;
+      background: linear-gradient(to bottom, var(--azul-claro), transparent);
+    }
+    .paso-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--azul-medio), var(--azul-claro));
+      color: white;
+      font-weight: 800;
+      font-size: 0.88rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 3px 8px rgba(0,90,156,0.35);
+    }
+    .paso-body { padding-top: 6px; }
+    .paso-body strong { display: block; font-size: 0.95rem; color: var(--azul-oscuro); margin-bottom: 2px; }
+    .paso-body span { font-size: 0.85rem; color: #666; }
+
+    /* ======= CIERRE / COMPLETADO ======= */
+    .cierre-hero {
+      text-align: center;
+      padding: 10px 0 30px;
+    }
+    .cierre-trophy {
+      font-size: 5rem;
+      display: block;
+      margin-bottom: 14px;
+      animation: bounce 1.5s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50%       { transform: translateY(-12px) scale(1.05); }
+    }
+    .cierre-hero h2 {
+      font-size: 1.8rem;
+      border: none; padding: 0; margin-bottom: 8px;
+    }
+    .cierre-hero h2::after { display: none; }
+    .cierre-hero p { color: var(--gris-medio); }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+    .video-card {
+      background: #f8fbff;
+      border: 1px solid #c0ddf9;
+      border-radius: var(--radio);
+      padding: 20px;
+      text-align: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .video-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .video-card .v-ico { font-size: 2.5rem; margin-bottom: 8px; }
+    .video-card h4 { color: var(--azul-oscuro); margin-bottom: 8px; }
+    .video-card a { font-size: 0.9rem; }
+
+    .final-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--verde), #1a9e3a);
+      color: white;
+      padding: 18px 48px;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 6px 20px rgba(40,167,69,0.45);
+    }
+    .final-button:hover {
+      transform: scale(1.06) translateY(-2px);
+      box-shadow: 0 10px 28px rgba(40,167,69,0.55);
+      color: white;
+      text-decoration: none;
+    }
+
+    /* ======= QR TARJETA ======= */
+    .qr-box {
+      text-align: center;
+      background: #f8fbff;
+      padding: 32px 20px;
+      border-radius: var(--radio);
+      border: 2px dashed var(--azul-claro);
+      max-width: 360px;
+      margin: 0 auto;
+    }
+    .qr-box p { font-weight: 700; color: var(--azul-oscuro); margin-bottom: 14px; }
+    .qr-box img {
+      width: 170px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+    .qr-hint { font-size: 0.8rem; color: var(--gris-medio); margin-top: 10px; }
+
+    /* ======= SEGURIDAD VIAL ======= */
+    .vial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .vial-card {
+      background: white;
+      border: 1px solid var(--gris-claro);
+      border-radius: var(--radio);
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-xs);
+      transition: transform var(--transition);
+    }
+    .vial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .vial-card .v-ico { font-size: 2.5rem; margin-bottom: 10px; display: block; }
+    .vial-card h4 { font-size: 0.9rem; margin-bottom: 6px; }
+    .vial-card p { font-size: 0.84rem; color: #666; margin: 0; }
+    .velocidad-badge {
+      display: inline-block;
+      background: var(--rojo);
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 800;
+      padding: 6px 18px;
+      border-radius: 10px;
+      margin: 4px 0;
+    }
+
+    /* ======= NORMAS COMPORTAMIENTO ======= */
+    .norma-card {
+      background: white;
+      border: 1px solid var(--gris-claro);
+      border-radius: var(--radio);
+      padding: 18px 16px;
+      box-shadow: var(--shadow-xs);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .norma-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .norma-card .n-ico { font-size: 2rem; display: block; margin-bottom: 8px; }
+    .norma-card h4 { font-size: 0.9rem; margin-bottom: 6px; }
+    .norma-card p { font-size: 0.85rem; color: #555; margin: 0; }
+
+    /* ======= TAREAS ALTO RIESGO ======= */
+    .risk-details summary { gap: 10px; }
+    .risk-tag {
+      font-size: 0.7rem; font-weight: 700; padding: 2px 8px;
+      border-radius: 50px; background: #ffe0e0; color: #c62828;
+      white-space: nowrap;
+    }
+
+    /* ======= BOTONES NAV ======= */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--gris-claro);
+      gap: 12px;
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--azul-medio), var(--azul-claro));
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      padding: 13px 30px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all var(--transition);
+      box-shadow: 0 4px 12px rgba(0,90,156,0.3);
+      font-size: 0.95rem;
+    }
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,90,156,0.4);
+    }
+    .nav-btn:active { transform: translateY(0); }
+    .nav-btn-prev { background: linear-gradient(135deg, #5a6a7e, #6c757d); }
+    .nav-btn-prev:hover { box-shadow: 0 8px 20px rgba(90,106,126,0.4); }
+    .nav-step-counter {
+      font-size: 0.82rem;
+      color: var(--gris-medio);
+      font-weight: 600;
+      text-align: center;
+      flex: 1;
+    }
+
+    /* ======= GRID UTILITARIO ======= */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* ======= VIDEO EMBED ======= */
+    .video-wrapper {
+      position: relative; width: 100%; height: 0; padding-bottom: 56.25%;
+      margin-bottom: 22px; border-radius: var(--radio); overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .video-wrapper iframe {
+      position: absolute; width: 100%; height: 100%; border: none;
+    }
+
+    /* ======= TOOLTIP ======= */
+    .badge-info {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #eef6ff; border: 1px solid #c0ddf9;
+      border-radius: 50px; padding: 6px 14px;
+      font-size: 0.82rem; font-weight: 600; color: var(--azul-medio);
+      margin: 4px 4px 4px 0;
+    }
+
+    /* ======= RESPONSIVE ======= */
+    @media screen and (max-width: 768px) {
+      .container { padding: 28px 20px; margin: 16px 10px 80px; border-radius: var(--radio); }
+      .header-section-name { display: none; }
+      .grid-2, .rules-grid { grid-template-columns: 1fr !important; }
+      .nav-buttons { flex-wrap: wrap; }
+      .nav-btn { padding: 12px 22px; font-size: 0.88rem; }
+      #navDots { display: none; }
+      .intro-hero h1 { font-size: 1.6rem; }
+      .intro-stats { gap: 12px; }
+      .cierre-hero h2 { font-size: 1.4rem; }
+      .final-button { padding: 15px 32px; font-size: 1rem; }
+    }
+
+    @media screen and (max-width: 480px) {
+      header { padding: 0 16px; }
+      .header-logos img { height: 36px; }
+      .header-badge { font-size: 0.72rem; padding: 3px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="header-badge" id="headerBadge">1 / 17</div>
+    <div>
+      <div class="header-title">Inducción HSEQ</div>
+      <div class="header-section-name" id="headerSectionName">Bienvenida</div>
+    </div>
+  </div>
+  <div class="header-logos">
+    <img src="https://i.postimg.cc/gcX7rNgd/Logo-PBI.png" alt="Logo PBI">
+    <img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="Personaje PBI">
+  </div>
+</header>
+
+<div id="barraProgreso"></div>
+
+<!-- NAV DOTS -->
+<div id="navDots"></div>
+
+<div class="container">
+
+  <!-- SECCIÓN 1: BIENVENIDA -->
+  <section class="active" data-title="Bienvenida">
+    <div class="intro-hero">
+      <img src="https://i.postimg.cc/gcX7rNgd/Logo-PBI.png" alt="Logo PBI" class="logo-grande">
+      <h1>¡Bienvenido a<br><span>Planta Corrales!</span></h1>
+      <p class="subtitle">Inducción HSEQ · Salud · Seguridad · Ambiente · Calidad</p>
+
+      <div class="intro-stats">
+        <div class="stat-pill">
+          <strong>17</strong>
+          <span>Secciones</span>
+        </div>
+        <div class="stat-pill">
+          <strong>10</strong>
+          <span>Reglas de oro</span>
+        </div>
+        <div class="stat-pill">
+          <strong>100%</strong>
+          <span>Obligatoria</span>
+        </div>
+      </div>
+
+      <div class="intro-obligatorio">
+        <span class="ico">📌</span>
+        <p>Esta inducción es <strong>obligatoria</strong>. Su aprobación es requisito previo para cualquier ingreso o actividad dentro de nuestras instalaciones. Al finalizar deberás completar la evaluación.</p>
+      </div>
+
+      <div class="welcome-footer">
+        🌱 Diseñada para que actúes de forma <strong>segura</strong>, <strong>responsable</strong> y coherente con nuestra cultura HSEQ.
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 2: OBJETIVO -->
+  <section data-title="Objetivo de la Inducción">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <h2><span class="section-number">2</span>Objetivo de la Inducción</h2>
+    <p>Te invitamos a ver el siguiente video introductorio que refuerza el propósito de esta inducción.</p>
+
+    <div class="video-wrapper">
+      <iframe src="https://streamable.com/e/uq5idk?" allowfullscreen></iframe>
+    </div>
+
+    <div class="imagen-seccion">
+      <img src="https://i.postimg.cc/nrQSBwyj/Whats-App-Image-2026-01-22-at-2-12-09-PM.png" alt="Foto Planta Corrales">
+    </div>
+
+    <div class="card" style="border-left-color: var(--azul-medio);">
+      <h4>🎯 Propósito</h4>
+      <p style="margin:0;">Brindar a todo visitante o contratista las herramientas y conocimientos esenciales en materia de <strong>Seguridad, Salud, Ambiente y Calidad (HSEQ)</strong>, garantizando la integridad de las personas, el entorno y la continuidad operativa.</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3: POLÍTICAS -->
+  <section data-title="Políticas Corporativas">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <h2><span class="section-number">3</span>Políticas Corporativas</h2>
+    <p>Estas son las políticas esenciales que rigen nuestro actuar diario en PBI. Haz clic en cada una para conocer su alcance:</p>
+
+    <details>
+      <summary>📌 Política Integral HSEQ</summary>
+      <p>Establece nuestro compromiso con la protección de la vida, la salud, el ambiente y la calidad en todos los procesos.</p>
+      <p><a href="https://drive.google.com/open?id=1To8ksi0_bzYq_hzyExQr8FiCRMw2FOy4" target="_blank">📄 Ver documento PDF completo →</a></p>
+    </details>
+
+    <details>
+      <summary>🚫 Política de Prevención SPA</summary>
+      <p>Fomenta ambientes seguros y saludables, orientadas a reducir los riesgos asociados al uso de sustancias psicoactivas. <strong>Cero alcohol · Cero drogas.</strong></p>
+      <p><a href="https://drive.google.com/open?id=19_eRtxWZ1DvwmY0pnxqImaBqKB7KbdRr" target="_blank">📄 Ver documento PDF completo →</a></p>
+    </details>
+
+    <details>
+      <summary>🚗 Política de Seguridad Vial</summary>
+      <p>Promueve una cultura de movilidad segura dentro y fuera de nuestras instalaciones para todos los colaboradores y visitantes.</p>
+      <p><a href="https://drive.google.com/open?id=1NAmg1SaRJ_Rzt3DeqWVO9znXfWT3OZOA" target="_blank">📄 Ver documento PDF completo →</a></p>
+    </details>
+  </section>
+
+  <!-- SECCIÓN 4: PELIGROS Y RIESGOS -->
+  <section data-title="Peligros y Riesgos Generales">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <h2><span class="section-number">4</span>Peligros y Riesgos Generales</h2>
+    <p>Durante tu visita podrías estar expuesto a los siguientes peligros. Despliega cada uno para conocer la medida preventiva:</p>
+
+    <details>
+      <summary>⚡ Riesgo Eléctrico <span class="risk-tag">ALTO</span></summary>
+      <p>Tableros y equipos energizados representan peligro de electrocución o arco eléctrico. Las áreas eléctricas están debidamente señalizadas.</p>
+      <span class="risk-preventiva">✅ No toques ni te acerques a equipos eléctricos sin autorización expresa del área técnica.</span>
+    </details>
+
+    <details>
+      <summary>🧪 Riesgos Químicos <span class="risk-tag">ALTO</span></summary>
+      <p>Exposición a combustibles, lubricantes, ácidos u otros productos que pueden causar quemaduras, intoxicación o reacciones alérgicas.</p>
+      <span class="risk-preventiva">✅ Usa siempre el EPP correspondiente y no manipules sustancias químicas sin autorización y entrenamiento.</span>
+    </details>
+
+    <details>
+      <summary>⚙️ Riesgos Mecánicos <span class="risk-tag">ALTO</span></summary>
+      <p>Equipos rotativos, poleas, fajas y herramientas en operación pueden generar atrapamientos, cortes o golpes graves.</p>
+      <span class="risk-preventiva">✅ Mantente fuera del alcance de equipos en movimiento y respeta las zonas demarcadas.</span>
+    </details>
+
+    <details>
+      <summary>🦠 Riesgos Biológicos <span class="risk-tag">MEDIO</span></summary>
+      <p>Presencia de vectores como mosquitos o insectos en zonas cálidas, que pueden transmitir enfermedades infecciosas.</p>
+      <span class="risk-preventiva">✅ Usa ropa que cubra la piel, aplica repelente y evita zonas con vegetación densa no autorizadas.</span>
+    </details>
+
+    <details>
+      <summary>🐍 Riesgo Ofídico <span class="risk-tag">MEDIO</span></summary>
+      <p>Presencia de serpientes en zonas rurales, áreas verdes o rocosas propias del entorno de la planta.</p>
+      <span class="risk-preventiva">✅ Usa calzado adecuado (botas), camina solo por rutas autorizadas y reporta cualquier avistamiento de inmediato.</span>
+    </details>
+  </section>
+
+  <!-- SECCIÓN 5: REGLAS DE ORO -->
+  <section data-title="Las 10 Reglas de Oro">
+    <div class="mascota"><img src="https://i.postimg.cc/fRBGStH9/diez.png" alt="Escudo 10"></div>
+    <h2><span class="section-number">5</span>Las 10 Reglas de Oro</h2>
+    <p>Estos compromisos son <strong>innegociables</strong>. Su cumplimiento protege la vida de todos:</p>
+
+    <div class="rules-grid">
+      <div class="rule-card">
+        <div class="rule-num">1</div>
+        <h4>Antes de empezar, revisa y planifica</h4>
+        <ul>
+          <li>Obtén el permiso de trabajo antes de iniciar.</li>
+          <li>Realiza el ATS con tu equipo, incluso en tareas rutinarias.</li>
+          <li>Verifica que exista el procedimiento PON y anexos.</li>
+        </ul>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">2</div>
+        <h4>Aísla bien las energías peligrosas</h4>
+        <ul>
+          <li>Bloquea, etiqueta y aísla todas las fuentes de energía (LOTO).</li>
+          <li>Incluye eléctricas, térmicas, neumáticas y partes móviles.</li>
+          <li>No retires bloqueos sin autorización.</li>
+        </ul>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">3</div>
+        <h4>Cuidado con trabajos en caliente</h4>
+        <ul>
+          <li>Verifica el permiso y el monitoreo de gases.</li>
+          <li>Ten extintores disponibles y listos para usar.</li>
+          <li>Retira materiales inflamables del área.</li>
+        </ul>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">4</div>
+        <h4>Con cargas, no te la juegues</h4>
+        <ul>
+          <li>Revisa eslingas, ganchos y estado de la carga.</li>
+          <li>Nunca estés bajo una carga suspendida.</li>
+          <li>Mantén comunicación clara con el operador.</li>
+        </ul>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">5</div>
+        <h4>Protégete al trabajar en altura</h4>
+        <ul>
+          <li>Usa arnés y puntos de anclaje certificados.</li>
+          <li>Asegura herramientas y materiales.</li>
+          <li>Verifica tu equipo antes de usarlo.</li>
+        </ul>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">6</div>
+        <h4>Conduce con responsabilidad</h4>
+        <ul>
+          <li>Usa el cinturón de seguridad siempre.</li>
+          <li>No uses el celular ni manejes fatigado.</li>
+          <li>Respeta los límites de velocidad.</li>
+        </ul>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">7</div>
+        <h4>Usa siempre tu EPP</h4>
+        <ul>
+          <li>Selecciona el EPP adecuado según la tarea.</li>
+          <li>Verifica que esté en buen estado antes de usarlo.</li>
+          <li>Aplica siempre, incluso en tareas cortas.</li>
+        </ul>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">8</div>
+        <h4>Maneja sustancias peligrosas</h4>
+        <ul>
+          <li>Etiqueta los productos correctamente.</li>
+          <li>Consulta la hoja de seguridad antes de usarlos.</li>
+          <li>Actúa de inmediato en caso de derrames.</li>
+        </ul>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">9</div>
+        <h4>No toques equipos eléctricos sin permiso</h4>
+        <ul>
+          <li>Solo personal autorizado puede intervenir.</li>
+          <li>Verifica corte, señalización y aislamiento.</li>
+          <li>Usa herramientas certificadas.</li>
+        </ul>
+      </div>
+      <div class="rule-card" style="border-top-color: var(--naranja);">
+        <div class="rule-num" style="background: linear-gradient(135deg, var(--naranja), var(--naranja-bright));">10</div>
+        <h4>Si no es seguro, detente</h4>
+        <ul>
+          <li>Tienes derecho y deber de detener tareas peligrosas.</li>
+          <li>Reporta al supervisor o a HSEQ.</li>
+          <li>No reinicies hasta controlar el riesgo.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 6: PERMISOS DE TRABAJO -->
+  <section data-title="Permisos de Trabajo y ATS">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <h2><span class="section-number">6</span>Permisos de Trabajo y ATS</h2>
+    <p>En Planta Corrales <strong>todo trabajo no rutinario</strong> debe contar con Permiso de Trabajo y Análisis de Trabajo Seguro (ATS) antes de iniciar cualquier actividad.</p>
+
+    <div class="proceso-steps">
+      <div class="paso-item">
+        <div class="paso-num">1</div>
+        <div class="paso-body">
+          <strong>Solicitar el Permiso de Trabajo</strong>
+          <span>El contratista gestiona el permiso con antelación suficiente, bajo el procedimiento INS-HSEQ-01.</span>
+        </div>
+      </div>
+      <div class="paso-item">
+        <div class="paso-num">2</div>
+        <div class="paso-body">
+          <strong>Elaborar el ATS con el equipo</strong>
+          <span>Identificar peligros, evaluar riesgos y definir controles conjuntamente con todos los involucrados.</span>
+        </div>
+      </div>
+      <div class="paso-item">
+        <div class="paso-num">3</div>
+        <div class="paso-body">
+          <strong>Revisión y firma por PBI (AA)</strong>
+          <span>La Autoridad de Área valida condiciones en campo y firma el permiso antes del inicio.</span>
+        </div>
+      </div>
+      <div class="paso-item">
+        <div class="paso-num">4</div>
+        <div class="paso-body">
+          <strong>Ejecución y seguimiento</strong>
+          <span>PBI supervisa y audita el trabajo durante toda su ejecución. Ante desviaciones, comunicar de inmediato.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>📋 Responsabilidad del Contratista</h4>
+        <ul>
+          <li>Personal capacitado y con inducción vigente.</li>
+          <li>Gestión oportuna del permiso antes del inicio.</li>
+          <li>Cumplimiento estricto del procedimiento INS-HSEQ-01.</li>
+          <li>Comunicación inmediata ante cualquier desviación.</li>
+        </ul>
+      </div>
+      <div class="card" style="border-left-color: var(--naranja);">
+        <h4>🛡️ Responsabilidad del Contratante (PBI)</h4>
+        <ul>
+          <li>Revisar permiso, AST y anexos.</li>
+          <li>Validar campo y condiciones operativas.</li>
+          <li>Firmar como Autoridad de Área (AA).</li>
+          <li>Supervisar y auditar el trabajo.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 7: RIESGOS ESPECÍFICOS -->
+  <section data-title="Riesgos: Tratamiento y Compresión">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <h2><span class="section-number">7</span>Riesgos Específicos: Tratamiento y Compresión</h2>
+
+    <div class="emergency-banner" style="background: linear-gradient(135deg, #e65100, #b71c1c); animation: none; box-shadow: 0 4px 16px rgba(230,81,0,0.4);">
+      <span class="e-ico">⚠️</span>
+      <div class="e-text">
+        <strong>Contexto de alto riesgo</strong>
+        Estás en una planta de gas con procesos de alta presión y temperatura. Mantén la alerta permanente.
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card" style="border-left-color: #7b2d8b;">
+        <div class="card-icon" style="background:#f3e5f5; font-size:1.5rem;">🔊</div>
+        <h4>Ruido Industrial (Compresores)</h4>
+        <p style="font-size:0.9rem;">Las áreas de compresión generan niveles de ruido altos que superan los límites permitidos.</p>
+        <span class="risk-preventiva">Uso permanente de protección auditiva. Doble protección si se indica en la zona.</span>
+      </div>
+
+      <div class="card" style="border-left-color: #1565c0;">
+        <div class="card-icon" style="background:#e3f2fd; font-size:1.5rem;">💨</div>
+        <h4>Altas Presiones</h4>
+        <p style="font-size:0.9rem;">Tuberías y recipientes operando a alta presión con riesgo de proyección de fluidos.</p>
+        <span class="risk-preventiva">Prohibido golpear tuberías, abrir válvulas sin autorización o pararse frente a válvulas de alivio.</span>
+      </div>
+
+      <div class="card" style="border-left-color: var(--rojo);">
+        <div class="card-icon" style="background:#fff5f5; font-size:1.5rem;">🔥</div>
+        <h4>Atmósferas Explosivas (Ex)</h4>
+        <p style="font-size:0.9rem;">Presencia potencial de gas inflamable en zonas clasificadas como áreas Ex.</p>
+        <span class="risk-preventiva">Herramientas antichispa, ropa 100% algodón antiestática y dispositivos electrónicos certificados únicamente.</span>
+      </div>
+
+      <div class="card" style="border-left-color: var(--naranja);">
+        <div class="card-icon" style="background:#fff8e1; font-size:1.5rem;">🌡️</div>
+        <h4>Superficies Calientes</h4>
+        <p style="font-size:0.9rem;">Cabezales de compresores, motores y líneas de descarga alcanzan temperaturas peligrosas.</p>
+        <span class="risk-preventiva">Evita el contacto con tuberías expuestas. Usa guantes de protección térmica adecuados.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 8: TAREAS ALTO RIESGO -->
+  <section data-title="Tareas de Alto Riesgo">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <h2><span class="section-number">8</span>Tareas de Alto Riesgo</h2>
+    <p>Estas tareas requieren controles rigurosos, personal competente y permisos especiales vigentes antes del inicio:</p>
+
+    <details class="risk-details">
+      <summary>🧗 Trabajo en Alturas <span class="risk-tag">PERMISO ESPECIAL</span></summary>
+      <p>Aplica para tareas desde <strong>2 metros</strong> de altura (Res 4272/2021). Requiere certificación de trabajo en alturas vigente, arnés homologado, líneas de vida certificadas y permiso aprobado.</p>
+      <div class="badge-info">📋 Res. 4272/2021</div>
+    </details>
+
+    <details class="risk-details">
+      <summary>🚧 Espacios Confinados <span class="risk-tag">PERMISO ESPECIAL</span></summary>
+      <p>Tanques, recipientes o estructuras cerradas con ventilación limitada. Requiere medición de gases (O₂, CO, H₂S, LEL), ventilación mecánica, vigía externo permanente y plan de rescate activado.</p>
+      <div class="badge-info">📋 Res. 0491/2020</div>
+    </details>
+
+    <details class="risk-details">
+      <summary>🔥 Trabajos en Caliente <span class="risk-tag">PERMISO ESPECIAL</span></summary>
+      <p>Soldadura, corte o esmerilado en áreas con potencial de atmósferas inflamables. Requiere monitoreo continuo de atmósferas explosivas, extintores listos y eliminación de materiales inflamables en la zona.</p>
+    </details>
+    </details>
+
+    <details class="risk-details">
+      <summary>🏗️ Izaje de Cargas <span class="risk-tag">PERMISO ESPECIAL</span></summary>
+      <p>Uso de grúas, polipastos o equipos de izado. Requiere inspección previa de aparejos y eslingas, plan de izaje firmado por profesional competente y zona demarcada con señalización.</p>
+    </details>
+
+    <details class="risk-details">
+      <summary>⚡ Energías Peligrosas – LOTO <span class="risk-tag">PERMISO ESPECIAL</span></summary>
+      <p>Intervención en sistemas con energías eléctrica, mecánica, hidráulica, térmica o gravitacional. Requiere bloqueo físico con candado personal, etiquetado (LOTO) y verificación de estado de energía cero antes de cualquier intervención.</p>
+    </details>
+  </section>
+
+  <!-- SECCIÓN 9: GESTIÓN AMBIENTAL -->
+  <section data-title="Gestión Ambiental">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <h2><span class="section-number">9</span>Gestión Ambiental</h2>
+    <p>La correcta clasificación de residuos es una responsabilidad de todos. En Planta Corrales utilizamos el siguiente código de colores:</p>
+
+    <div class="residuo-grid">
+      <div class="residuo-card r-blanco">
+        <div class="r-ico">♻️</div>
+        <h4>BLANCO · Aprovechables</h4>
+        <p>Papel, cartón, plástico limpio, vidrio, metales no contaminados.</p>
+      </div>
+      <div class="residuo-card r-verde">
+        <div class="r-ico">🌿</div>
+        <h4>VERDE · Orgánicos</h4>
+        <p>Restos de comida, cáscaras, residuos de jardinería y poda.</p>
+      </div>
+      <div class="residuo-card r-negro">
+        <div class="r-ico">🗑️</div>
+        <h4>NEGRO · No Aprovechables</h4>
+        <p>Papel higiénico, servilletas usadas, icopor, residuos de barrido.</p>
+      </div>
+      <div class="residuo-card r-rojo">
+        <div class="r-ico">☣️</div>
+        <h4>ROJO · Peligrosos</h4>
+        <p>Trapos con aceite, pintura, residuos químicos contaminados.</p>
+      </div>
+    </div>
+
+    <div class="card" style="border-left-color: var(--verde);">
+      <p style="margin:0;">♻️ <strong>Recuerda:</strong> No mezcles residuos entre canecas y haz uso correcto de los puntos ecológicos. El manejo inadecuado de residuos peligrosos tiene consecuencias legales y ambientales.</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 10: PLAN DE EMERGENCIAS -->
+  <section data-title="Plan de Emergencias">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <h2><span class="section-number">10</span>Plan de Emergencias</h2>
+
+    <div class="emergency-banner">
+      <span class="e-ico">🚨</span>
+      <div class="e-text">
+        <strong>Ante cualquier emergencia — sismo, incendio, fuga de gas</strong>
+        Sigue estos pasos en orden. No improvises.
+      </div>
+    </div>
+
+    <ol class="emergency-steps">
+      <li><strong>Identifica la alarma:</strong> Distingue entre sirena continua (evacuación) e intermitente (alerta).</li>
+      <li><strong>Parada de emergencia:</strong> Detén tu actividad. Apaga equipos solo si es seguro hacerlo (ESD).</li>
+      <li><strong>Evacúa:</strong> Dirígete al punto de encuentro caminando. En caso de fuga de gas, desplázate en dirección contraria al viento.</li>
+      <li><strong>Sigue a los brigadistas:</strong> Obedece las instrucciones del personal con chaleco/casco distintivo.</li>
+      <li><strong>No regreses:</strong> No vuelvas a buscar objetos personales hasta que se declare el fin de la emergencia.</li>
+    </ol>
+
+    <div class="card" style="border-left-color: var(--rojo); background: #fff5f5;">
+      <h4>📞 Contacto de emergencia</h4>
+      <p style="margin:0; font-size:0.93rem;">Reporta cualquier emergencia al supervisor del área o al líder HSEQ de turno de forma inmediata. <strong>Nunca subestimes un incidente.</strong></p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 11: PLANO DE EVACUACIÓN -->
+  <section data-title="Plano de Evacuación">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <h2><span class="section-number">11</span>Plano de Evacuación</h2>
+    <p>Identifica las salidas de emergencia y el punto de encuentro de Planta Corrales antes de iniciar cualquier actividad.</p>
+
+    <div class="plano-container">
+      <img src="https://i.postimg.cc/RhQfk7f6/Plano-de-evacuacion-Corrales.png" alt="Plano de Evacuación Corrales">
+      <p style="font-size: 0.78rem; color: #888; margin-top: 8px; margin-bottom: 0;">Imagen de referencia. Ubica el plano físico en tu área de trabajo.</p>
+    </div>
+
+    <div class="card" style="border-left-color: var(--verde);">
+      <h4>✅ Recomendaciones Clave</h4>
+      <ul style="margin:0;">
+        <li>Ubica el punto <em>"Usted está aquí"</em> en los mapas físicos de cada área.</li>
+        <li>Sigue las flechas verdes en pasillos y salidas de emergencia.</li>
+        <li>No te devuelvas por objetos personales una vez iniciada la evacuación.</li>
+        <li>Preséntate en el punto de encuentro y espera el conteo de personal.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 12: EXTINTORES -->
+  <section data-title="Tipos de Extintores">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <h2><span class="section-number">12</span>Tipos de Extintores</h2>
+
+    <div class="alerta-extintor">
+      <span>⚠️</span>
+      Solo personal capacitado y entrenado debe manipular los extintores. Conoce su ubicación y tipo.
+    </div>
+
+    <div class="extintor-container">
+      <div class="extintor-card ext-abc">
+        <h4>🟡 ABC · Polvo Químico Seco</h4>
+        <div class="extintor-uso">Fuegos de clase A, B y C: papel, madera, líquidos inflamables, equipos eléctricos.</div>
+        <img src="https://i.postimg.cc/Bny0bGmN/EXTINTOR-TIPO-ABC.jpg" alt="Extintor ABC">
+      </div>
+      <div class="extintor-card ext-co2">
+        <h4>🔴 CO2 · Gas Carbónico</h4>
+        <div class="extintor-uso">Equipos eléctricos y electrónicos. No deja residuo. Ideal en salas técnicas.</div>
+        <img src="https://i.postimg.cc/V6fDcJXh/TIPO-CO2.png" alt="Extintor CO2">
+      </div>
+      <div class="extintor-card ext-agua">
+        <h4>🟢 AGUA · Solkaflam</h4>
+        <div class="extintor-uso">Combustibles sólidos (madera, papel) y superficies limpias. Clase A.</div>
+        <img src="https://i.postimg.cc/28HnJH5n/Extintor-tipo-A.png" alt="Extintor Agua">
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 13: TARJETAS DE APORTE -->
+  <section data-title="Tarjetas de Aporte">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <h2><span class="section-number">13</span>Tarjetas de Aporte</h2>
+    <p>Son el medio oficial para <strong>reportar actos inseguros, condiciones peligrosas o incidentes ambientales</strong>. Tu reporte ayuda a prevenir accidentes.</p>
+
+    <div class="grid-2" style="margin-bottom: 24px;">
+      <div class="card" style="border-left-color: var(--naranja);">
+        <h4>📢 ¿Qué reportar?</h4>
+        <ul style="margin:0; font-size:0.9rem;">
+          <li>Actos inseguros observados</li>
+          <li>Condiciones peligrosas en el área</li>
+          <li>Incidentes ambientales (derrames, etc.)</li>
+          <li>Sugerencias de mejora</li>
+        </ul>
+      </div>
+      <div class="card" style="border-left-color: var(--verde);">
+        <h4>🎯 ¿Por qué es importante?</h4>
+        <ul style="margin:0; font-size:0.9rem;">
+          <li>Previene accidentes antes de que ocurran</li>
+          <li>Mejora las condiciones de trabajo</li>
+          <li>Fortalece la cultura de seguridad</li>
+          <li>Es anónimo y sin represalias</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="qr-box">
+      <p>📱 Escanea el QR para reportar ahora:</p>
+      <img src="https://i.postimg.cc/0Nhp4dDd/Captura-de-pantalla-2025-06-17-093430.png" alt="QR Tarjetas de Aporte">
+      <p class="qr-hint">Apunta la cámara de tu celular al código QR</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 14: NORMAS DE COMPORTAMIENTO -->
+  <section data-title="Normas de Comportamiento">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <h2><span class="section-number">14</span>Normas de Comportamiento</h2>
+    <p>Se espera que cada persona que ingresa a Planta Corrales mantenga un comportamiento seguro, respetuoso y coherente con nuestra cultura:</p>
+
+    <div class="grid-2">
+      <div class="norma-card">
+        <span class="n-ico">🚭</span>
+        <h4>Cero Humo / Vapers</h4>
+        <p>Prohibido fumar y usar cigarrillos electrónicos en todas las instalaciones, de acuerdo con la política HSEQ.</p>
+      </div>
+      <div class="norma-card">
+        <span class="n-ico">🤝</span>
+        <h4>Respeto y Cortesía</h4>
+        <p>Dirígete con amabilidad al personal y sigue siempre las indicaciones del personal autorizado.</p>
+      </div>
+      <div class="norma-card">
+        <span class="n-ico">📸</span>
+        <h4>Fotografías Restringidas</h4>
+        <p>Se requieren cámaras intrínsecamente seguras en áreas clasificadas y permiso previo para fotografiar.</p>
+      </div>
+      <div class="norma-card">
+        <span class="n-ico">🛑</span>
+        <h4>No Manipules Equipos</h4>
+        <p>Prohibido tocar válvulas, botones o cualquier componente operativo sin autorización y entrenamiento.</p>
+      </div>
+      <div class="norma-card">
+        <span class="n-ico">📍</span>
+        <h4>Respeta las Zonas</h4>
+        <p>No te desvíes de las rutas señalizadas. Permanece siempre dentro de las áreas permitidas para tu ingreso.</p>
+      </div>
+      <div class="norma-card">
+        <span class="n-ico">📵</span>
+        <h4>Cero Distracciones</h4>
+        <p>No uses celulares mientras te desplazas por zonas operativas, técnicas o vías vehiculares.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 15: SEGURIDAD VIAL -->
+  <section data-title="Seguridad Vial">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <h2><span class="section-number">15</span>Seguridad Vial</h2>
+    <p>🚘 La seguridad vial es parte integral de nuestra cultura preventiva. Aplica estas normas en todo momento dentro de las instalaciones:</p>
+
+    <div class="vial-grid">
+      <div class="vial-card">
+        <span class="v-ico">📵</span>
+        <h4>Sin Distracciones</h4>
+        <p>No uses el celular mientras conduces ni durante desplazamientos a pie por zonas vehiculares.</p>
+      </div>
+      <div class="vial-card">
+        <span class="v-ico">⏱️</span>
+        <h4>Límite de Velocidad</h4>
+        <div class="velocidad-badge">10 km/h</div>
+        <p>Velocidad máxima dentro de la planta. Sin excepciones.</p>
+      </div>
+      <div class="vial-card">
+        <span class="v-ico">✅</span>
+        <h4>Cinturón Siempre</h4>
+        <p>Uso obligatorio para todos los ocupantes del vehículo, incluso en trayectos cortos.</p>
+      </div>
+      <div class="vial-card">
+        <span class="v-ico">🅿️</span>
+        <h4>Parqueo Seguro</h4>
+        <p>Parquea en reversa (posición de salida) únicamente en zonas autorizadas y demarcadas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 16: CHECKLIST -->
+  <section id="checklist-section" data-title="Recomendaciones Finales">
+    <div class="mascota"><img src="https://i.postimg.cc/gcX7rNgd/Logo-PBI.png" alt="Logo PBI"></div>
+    <h2><span class="section-number">16</span>Recomendaciones Finales</h2>
+    <p>Antes de ingresar a la planta, confirma que cumples con todos los puntos. <strong>Debes marcar todos los ítems para continuar.</strong></p>
+
+    <div class="checklist-count" id="checkCount">0 de 6 completados</div>
+    <div class="checklist-progress">
+      <div class="checklist-progress-bar" id="checkProgressBar" style="width:0%"></div>
+    </div>
+
+    <ul class="checklist-list">
+      <li id="cli-0"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Entendí los riesgos de gas, alta presión y atmósferas explosivas de la planta.</span></label></li>
+      <li id="cli-1"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Porto mi EPP completo y en buen estado requerido para el área.</span></label></li>
+      <li id="cli-2"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Conozco los puntos de encuentro y las rutas de evacuación.</span></label></li>
+      <li id="cli-3"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Mi ropa es adecuada (100% Algodón / Antiestática) para zonas clasificadas.</span></label></li>
+      <li id="cli-4"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>No porté celular sin certificación intrínsecamente segura en áreas operativas.</span></label></li>
+      <li id="cli-5"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Cumpliré la política de cero alcohol, cero drogas y no fumar/vapear.</span></label></li>
+    </ul>
+
+    <div id="mensaje-alerta"></div>
+  </section>
+
+  <!-- SECCIÓN 17: CIERRE -->
+  <section data-title="Cierre y Cultura">
+    <div class="cierre-hero">
+      <span class="cierre-trophy">🏆</span>
+      <h2 style="color: var(--azul-oscuro);">¡Inducción Completada!</h2>
+      <p>Gracias por tomarte el tiempo de conocer nuestra cultura de seguridad. <strong>Tu responsabilidad hace la diferencia.</strong></p>
+    </div>
+
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="v-ico">🎥</div>
+        <h4>Cultura de Seguridad Industrial</h4>
+        <p style="font-size:0.84rem; color:#666; margin-bottom:10px;">Refuerza los conceptos aprendidos</p>
+        <a href="https://youtu.be/faHop1FcGNE" target="_blank">▶ Ver video →</a>
+      </div>
+      <div class="video-card">
+        <div class="v-ico">🏢</div>
+        <h4>Quiénes Somos — PBI</h4>
+        <p style="font-size:0.84rem; color:#666; margin-bottom:10px;">Conoce el propósito y valores corporativos</p>
+        <a href="https://youtu.be/-gRjlWdwpao" target="_blank">▶ Ver video →</a>
+      </div>
+    </div>
+
+    <div style="text-align: center; padding: 30px 0 10px;">
+      <p style="color: var(--gris-medio); font-size:0.9rem; margin-bottom: 20px;">Haz clic para presentar la evaluación de conocimientos y obtener tu certificado de inducción:</p>
+      <a class="final-button" href="https://docs.google.com/forms/d/e/1FAIpQLSfAjJpeeycvWsdF_uxza6CA4-6IB9Wsny7-M6fHBr-SGm_9Eg/viewform?usp=publish-editor" target="_blank">
+        ✅ Presentar Evaluación
+      </a>
+    </div>
+  </section>
+
+  <!-- NAVEGACIÓN -->
+  <div class="nav-buttons">
+    <button class="nav-btn nav-btn-prev" id="btnAnterior" onclick="prevSection()">← Anterior</button>
+    <div class="nav-step-counter" id="stepCounter">Sección 1 de 17</div>
+    <button class="nav-btn" id="btnSiguiente" onclick="nextSection()">Siguiente →</button>
+  </div>
+
+</div>
+
+<script>
+  let current = 0;
+  const sections = document.querySelectorAll('section');
+  const btnAnterior = document.getElementById('btnAnterior');
+  const btnSiguiente = document.getElementById('btnSiguiente');
+  const barraProgreso = document.getElementById('barraProgreso');
+  const checklistSection = document.getElementById('checklist-section');
+  const headerBadge = document.getElementById('headerBadge');
+  const headerSectionName = document.getElementById('headerSectionName');
+  const stepCounter = document.getElementById('stepCounter');
+  const navDotsContainer = document.getElementById('navDots');
+
+  // Build nav dots
+  sections.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.title = sections[i].dataset.title || ('Sección ' + (i + 1));
+    dot.setAttribute('aria-label', dot.title);
+    dot.onclick = () => goTo(i);
+    navDotsContainer.appendChild(dot);
+  });
+
+  function updateChecklist() {
+    const items = checklistSection.querySelectorAll('.check-item');
+    const total = items.length;
+    const done = Array.from(items).filter(cb => cb.checked).length;
+
+    // Update progress bar
+    const bar = document.getElementById('checkProgressBar');
+    const count = document.getElementById('checkCount');
+    if (bar) bar.style.width = (done / total * 100) + '%';
+    if (count) count.textContent = done + ' de ' + total + ' completados';
+
+    // Highlight checked rows
+    items.forEach((cb, idx) => {
+      const li = document.getElementById('cli-' + idx);
+      if (li) li.classList.toggle('checked-ok', cb.checked);
+    });
+  }
+
+  function show(index) {
+    sections.forEach((s, i) => s.classList.toggle('active', i === index));
+
+    // Buttons
+    btnAnterior.style.visibility = index === 0 ? 'hidden' : 'visible';
+    btnSiguiente.style.display = index === sections.length - 1 ? 'none' : 'inline-flex';
+
+    // Progress bar
+    barraProgreso.style.width = ((index + 1) / sections.length * 100) + '%';
+
+    // Header info
+    headerBadge.textContent = (index + 1) + ' / ' + sections.length;
+    headerSectionName.textContent = sections[index].dataset.title || '';
+    stepCounter.textContent = 'Sección ' + (index + 1) + ' de ' + sections.length;
+
+    // Nav dots
+    document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === index));
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goTo(index) {
+    current = index;
+    show(current);
+  }
+
+  function nextSection() {
+    if (sections[current] === checklistSection) {
+      const checkboxes = checklistSection.querySelectorAll('.check-item');
+      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+      const areaMensaje = document.getElementById('mensaje-alerta');
+
+      if (!allChecked) {
+        if (!areaMensaje.querySelector('.advertencia-checklist')) {
+          areaMensaje.innerHTML = "<div class='advertencia-checklist'>⚠️ Por favor marca todos los ítems antes de continuar.</div>";
+          setTimeout(() => {
+            const adv = areaMensaje.querySelector('.advertencia-checklist');
+            if (adv) adv.style.animation = 'shake 0.4s';
+          }, 10);
+        }
+        return;
+      } else {
+        areaMensaje.innerHTML = '';
+      }
+    }
+
+    if (current < sections.length - 1) {
+      current++;
+      show(current);
+    }
+  }
+
+  function prevSection() {
+    if (current > 0) {
+      current--;
+      show(current);
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSection();
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSection();
+  });
+
+  // Init
+  document.addEventListener('DOMContentLoaded', () => {
+    show(0);
+    updateChecklist();
+  });
+</script>
+
+</body>
+</html>
