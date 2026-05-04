@@ -517,30 +517,7 @@
       font-size: 0.92rem;
     }
 
-    /* ======= AMBIENTAL Y JUEGO ======= */
-    .residuo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-    .residuo-card {
-      border-radius: var(--radio);
-      padding: 18px 16px;
-      text-align: center;
-      box-shadow: var(--shadow-xs);
-      transition: transform var(--transition);
-    }
-    .residuo-card:hover { transform: scale(1.03); }
-    .residuo-card .r-ico { font-size: 2rem; margin-bottom: 6px; }
-    .residuo-card h4 { font-size: 0.88rem; margin-bottom: 4px; }
-    .residuo-card p { font-size: 0.82rem; margin: 0; }
-    .r-blanco { background: #f8f9fa; border: 2px solid #adb5bd; color: #333; }
-    .r-verde  { background: #e8f5e9; border: 2px solid #4caf50; color: #1b5e20; }
-    .r-negro  { background: #212529; border: 2px solid #000; color: #f8f9fa; }
-    .r-rojo   { background: #fff5f5; border: 2px solid var(--rojo); color: #7f1d1d; }
-
-    /* Estilos del Mini Juego */
+    /* ======= ESTILOS MINI JUEGOS ======= */
     .game-container {
       background: #f8fbff;
       border: 2px dashed var(--azul-claro);
@@ -554,14 +531,15 @@
       font-weight: 700;
       color: var(--azul-oscuro);
       margin-bottom: 14px;
+      font-size: 1.1rem;
     }
     .game-item {
-      font-size: 1.2rem;
-      font-weight: 800;
+      font-size: 1.1rem;
+      font-weight: 700;
       color: var(--naranja);
       background: white;
-      padding: 12px 24px;
-      border-radius: 50px;
+      padding: 14px 20px;
+      border-radius: var(--radio);
       display: inline-block;
       margin-bottom: 20px;
       box-shadow: var(--shadow-md);
@@ -585,16 +563,46 @@
     }
     .game-bin:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .game-bin:active { transform: translateY(0); }
+    
+    /* Colores Residuos */
     .game-bin.blanco { background: #fff; border-color: #adb5bd; color: #333; }
     .game-bin.verde { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
     .game-bin.negro { background: #212529; color: #fff; }
     .game-bin.rojo { background: #fff5f5; border-color: var(--rojo); color: #7f1d1d; }
+
+    /* Colores Permisos */
+    .game-bin.rutina { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
+    .game-bin.permiso { background: #fff5f5; border-color: var(--rojo); color: #7f1d1d; }
+
     .game-feedback {
       margin-top: 18px;
       font-weight: 700;
       min-height: 24px;
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
+
+    /* ======= AMBIENTAL ======= */
+    .residuo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .residuo-card {
+      border-radius: var(--radio);
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-xs);
+      transition: transform var(--transition);
+    }
+    .residuo-card:hover { transform: scale(1.03); }
+    .residuo-card .r-ico { font-size: 2rem; margin-bottom: 6px; }
+    .residuo-card h4 { font-size: 0.88rem; margin-bottom: 4px; }
+    .residuo-card p { font-size: 0.82rem; margin: 0; }
+    .r-blanco { background: #f8f9fa; border: 2px solid #adb5bd; color: #333; }
+    .r-verde  { background: #e8f5e9; border: 2px solid #4caf50; color: #1b5e20; }
+    .r-negro  { background: #212529; border: 2px solid #000; color: #f8f9fa; }
+    .r-rojo   { background: #fff5f5; border: 2px solid var(--rojo); color: #7f1d1d; }
 
     /* ======= CHECKLIST ======= */
     .checklist-list { list-style: none; padding: 0; margin-bottom: 0; }
@@ -700,43 +708,6 @@
       font-weight: 800; font-size: 0.85rem;
       display: flex; align-items: center; justify-content: center;
     }
-
-    /* ======= PERMISOS/ATS ======= */
-    .proceso-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-bottom: 18px;
-    }
-    .paso-item {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      padding-bottom: 18px;
-      position: relative;
-    }
-    .paso-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      left: 18px; top: 40px;
-      width: 2px;
-      bottom: 0;
-      background: linear-gradient(to bottom, var(--azul-claro), transparent);
-    }
-    .paso-num {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--azul-medio), var(--azul-claro));
-      color: white;
-      font-weight: 800;
-      font-size: 0.88rem;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 3px 8px rgba(0,90,156,0.35);
-    }
-    .paso-body { padding-top: 6px; }
-    .paso-body strong { display: block; font-size: 0.95rem; color: var(--azul-oscuro); margin-bottom: 2px; }
-    .paso-body span { font-size: 0.85rem; color: #666; }
 
     /* ======= CIERRE / COMPLETADO ======= */
     .cierre-hero {
@@ -1192,59 +1163,37 @@
 
   <section data-title="Permisos de Trabajo y ATS">
     <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
-    <h2><span class="section-number">6</span>Permisos de Trabajo y ATS</h2>
-    <p>En Planta Corrales <strong>todo trabajo no rutinario</strong> debe contar con Permiso de Trabajo y Análisis de Trabajo Seguro (ATS) antes de iniciar cualquier actividad.</p>
+    <h2><span class="section-number">6</span>Rutina vs. Permisos de Trabajo</h2>
+    <p>Para evitar burocracia innecesaria y enfocarnos en el riesgo real, en Planta Corrales dividimos las tareas en dos categorías. <strong>El ATS siempre es obligatorio</strong>, pero el Permiso de Trabajo (PT) depende de la tarea:</p>
 
-    <div class="proceso-steps">
-      <div class="paso-item">
-        <div class="paso-num">1</div>
-        <div class="paso-body">
-          <strong>Solicitar el Permiso de Trabajo</strong>
-          <span>El contratista gestiona el permiso con antelación suficiente, bajo el procedimiento INS-HSEQ-01.</span>
-        </div>
+    <div class="grid-2">
+      <div class="card" style="border-left-color: var(--verde);">
+        <h4>✅ Tareas Rutinarias</h4>
+        <p style="font-size:0.9rem; color:#555;">Actividades del día a día, repetitivas y de bajo impacto (ej. recorridos de inspección, limpieza general, toma de lecturas).</p>
+        <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+        <strong style="color:var(--verde);">Requisitos obligatorios:</strong>
+        <ul style="font-size:0.9rem; margin-top:8px;">
+          <li>Procedimiento Operativo Normalizado (PON)</li>
+          <li>Análisis de Trabajo Seguro (ATS)</li>
+        </ul>
       </div>
-      <div class="paso-item">
-        <div class="paso-num">2</div>
-        <div class="paso-body">
-          <strong>Elaborar el ATS con el equipo</strong>
-          <span>Identificar peligros, evaluar riesgos y definir controles conjuntamente con todos los involucrados.</span>
-        </div>
-      </div>
-      <div class="paso-item">
-        <div class="paso-num">3</div>
-        <div class="paso-body">
-          <strong>Revisión y firma por PBI (AA)</strong>
-          <span>La Autoridad de Área valida condiciones en campo y firma el permiso antes del inicio.</span>
-        </div>
-      </div>
-      <div class="paso-item">
-        <div class="paso-num">4</div>
-        <div class="paso-body">
-          <strong>Ejecución y seguimiento</strong>
-          <span>PBI supervisa y audita el trabajo durante toda su ejecución. Ante desviaciones, comunicar de inmediato.</span>
-        </div>
+
+      <div class="card" style="border-left-color: var(--rojo);">
+        <h4>⚠️ No Rutinarias o de Alto Riesgo</h4>
+        <p style="font-size:0.9rem; color:#555;">Trabajos que se salen de la operación normal o exponen al trabajador a energías peligrosas, alturas, soldadura, etc.</p>
+        <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+        <strong style="color:var(--rojo);">Requisitos obligatorios:</strong>
+        <ul style="font-size:0.9rem; margin-top:8px;">
+          <li><strong>Permiso de Trabajo (PT) firmado</strong></li>
+          <li>Análisis de Trabajo Seguro (ATS) específico</li>
+          <li>Certificados (Alturas, LOTO, etc.)</li>
+        </ul>
       </div>
     </div>
 
-    <div class="grid-2">
-      <div class="card">
-        <h4>📋 Responsabilidad del Contratista</h4>
-        <ul>
-          <li>Personal capacitado y con inducción vigente.</li>
-          <li>Gestión oportuna del permiso antes del inicio.</li>
-          <li>Cumplimiento estricto del procedimiento INS-HSEQ-01.</li>
-          <li>Comunicación inmediata ante cualquier desviación.</li>
-        </ul>
-      </div>
-      <div class="card" style="border-left-color: var(--naranja);">
-        <h4>🛡️ Responsabilidad del Contratante (PBI)</h4>
-        <ul>
-          <li>Revisar permiso, AST y anexos.</li>
-          <li>Validar campo y condiciones operativas.</li>
-          <li>Firmar como Autoridad de Área (AA).</li>
-          <li>Supervisar y auditar el trabajo.</li>
-        </ul>
-      </div>
+    <div class="card" style="border-left-color: var(--azul-medio); margin-top: 20px;">
+      <h4>⚙️ El proceso para un Permiso de Trabajo (PT)</h4>
+      <p style="font-size: 0.9rem; margin-bottom: 0;">Si tu labor cae en Alto Riesgo, el <strong>Contratista</strong> debe elaborar el ATS y solicitar el PT bajo el procedimiento INS-HSEQ-01. La <strong>Autoridad de Área (PBI)</strong> validará las condiciones en campo y firmará la autorización antes de que inicies.</p>
     </div>
   </section>
 
@@ -1294,18 +1243,16 @@
   <section data-title="Tareas de Alto Riesgo">
     <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">8</span>Tareas de Alto Riesgo</h2>
-    <p>Estas tareas requieren controles rigurosos, personal competente y permisos especiales vigentes antes del inicio:</p>
+    <p>Estas tareas requieren controles rigurosos, personal competente y <strong>Permisos Especiales de Trabajo</strong> vigentes antes de iniciar:</p>
 
     <details class="risk-details">
       <summary>🧗 Trabajo en Alturas <span class="risk-tag">PERMISO ESPECIAL</span></summary>
       <p>Aplica para tareas desde <strong>2 metros</strong> de altura (Res 4272/2021). Requiere certificación de trabajo en alturas vigente, arnés homologado, líneas de vida certificadas y permiso aprobado.</p>
-      <div class="badge-info">📋 Res. 4272/2021</div>
     </details>
 
     <details class="risk-details">
       <summary>🚧 Espacios Confinados <span class="risk-tag">PERMISO ESPECIAL</span></summary>
       <p>Tanques, recipientes o estructuras cerradas con ventilación limitada. Requiere medición de gases (O₂, CO, H₂S, LEL), ventilación mecánica, vigía externo permanente y plan de rescate activado.</p>
-      <div class="badge-info">📋 Res. 0491/2020</div>
     </details>
 
     <details class="risk-details">
@@ -1320,8 +1267,22 @@
 
     <details class="risk-details">
       <summary>⚡ Energías Peligrosas – LOTO <span class="risk-tag">PERMISO ESPECIAL</span></summary>
-      <p>Intervención en sistemas con energías eléctrica, mecánica, hidráulica, térmica o gravitacional. Requiere bloqueo físico con candado personal, etiquetado (LOTO) y verificación de estado de energía cero antes de cualquier intervención.</p>
+      <p>Intervención en sistemas eléctricos, mecánicos o hidráulicos. Requiere bloqueo físico con candado personal, etiquetado (LOTO) y verificación de energía cero.</p>
     </details>
+
+    <div class="game-container" style="border-color: var(--naranja);">
+      <div class="game-title">🎮 Mini-Juego: ¿Requiere Permiso Especial?</div>
+      <p style="font-size: 0.9rem; margin-bottom: 15px;">Toca si la tarea es de Rutina (Solo ATS) o de Alto Riesgo (Requiere PT).</p>
+      
+      <div id="game2-item-text" class="game-item" style="color: var(--azul-oscuro);">Cargando...</div>
+      
+      <div class="game-bins" id="game2-bins">
+        <div class="game-bin rutina" onclick="checkRisk('rutina')">Rutina (Solo ATS)</div>
+        <div class="game-bin permiso" onclick="checkRisk('permiso')">Alto Riesgo (Exige PT)</div>
+      </div>
+
+      <div id="game2-feedback" class="game-feedback"></div>
+    </div>
   </section>
 
   <section data-title="Gestión Ambiental">
@@ -1371,28 +1332,25 @@
 
   <section data-title="Plan de Emergencias">
     <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
-    <h2><span class="section-number">10</span>Plan de Emergencias</h2>
+    <h2><span class="section-number">10</span>Protocolo de Emergencias</h2>
 
-    <div class="emergency-banner">
+    <div class="emergency-banner" style="background: linear-gradient(135deg, #b71c1c, #7f0000);">
       <span class="e-ico" aria-hidden="true">🚨</span>
       <div class="e-text">
-        <strong>Ante cualquier emergencia — sismo, incendio, fuga de gas</strong>
-        Sigue estos pasos en orden. No improvises.
+        <strong>Planta de Gas, Compresión y Generación</strong>
+        Manejamos gas directo de pozo, altas presiones y generadores eléctricos. Un error puede causar fugas severas, arco eléctrico o explosión por nube de vapor (UVCE).
       </div>
     </div>
 
-    <ol class="emergency-steps">
-      <li><strong>Identifica la alarma:</strong> Distingue entre sirena continua (evacuación) e intermitente (alerta).</li>
-      <li><strong>Parada de emergencia:</strong> Detén tu actividad. Apaga equipos solo si es seguro hacerlo (ESD).</li>
-      <li><strong>Evacúa:</strong> Dirígete al punto de encuentro caminando. En caso de fuga de gas, desplázate en dirección contraria al viento.</li>
-      <li><strong>Sigue a los brigadistas:</strong> Obedece las instrucciones del personal con chaleco/casco distintivo.</li>
-      <li><strong>No regreses:</strong> No vuelvas a buscar objetos personales hasta que se declare el fin de la emergencia.</li>
-    </ol>
+    <p style="font-weight: 600; margin-bottom: 18px;">Si escuchas la alarma o presencias un incidente, aplica estas reglas innegociables:</p>
 
-    <div class="card" style="border-left-color: var(--rojo); background: #fff5f5;">
-      <h4>📞 Contacto de emergencia</h4>
-      <p style="margin:0; font-size:0.93rem;">Reporta cualquier emergencia al supervisor del área o al líder HSEQ de turno de forma inmediata. <strong>Nunca subestimes un incidente.</strong></p>
-    </div>
+    <ol class="emergency-steps">
+      <li><strong>Parada de Planta (ESD):</strong> Si hay una fuga incontrolable de gas, el personal capacitado debe presionar el botón de Parada de Emergencia (ESD) para aislar la planta de forma segura.</li>
+      <li><strong>Cero Ignición:</strong> ¡NUNCA arranques un vehículo, uses un radio convencional o saques tu celular durante una fuga! Cualquier dispositivo no certificado puede generar la chispa que detone el gas.</li>
+      <li><strong>Evacúa observando el viento:</strong> Busca de inmediato la manga de viento (windsock). Dirígete al punto de encuentro caminando con el <strong>viento cruzado (perpendicular)</strong>, nunca a favor ni en contra de la dirección del gas.</li>
+      <li><strong>Fuego en Generadores:</strong> Si la emergencia es eléctrica (generadores), aléjate rápidamente. Nunca uses agua. Los brigadistas usarán extintores de CO2 (Gas carbónico) para sofocarlo.</li>
+      <li><strong>No regreses:</strong> Preséntate en el punto de encuentro detrás de las oficinas y espera el conteo. Nadie vuelve a entrar hasta que la Autoridad del Área declare el "Fin de Emergencia".</li>
+    </ol>
   </section>
 
   <section data-title="Plano de Evacuación">
@@ -1557,11 +1515,11 @@
     </div>
 
     <ul class="checklist-list">
-      <li id="cli-0"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Entendí los riesgos de gas, alta presión y climas extremos (frío/altitud).</span></label></li>
+      <li id="cli-0"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Entendí los riesgos de gas de pozo, UVCE y climas extremos.</span></label></li>
       <li id="cli-1"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Porto mi EPP completo y ropa abrigada adecuada para el área.</span></label></li>
-      <li id="cli-2"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Conozco los puntos de encuentro y las rutas de evacuación.</span></label></li>
-      <li id="cli-3"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Mi ropa es 100% Algodón y antiestática para ingresar a zonas clasificadas.</span></label></li>
-      <li id="cli-4"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>No portaré celular sin certificación intrínsecamente segura en áreas operativas.</span></label></li>
+      <li id="cli-2"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Sé ubicar la manga de viento para evacuar de forma cruzada ante fugas.</span></label></li>
+      <li id="cli-3"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Mi ropa es 100% Algodón y antiestática para ingresar a zonas Ex.</span></label></li>
+      <li id="cli-4"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>No portaré celular sin certificación intrínsecamente segura en planta.</span></label></li>
       <li id="cli-5"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Cumpliré la política de cero alcohol, cero drogas y cero humo/vapeo.</span></label></li>
     </ul>
 
@@ -1634,7 +1592,7 @@
     }
   }
 
-  // ======= LÓGICA DEL MINI JUEGO AMBIENTAL =======
+  // ======= MINI JUEGO 1 (AMBIENTAL - SEC 9) =======
   const wasteItems = [
     { text: "Botella de plástico limpia 🥤", bin: "blanco" },
     { text: "Servilleta usada 🧻", bin: "negro" },
@@ -1643,12 +1601,12 @@
   ];
   let currentGameIndex = 0;
 
-  function initGame() {
+  function initGame1() {
     currentGameIndex = 0;
-    updateGameUI();
+    updateGame1UI();
   }
 
-  function updateGameUI() {
+  function updateGame1UI() {
     const itemEl = document.getElementById("game-item-text");
     const binsEl = document.getElementById("game-bins");
     const feedbackEl = document.getElementById("game-feedback");
@@ -1682,11 +1640,72 @@
       setTimeout(() => {
         currentGameIndex++;
         itemEl.style.transform = "scale(1)";
-        updateGameUI();
+        updateGame1UI();
       }, 700);
     } else {
       feedbackEl.style.color = "var(--rojo)";
       feedbackEl.textContent = "Ups, esa no es la caneca. Intenta de nuevo ❌";
+      if(audioError) { audioError.currentTime = 0; audioError.play().catch(e=>{}); }
+      
+      itemEl.style.animation = 'shake 0.4s';
+      setTimeout(() => itemEl.style.animation = '', 400);
+      if (navigator.vibrate) navigator.vibrate(200);
+    }
+  }
+
+  // ======= MINI JUEGO 2 (RIESGOS - SEC 8) =======
+  const riskItems = [
+    { text: "Soldadura cerca a compresores 🔥", type: "permiso" },
+    { text: "Recorrido de inspección visual 👀", type: "rutina" },
+    { text: "Mantenimiento interno de tanque 🚧", type: "permiso" },
+    { text: "Ajuste menor a nivel de piso 🔧", type: "rutina" }
+  ];
+  let currentRiskIndex = 0;
+
+  function initGame2() {
+    currentRiskIndex = 0;
+    updateGame2UI();
+  }
+
+  function updateGame2UI() {
+    const itemEl = document.getElementById("game2-item-text");
+    const binsEl = document.getElementById("game2-bins");
+    const feedbackEl = document.getElementById("game2-feedback");
+
+    if (currentRiskIndex >= riskItems.length) {
+      itemEl.innerHTML = "🛡️ ¡Perfecto! Sabes identificar los trabajos críticos.";
+      itemEl.style.color = "var(--verde)";
+      binsEl.style.display = "none";
+      feedbackEl.textContent = "";
+      if(audioSuccess) { audioSuccess.currentTime = 0; audioSuccess.play().catch(e=>{}); }
+      return;
+    }
+    
+    itemEl.style.color = "var(--azul-oscuro)";
+    itemEl.textContent = riskItems[currentRiskIndex].text;
+    binsEl.style.display = "flex";
+    feedbackEl.textContent = "";
+  }
+
+  function checkRisk(selectedType) {
+    const correctType = riskItems[currentRiskIndex].type;
+    const feedbackEl = document.getElementById("game2-feedback");
+    const itemEl = document.getElementById("game2-item-text");
+
+    if (selectedType === correctType) {
+      feedbackEl.style.color = "var(--verde)";
+      feedbackEl.textContent = "¡Bien clasificado! ✅";
+      if(audioSuccess) { audioSuccess.currentTime = 0; audioSuccess.play().catch(e=>{}); }
+      
+      itemEl.style.transform = "scale(0.8)";
+      setTimeout(() => {
+        currentRiskIndex++;
+        itemEl.style.transform = "scale(1)";
+        updateGame2UI();
+      }, 700);
+    } else {
+      feedbackEl.style.color = "var(--rojo)";
+      feedbackEl.textContent = "Cuidado. Revisa los conceptos ❌";
       if(audioError) { audioError.currentTime = 0; audioError.play().catch(e=>{}); }
       
       itemEl.style.animation = 'shake 0.4s';
@@ -1765,9 +1784,13 @@
       updateChecklist(); 
     }
 
-    // Iniciar juego si entra a la sección 9 (índice 8)
+    // Iniciar Juego de Permisos (Sección 8 / Índice 7)
+    if (index === 7) {
+      initGame2();
+    }
+    // Iniciar Juego Ambiental (Sección 9 / Índice 8)
     if (index === 8) {
-      initGame();
+      initGame1();
     }
 
     barraProgreso.style.width = ((index + 1) / sections.length * 100) + '%';
