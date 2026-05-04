@@ -50,6 +50,15 @@
       min-height: 100vh;
     }
 
+    /* ======= ACCESIBILIDAD Y RENDIMIENTO ======= */
+    button:focus-visible, a:focus-visible, input[type="checkbox"]:focus-visible, details:focus-visible {
+      outline: 3px dashed var(--naranja);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+    .mascota img, .cierre-trophy, .logo-grande { will-change: transform; }
+    .emergency-banner { will-change: box-shadow; }
+
     /* ======= HEADER ======= */
     header {
       background: linear-gradient(110deg, var(--azul-oscuro) 0%, #004080 50%, var(--azul-medio) 100%);
@@ -181,10 +190,6 @@
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
     }
 
     section { display: none; }
@@ -417,7 +422,6 @@
       background: #e8f5e9; color: #2e7d32;
       font-size: 0.75rem; font-weight: 600;
       padding: 6px 12px;
-      border-radius: var(--radio);
       border-radius: var(--radio);
       margin-top: 8px;
       display: block;
@@ -838,7 +842,6 @@
     }
     .nav-btn:hover {
       transform: translateY(-2px);
-      transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0,90,156,0.4);
     }
     .nav-btn:active { transform: translateY(0); }
@@ -913,12 +916,10 @@
 
 <div id="barraProgreso"></div>
 
-<!-- NAV DOTS -->
 <div id="navDots"></div>
 
 <div class="container">
 
-  <!-- SECCIÓN 1: BIENVENIDA -->
   <section class="active" data-title="Bienvenida">
     <div class="intro-hero">
       <img src="https://i.postimg.cc/gcX7rNgd/Logo-PBI.png" alt="Logo PBI" class="logo-grande">
@@ -941,7 +942,7 @@
       </div>
 
       <div class="intro-obligatorio">
-        <span class="ico">📌</span>
+        <span class="ico" aria-hidden="true">📌</span>
         <p>Esta inducción es <strong>obligatoria</strong>. Su aprobación es requisito previo para cualquier ingreso o actividad dentro de nuestras instalaciones. Al finalizar deberás completar la evaluación.</p>
       </div>
 
@@ -951,14 +952,13 @@
     </div>
   </section>
 
-  <!-- SECCIÓN 2: OBJETIVO -->
   <section data-title="Objetivo de la Inducción">
     <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
     <h2><span class="section-number">2</span>Objetivo de la Inducción</h2>
     <p>Te invitamos a ver el siguiente video introductorio que refuerza el propósito de esta inducción.</p>
 
     <div class="video-wrapper">
-      <iframe src="https://streamable.com/e/uq5idk?" allowfullscreen></iframe>
+      <iframe src="https://streamable.com/e/uq5idk?" title="Video introductorio Inducción HSEQ" allowfullscreen></iframe>
     </div>
 
     <div class="imagen-seccion">
@@ -971,9 +971,8 @@
     </div>
   </section>
 
-  <!-- SECCIÓN 3: POLÍTICAS -->
   <section data-title="Políticas Corporativas">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">3</span>Políticas Corporativas</h2>
     <p>Estas son las políticas esenciales que rigen nuestro actuar diario en PBI. Haz clic en cada una para conocer su alcance:</p>
 
@@ -996,9 +995,8 @@
     </details>
   </section>
 
-  <!-- SECCIÓN 4: PELIGROS Y RIESGOS -->
   <section data-title="Peligros y Riesgos Generales">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">4</span>Peligros y Riesgos Generales</h2>
     <p>Durante tu visita podrías estar expuesto a los siguientes peligros. Despliega cada uno para conocer la medida preventiva:</p>
 
@@ -1033,9 +1031,8 @@
     </details>
   </section>
 
-  <!-- SECCIÓN 5: REGLAS DE ORO -->
   <section data-title="Las 10 Reglas de Oro">
-    <div class="mascota"><img src="https://i.postimg.cc/fRBGStH9/diez.png" alt="Escudo 10"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/fRBGStH9/diez.png" alt="Escudo 10" loading="lazy"></div>
     <h2><span class="section-number">5</span>Las 10 Reglas de Oro</h2>
     <p>Estos compromisos son <strong>innegociables</strong>. Su cumplimiento protege la vida de todos:</p>
 
@@ -1133,9 +1130,8 @@
     </div>
   </section>
 
-  <!-- SECCIÓN 6: PERMISOS DE TRABAJO -->
   <section data-title="Permisos de Trabajo y ATS">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">6</span>Permisos de Trabajo y ATS</h2>
     <p>En Planta Corrales <strong>todo trabajo no rutinario</strong> debe contar con Permiso de Trabajo y Análisis de Trabajo Seguro (ATS) antes de iniciar cualquier actividad.</p>
 
@@ -1192,13 +1188,12 @@
     </div>
   </section>
 
-  <!-- SECCIÓN 7: RIESGOS ESPECÍFICOS -->
   <section data-title="Riesgos: Tratamiento y Compresión">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">7</span>Riesgos Específicos: Tratamiento y Compresión</h2>
 
     <div class="emergency-banner" style="background: linear-gradient(135deg, #e65100, #b71c1c); animation: none; box-shadow: 0 4px 16px rgba(230,81,0,0.4);">
-      <span class="e-ico">⚠️</span>
+      <span class="e-ico" aria-hidden="true">⚠️</span>
       <div class="e-text">
         <strong>Contexto de alto riesgo</strong>
         Estás en una planta de gas con procesos de alta presión y temperatura. Mantén la alerta permanente.
@@ -1207,28 +1202,28 @@
 
     <div class="grid-2">
       <div class="card" style="border-left-color: #7b2d8b;">
-        <div class="card-icon" style="background:#f3e5f5; font-size:1.5rem;">🔊</div>
+        <div class="card-icon" style="background:#f3e5f5; font-size:1.5rem;" aria-hidden="true">🔊</div>
         <h4>Ruido Industrial (Compresores)</h4>
         <p style="font-size:0.9rem;">Las áreas de compresión generan niveles de ruido altos que superan los límites permitidos.</p>
         <span class="risk-preventiva">Uso permanente de protección auditiva. Doble protección si se indica en la zona.</span>
       </div>
 
       <div class="card" style="border-left-color: #1565c0;">
-        <div class="card-icon" style="background:#e3f2fd; font-size:1.5rem;">💨</div>
+        <div class="card-icon" style="background:#e3f2fd; font-size:1.5rem;" aria-hidden="true">💨</div>
         <h4>Altas Presiones</h4>
         <p style="font-size:0.9rem;">Tuberías y recipientes operando a alta presión con riesgo de proyección de fluidos.</p>
         <span class="risk-preventiva">Prohibido golpear tuberías, abrir válvulas sin autorización o pararse frente a válvulas de alivio.</span>
       </div>
 
       <div class="card" style="border-left-color: var(--rojo);">
-        <div class="card-icon" style="background:#fff5f5; font-size:1.5rem;">🔥</div>
+        <div class="card-icon" style="background:#fff5f5; font-size:1.5rem;" aria-hidden="true">🔥</div>
         <h4>Atmósferas Explosivas (Ex)</h4>
         <p style="font-size:0.9rem;">Presencia potencial de gas inflamable en zonas clasificadas como áreas Ex.</p>
         <span class="risk-preventiva">Herramientas antichispa, ropa 100% algodón antiestática y dispositivos electrónicos certificados únicamente.</span>
       </div>
 
       <div class="card" style="border-left-color: var(--naranja);">
-        <div class="card-icon" style="background:#fff8e1; font-size:1.5rem;">🌡️</div>
+        <div class="card-icon" style="background:#fff8e1; font-size:1.5rem;" aria-hidden="true">🌡️</div>
         <h4>Superficies Calientes</h4>
         <p style="font-size:0.9rem;">Cabezales de compresores, motores y líneas de descarga alcanzan temperaturas peligrosas.</p>
         <span class="risk-preventiva">Evita el contacto con tuberías expuestas. Usa guantes de protección térmica adecuados.</span>
@@ -1236,9 +1231,8 @@
     </div>
   </section>
 
-  <!-- SECCIÓN 8: TAREAS ALTO RIESGO -->
   <section data-title="Tareas de Alto Riesgo">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">8</span>Tareas de Alto Riesgo</h2>
     <p>Estas tareas requieren controles rigurosos, personal competente y permisos especiales vigentes antes del inicio:</p>
 
@@ -1258,7 +1252,6 @@
       <summary>🔥 Trabajos en Caliente <span class="risk-tag">PERMISO ESPECIAL</span></summary>
       <p>Soldadura, corte o esmerilado en áreas con potencial de atmósferas inflamables. Requiere monitoreo continuo de atmósferas explosivas, extintores listos y eliminación de materiales inflamables en la zona.</p>
     </details>
-    </details>
 
     <details class="risk-details">
       <summary>🏗️ Izaje de Cargas <span class="risk-tag">PERMISO ESPECIAL</span></summary>
@@ -1271,30 +1264,29 @@
     </details>
   </section>
 
-  <!-- SECCIÓN 9: GESTIÓN AMBIENTAL -->
   <section data-title="Gestión Ambiental">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">9</span>Gestión Ambiental</h2>
     <p>La correcta clasificación de residuos es una responsabilidad de todos. En Planta Corrales utilizamos el siguiente código de colores:</p>
 
     <div class="residuo-grid">
       <div class="residuo-card r-blanco">
-        <div class="r-ico">♻️</div>
+        <div class="r-ico" aria-hidden="true">♻️</div>
         <h4>BLANCO · Aprovechables</h4>
         <p>Papel, cartón, plástico limpio, vidrio, metales no contaminados.</p>
       </div>
       <div class="residuo-card r-verde">
-        <div class="r-ico">🌿</div>
+        <div class="r-ico" aria-hidden="true">🌿</div>
         <h4>VERDE · Orgánicos</h4>
         <p>Restos de comida, cáscaras, residuos de jardinería y poda.</p>
       </div>
       <div class="residuo-card r-negro">
-        <div class="r-ico">🗑️</div>
+        <div class="r-ico" aria-hidden="true">🗑️</div>
         <h4>NEGRO · No Aprovechables</h4>
         <p>Papel higiénico, servilletas usadas, icopor, residuos de barrido.</p>
       </div>
       <div class="residuo-card r-rojo">
-        <div class="r-ico">☣️</div>
+        <div class="r-ico" aria-hidden="true">☣️</div>
         <h4>ROJO · Peligrosos</h4>
         <p>Trapos con aceite, pintura, residuos químicos contaminados.</p>
       </div>
@@ -1305,13 +1297,12 @@
     </div>
   </section>
 
-  <!-- SECCIÓN 10: PLAN DE EMERGENCIAS -->
   <section data-title="Plan de Emergencias">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">10</span>Plan de Emergencias</h2>
 
     <div class="emergency-banner">
-      <span class="e-ico">🚨</span>
+      <span class="e-ico" aria-hidden="true">🚨</span>
       <div class="e-text">
         <strong>Ante cualquier emergencia — sismo, incendio, fuga de gas</strong>
         Sigue estos pasos en orden. No improvises.
@@ -1332,14 +1323,13 @@
     </div>
   </section>
 
-  <!-- SECCIÓN 11: PLANO DE EVACUACIÓN -->
   <section data-title="Plano de Evacuación">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">11</span>Plano de Evacuación</h2>
     <p>Identifica las salidas de emergencia y el punto de encuentro de Planta Corrales antes de iniciar cualquier actividad.</p>
 
     <div class="plano-container">
-      <img src="https://i.postimg.cc/RhQfk7f6/Plano-de-evacuacion-Corrales.png" alt="Plano de Evacuación Corrales">
+      <img src="https://i.postimg.cc/RhQfk7f6/Plano-de-evacuacion-Corrales.png" alt="Plano de Evacuación Corrales" loading="lazy">
       <p style="font-size: 0.78rem; color: #888; margin-top: 8px; margin-bottom: 0;">Imagen de referencia. Ubica el plano físico en tu área de trabajo.</p>
     </div>
 
@@ -1354,13 +1344,12 @@
     </div>
   </section>
 
-  <!-- SECCIÓN 12: EXTINTORES -->
   <section data-title="Tipos de Extintores">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">12</span>Tipos de Extintores</h2>
 
     <div class="alerta-extintor">
-      <span>⚠️</span>
+      <span aria-hidden="true">⚠️</span>
       Solo personal capacitado y entrenado debe manipular los extintores. Conoce su ubicación y tipo.
     </div>
 
@@ -1368,24 +1357,23 @@
       <div class="extintor-card ext-abc">
         <h4>🟡 ABC · Polvo Químico Seco</h4>
         <div class="extintor-uso">Fuegos de clase A, B y C: papel, madera, líquidos inflamables, equipos eléctricos.</div>
-        <img src="https://i.postimg.cc/Bny0bGmN/EXTINTOR-TIPO-ABC.jpg" alt="Extintor ABC">
+        <img src="https://i.postimg.cc/Bny0bGmN/EXTINTOR-TIPO-ABC.jpg" alt="Extintor ABC" loading="lazy">
       </div>
       <div class="extintor-card ext-co2">
         <h4>🔴 CO2 · Gas Carbónico</h4>
         <div class="extintor-uso">Equipos eléctricos y electrónicos. No deja residuo. Ideal en salas técnicas.</div>
-        <img src="https://i.postimg.cc/V6fDcJXh/TIPO-CO2.png" alt="Extintor CO2">
+        <img src="https://i.postimg.cc/V6fDcJXh/TIPO-CO2.png" alt="Extintor CO2" loading="lazy">
       </div>
       <div class="extintor-card ext-agua">
         <h4>🟢 AGUA · Solkaflam</h4>
         <div class="extintor-uso">Combustibles sólidos (madera, papel) y superficies limpias. Clase A.</div>
-        <img src="https://i.postimg.cc/28HnJH5n/Extintor-tipo-A.png" alt="Extintor Agua">
+        <img src="https://i.postimg.cc/28HnJH5n/Extintor-tipo-A.png" alt="Extintor Agua" loading="lazy">
       </div>
     </div>
   </section>
 
-  <!-- SECCIÓN 13: TARJETAS DE APORTE -->
   <section data-title="Tarjetas de Aporte">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">13</span>Tarjetas de Aporte</h2>
     <p>Son el medio oficial para <strong>reportar actos inseguros, condiciones peligrosas o incidentes ambientales</strong>. Tu reporte ayuda a prevenir accidentes.</p>
 
@@ -1412,85 +1400,82 @@
 
     <div class="qr-box">
       <p>📱 Escanea el QR para reportar ahora:</p>
-      <img src="https://i.postimg.cc/0Nhp4dDd/Captura-de-pantalla-2025-06-17-093430.png" alt="QR Tarjetas de Aporte">
+      <img src="https://i.postimg.cc/0Nhp4dDd/Captura-de-pantalla-2025-06-17-093430.png" alt="QR Tarjetas de Aporte" loading="lazy">
       <p class="qr-hint">Apunta la cámara de tu celular al código QR</p>
     </div>
   </section>
 
-  <!-- SECCIÓN 14: NORMAS DE COMPORTAMIENTO -->
   <section data-title="Normas de Comportamiento">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">14</span>Normas de Comportamiento</h2>
     <p>Se espera que cada persona que ingresa a Planta Corrales mantenga un comportamiento seguro, respetuoso y coherente con nuestra cultura:</p>
 
     <div class="grid-2">
       <div class="norma-card">
-        <span class="n-ico">🚭</span>
+        <span class="n-ico" aria-hidden="true">🚭</span>
         <h4>Cero Humo / Vapers</h4>
         <p>Prohibido fumar y usar cigarrillos electrónicos en todas las instalaciones, de acuerdo con la política HSEQ.</p>
       </div>
       <div class="norma-card">
-        <span class="n-ico">🤝</span>
+        <span class="n-ico" aria-hidden="true">🤝</span>
         <h4>Respeto y Cortesía</h4>
         <p>Dirígete con amabilidad al personal y sigue siempre las indicaciones del personal autorizado.</p>
       </div>
       <div class="norma-card">
-        <span class="n-ico">📸</span>
+        <span class="n-ico" aria-hidden="true">📸</span>
         <h4>Fotografías Restringidas</h4>
         <p>Se requieren cámaras intrínsecamente seguras en áreas clasificadas y permiso previo para fotografiar.</p>
       </div>
       <div class="norma-card">
-        <span class="n-ico">🛑</span>
+        <span class="n-ico" aria-hidden="true">🛑</span>
         <h4>No Manipules Equipos</h4>
         <p>Prohibido tocar válvulas, botones o cualquier componente operativo sin autorización y entrenamiento.</p>
       </div>
       <div class="norma-card">
-        <span class="n-ico">📍</span>
+        <span class="n-ico" aria-hidden="true">📍</span>
         <h4>Respeta las Zonas</h4>
         <p>No te desvíes de las rutas señalizadas. Permanece siempre dentro de las áreas permitidas para tu ingreso.</p>
       </div>
       <div class="norma-card">
-        <span class="n-ico">📵</span>
+        <span class="n-ico" aria-hidden="true">📵</span>
         <h4>Cero Distracciones</h4>
         <p>No uses celulares mientras te desplazas por zonas operativas, técnicas o vías vehiculares.</p>
       </div>
     </div>
   </section>
 
-  <!-- SECCIÓN 15: SEGURIDAD VIAL -->
   <section data-title="Seguridad Vial">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">15</span>Seguridad Vial</h2>
     <p>🚘 La seguridad vial es parte integral de nuestra cultura preventiva. Aplica estas normas en todo momento dentro de las instalaciones:</p>
 
     <div class="vial-grid">
       <div class="vial-card">
-        <span class="v-ico">📵</span>
+        <span class="v-ico" aria-hidden="true">📵</span>
         <h4>Sin Distracciones</h4>
         <p>No uses el celular mientras conduces ni durante desplazamientos a pie por zonas vehiculares.</p>
       </div>
       <div class="vial-card">
-        <span class="v-ico">⏱️</span>
+        <span class="v-ico" aria-hidden="true">⏱️</span>
         <h4>Límite de Velocidad</h4>
         <div class="velocidad-badge">10 km/h</div>
         <p>Velocidad máxima dentro de la planta. Sin excepciones.</p>
       </div>
       <div class="vial-card">
-        <span class="v-ico">✅</span>
+        <span class="v-ico" aria-hidden="true">✅</span>
         <h4>Cinturón Siempre</h4>
         <p>Uso obligatorio para todos los ocupantes del vehículo, incluso en trayectos cortos.</p>
       </div>
       <div class="vial-card">
-        <span class="v-ico">🅿️</span>
+        <span class="v-ico" aria-hidden="true">🅿️</span>
         <h4>Parqueo Seguro</h4>
         <p>Parquea en reversa (posición de salida) únicamente en zonas autorizadas y demarcadas.</p>
       </div>
     </div>
   </section>
 
-  <!-- SECCIÓN 16: CHECKLIST -->
   <section id="checklist-section" data-title="Recomendaciones Finales">
-    <div class="mascota"><img src="https://i.postimg.cc/gcX7rNgd/Logo-PBI.png" alt="Logo PBI"></div>
+    <div class="mascota"><img src="https://i.postimg.cc/gcX7rNgd/Logo-PBI.png" alt="Logo PBI" loading="lazy"></div>
     <h2><span class="section-number">16</span>Recomendaciones Finales</h2>
     <p>Antes de ingresar a la planta, confirma que cumples con todos los puntos. <strong>Debes marcar todos los ítems para continuar.</strong></p>
 
@@ -1511,7 +1496,6 @@
     <div id="mensaje-alerta"></div>
   </section>
 
-  <!-- SECCIÓN 17: CIERRE -->
   <section data-title="Cierre y Cultura">
     <div class="cierre-hero">
       <span class="cierre-trophy">🏆</span>
@@ -1521,13 +1505,13 @@
 
     <div class="video-grid">
       <div class="video-card">
-        <div class="v-ico">🎥</div>
+        <div class="v-ico" aria-hidden="true">🎥</div>
         <h4>Cultura de Seguridad Industrial</h4>
         <p style="font-size:0.84rem; color:#666; margin-bottom:10px;">Refuerza los conceptos aprendidos</p>
         <a href="https://youtu.be/faHop1FcGNE" target="_blank">▶ Ver video →</a>
       </div>
       <div class="video-card">
-        <div class="v-ico">🏢</div>
+        <div class="v-ico" aria-hidden="true">🏢</div>
         <h4>Quiénes Somos — PBI</h4>
         <p style="font-size:0.84rem; color:#666; margin-bottom:10px;">Conoce el propósito y valores corporativos</p>
         <a href="https://youtu.be/-gRjlWdwpao" target="_blank">▶ Ver video →</a>
@@ -1542,7 +1526,6 @@
     </div>
   </section>
 
-  <!-- NAVEGACIÓN -->
   <div class="nav-buttons">
     <button class="nav-btn nav-btn-prev" id="btnAnterior" onclick="prevSection()">← Anterior</button>
     <div class="nav-step-counter" id="stepCounter">Sección 1 de 17</div>
@@ -1550,6 +1533,10 @@
   </div>
 
 </div>
+
+<audio id="snd-exito" src="https://actions.google.com/sounds/v1/ui/succeeded_bell.ogg" preload="auto"></audio>
+<audio id="snd-error" src="https://actions.google.com/sounds/v1/ui/error_beep.ogg" preload="auto"></audio>
+<audio id="snd-victoria" src="https://actions.google.com/sounds/v1/crowds/crowd_cheer.ogg" preload="auto"></audio>
 
 <script>
   let current = 0;
@@ -1589,14 +1576,47 @@
       const li = document.getElementById('cli-' + idx);
       if (li) li.classList.toggle('checked-ok', cb.checked);
     });
+
+    // UX y Sonido
+    const allChecked = (done === total);
+    
+    // Validar solo si estamos en la sección del checklist (índice 15)
+    if (current === 15) {
+      if (allChecked) {
+        btnSiguiente.style.opacity = '1';
+        btnSiguiente.style.cursor = 'pointer';
+        
+        // Sonido de éxito al marcar todo por primera vez
+        if(!window.checklistCompleted) {
+            const sndExito = document.getElementById('snd-exito');
+            if(sndExito) { 
+              sndExito.volume = 0.5; 
+              sndExito.play().catch(e => console.log("Audio bloqueado")); 
+            }
+            window.checklistCompleted = true; // Evitar repetición si desmarca y vuelve a marcar
+        }
+      } else {
+        btnSiguiente.style.opacity = '0.5';
+        btnSiguiente.style.cursor = 'not-allowed';
+        window.checklistCompleted = false;
+      }
+    }
   }
 
   function show(index) {
     sections.forEach((s, i) => s.classList.toggle('active', i === index));
 
-    // Buttons
+    // Buttons visibility
     btnAnterior.style.visibility = index === 0 ? 'hidden' : 'visible';
     btnSiguiente.style.display = index === sections.length - 1 ? 'none' : 'inline-flex';
+
+    // Restablecer el botón "Siguiente" si NO estamos en el checklist
+    if (index !== 15) {
+      btnSiguiente.style.opacity = '1';
+      btnSiguiente.style.cursor = 'pointer';
+    } else {
+      updateChecklist(); // Fuerza la validación visual al entrar al checklist
+    }
 
     // Progress bar
     barraProgreso.style.width = ((index + 1) / sections.length * 100) + '%';
@@ -1611,6 +1631,15 @@
 
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Sonido de victoria al llegar a la última sección
+    if (index === sections.length - 1) {
+      const sndVictoria = document.getElementById('snd-victoria');
+      if (sndVictoria) {
+        sndVictoria.volume = 0.5;
+        sndVictoria.play().catch(e => console.log("Audio bloqueado"));
+      }
+    }
   }
 
   function goTo(index) {
@@ -1625,6 +1654,13 @@
       const areaMensaje = document.getElementById('mensaje-alerta');
 
       if (!allChecked) {
+        // Reproducir sonido de error
+        const sndError = document.getElementById('snd-error');
+        if(sndError) {
+          sndError.volume = 0.4;
+          sndError.play().catch(e => console.log("Audio bloqueado"));
+        }
+
         if (!areaMensaje.querySelector('.advertencia-checklist')) {
           areaMensaje.innerHTML = "<div class='advertencia-checklist'>⚠️ Por favor marca todos los ítems antes de continuar.</div>";
           setTimeout(() => {
