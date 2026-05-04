@@ -517,6 +517,85 @@
       font-size: 0.92rem;
     }
 
+    /* ======= AMBIENTAL Y JUEGO ======= */
+    .residuo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .residuo-card {
+      border-radius: var(--radio);
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-xs);
+      transition: transform var(--transition);
+    }
+    .residuo-card:hover { transform: scale(1.03); }
+    .residuo-card .r-ico { font-size: 2rem; margin-bottom: 6px; }
+    .residuo-card h4 { font-size: 0.88rem; margin-bottom: 4px; }
+    .residuo-card p { font-size: 0.82rem; margin: 0; }
+    .r-blanco { background: #f8f9fa; border: 2px solid #adb5bd; color: #333; }
+    .r-verde  { background: #e8f5e9; border: 2px solid #4caf50; color: #1b5e20; }
+    .r-negro  { background: #212529; border: 2px solid #000; color: #f8f9fa; }
+    .r-rojo   { background: #fff5f5; border: 2px solid var(--rojo); color: #7f1d1d; }
+
+    /* Estilos del Mini Juego */
+    .game-container {
+      background: #f8fbff;
+      border: 2px dashed var(--azul-claro);
+      border-radius: var(--radio);
+      padding: 24px 20px;
+      text-align: center;
+      margin-top: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .game-title {
+      font-weight: 700;
+      color: var(--azul-oscuro);
+      margin-bottom: 14px;
+    }
+    .game-item {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--naranja);
+      background: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--gris-claro);
+      transition: transform 0.3s;
+    }
+    .game-bins {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .game-bin {
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 2px solid transparent;
+      flex: 1 1 100px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .game-bin:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .game-bin:active { transform: translateY(0); }
+    .game-bin.blanco { background: #fff; border-color: #adb5bd; color: #333; }
+    .game-bin.verde { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
+    .game-bin.negro { background: #212529; color: #fff; }
+    .game-bin.rojo { background: #fff5f5; border-color: var(--rojo); color: #7f1d1d; }
+    .game-feedback {
+      margin-top: 18px;
+      font-weight: 700;
+      min-height: 24px;
+      font-size: 1.1rem;
+    }
+
     /* ======= CHECKLIST ======= */
     .checklist-list { list-style: none; padding: 0; margin-bottom: 0; }
     .checklist-list li {
@@ -621,29 +700,6 @@
       font-weight: 800; font-size: 0.85rem;
       display: flex; align-items: center; justify-content: center;
     }
-
-    /* ======= AMBIENTAL ======= */
-    .residuo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-    .residuo-card {
-      border-radius: var(--radio);
-      padding: 18px 16px;
-      text-align: center;
-      box-shadow: var(--shadow-xs);
-      transition: transform var(--transition);
-    }
-    .residuo-card:hover { transform: scale(1.03); }
-    .residuo-card .r-ico { font-size: 2rem; margin-bottom: 6px; }
-    .residuo-card h4 { font-size: 0.88rem; margin-bottom: 4px; }
-    .residuo-card p { font-size: 0.82rem; margin: 0; }
-    .r-blanco { background: #f8f9fa; border: 2px solid #adb5bd; color: #333; }
-    .r-verde  { background: #e8f5e9; border: 2px solid #4caf50; color: #1b5e20; }
-    .r-negro  { background: #212529; border: 2px solid #000; color: #f8f9fa; }
-    .r-rojo   { background: #fff5f5; border: 2px solid var(--rojo); color: #7f1d1d; }
 
     /* ======= PERMISOS/ATS ======= */
     .proceso-steps {
@@ -920,6 +976,7 @@
 
 <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
 <audio id="successSound" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3" preload="auto"></audio>
+<audio id="errorSound" src="https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3" preload="auto"></audio>
 
 <div class="container">
 
@@ -1001,7 +1058,7 @@
   <section data-title="Peligros y Riesgos Generales">
     <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
     <h2><span class="section-number">4</span>Peligros y Riesgos Generales</h2>
-    <p>Durante tu visita podrías estar expuesto a los siguientes peligros. Despliega cada uno para conocer la medida preventiva:</p>
+    <p>Durante tu visita a Planta Corrales podrías estar expuesto a los siguientes peligros. Despliega cada uno para conocer la medida preventiva:</p>
 
     <details>
       <summary>⚡ Riesgo Eléctrico <span class="risk-tag">ALTO</span></summary>
@@ -1022,15 +1079,15 @@
     </details>
 
     <details>
-      <summary>🦠 Riesgos Biológicos <span class="risk-tag">MEDIO</span></summary>
-      <p>Presencia de vectores como mosquitos o insectos en zonas cálidas, que pueden transmitir enfermedades infecciosas.</p>
-      <span class="risk-preventiva">✅ Usa ropa que cubra la piel, aplica repelente y evita zonas con vegetación densa no autorizadas.</span>
+      <summary>❄️ Riesgos Climáticos (Bajas Temperaturas) <span class="risk-tag">MEDIO</span></summary>
+      <p>El clima frío de Corrales y las heladas matutinas pueden generar estrés térmico (hipotermia leve) y crear superficies o pasarelas metálicas resbalosas por escarcha.</p>
+      <span class="risk-preventiva">✅ Acude siempre con ropa abrigada adecuada, camina con precaución en áreas metálicas y usa calzado antideslizante.</span>
     </details>
 
     <details>
-      <summary>🐍 Riesgo Ofídico <span class="risk-tag">MEDIO</span></summary>
-      <p>Presencia de serpientes en zonas rurales, áreas verdes o rocosas propias del entorno de la planta.</p>
-      <span class="risk-preventiva">✅ Usa calzado adecuado (botas), camina solo por rutas autorizadas y reporta cualquier avistamiento de inmediato.</span>
+      <summary>🏔️ Riesgo por Altitud (Soroche) <span class="risk-tag">MEDIO</span></summary>
+      <p>La altura sobre el nivel del mar puede generar fatiga rápida, mareos o dificultad respiratoria en visitantes no aclimatados, especialmente al subir escaleras.</p>
+      <span class="risk-preventiva">✅ Mantente hidratado, evita movimientos bruscos o correr, y reporta inmediatamente si te sientes mareado.</span>
     </details>
   </section>
 
@@ -1276,27 +1333,39 @@
       <div class="residuo-card r-blanco">
         <div class="r-ico" aria-hidden="true">♻️</div>
         <h4>BLANCO · Aprovechables</h4>
-        <p>Papel, cartón, plástico limpio, vidrio, metales no contaminados.</p>
+        <p>Papel, cartón, plástico limpio, vidrio.</p>
       </div>
       <div class="residuo-card r-verde">
         <div class="r-ico" aria-hidden="true">🌿</div>
         <h4>VERDE · Orgánicos</h4>
-        <p>Restos de comida, cáscaras, residuos de jardinería y poda.</p>
+        <p>Restos de comida, cáscaras, poda.</p>
       </div>
       <div class="residuo-card r-negro">
         <div class="r-ico" aria-hidden="true">🗑️</div>
         <h4>NEGRO · No Aprovechables</h4>
-        <p>Papel higiénico, servilletas usadas, icopor, residuos de barrido.</p>
+        <p>Papel higiénico, servilletas usadas.</p>
       </div>
       <div class="residuo-card r-rojo">
         <div class="r-ico" aria-hidden="true">☣️</div>
         <h4>ROJO · Peligrosos</h4>
-        <p>Trapos con aceite, pintura, residuos químicos contaminados.</p>
+        <p>Trapos con aceite, pintura.</p>
       </div>
     </div>
 
-    <div class="card" style="border-left-color: var(--verde);">
-      <p style="margin:0;">♻️ <strong>Recuerda:</strong> No mezcles residuos entre canecas y haz uso correcto de los puntos ecológicos. El manejo inadecuado de residuos peligrosos tiene consecuencias legales y ambientales.</p>
+    <div class="game-container">
+      <div class="game-title">🎮 Mini-Juego: ¿Dónde va este residuo?</div>
+      <p style="font-size: 0.9rem; margin-bottom: 15px;">Toca la caneca correcta para avanzar.</p>
+      
+      <div id="game-item-text" class="game-item">Cargando...</div>
+      
+      <div class="game-bins" id="game-bins">
+        <div class="game-bin blanco" onclick="checkBin('blanco')">Blanco</div>
+        <div class="game-bin verde" onclick="checkBin('verde')">Verde</div>
+        <div class="game-bin negro" onclick="checkBin('negro')">Negro</div>
+        <div class="game-bin rojo" onclick="checkBin('rojo')">Rojo</div>
+      </div>
+
+      <div id="game-feedback" class="game-feedback"></div>
     </div>
   </section>
 
@@ -1488,12 +1557,12 @@
     </div>
 
     <ul class="checklist-list">
-      <li id="cli-0"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Entendí los riesgos de gas, alta presión y atmósferas explosivas de la planta.</span></label></li>
-      <li id="cli-1"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Porto mi EPP completo y en buen estado requerido para el área.</span></label></li>
+      <li id="cli-0"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Entendí los riesgos de gas, alta presión y climas extremos (frío/altitud).</span></label></li>
+      <li id="cli-1"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Porto mi EPP completo y ropa abrigada adecuada para el área.</span></label></li>
       <li id="cli-2"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Conozco los puntos de encuentro y las rutas de evacuación.</span></label></li>
-      <li id="cli-3"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Mi ropa es adecuada (100% Algodón / Antiestática) para zonas clasificadas.</span></label></li>
-      <li id="cli-4"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>No porté celular sin certificación intrínsecamente segura en áreas operativas.</span></label></li>
-      <li id="cli-5"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Cumpliré la política de cero alcohol, cero drogas y no fumar/vapear.</span></label></li>
+      <li id="cli-3"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Mi ropa es 100% Algodón y antiestática para ingresar a zonas clasificadas.</span></label></li>
+      <li id="cli-4"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>No portaré celular sin certificación intrínsecamente segura en áreas operativas.</span></label></li>
+      <li id="cli-5"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Cumpliré la política de cero alcohol, cero drogas y cero humo/vapeo.</span></label></li>
     </ul>
 
     <div id="mensaje-alerta"></div>
@@ -1537,6 +1606,10 @@
 
 </div>
 
+<audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
+<audio id="successSound" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3" preload="auto"></audio>
+<audio id="errorSound" src="https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3" preload="auto"></audio>
+
 <script>
   let current = 0;
   const sections = document.querySelectorAll('section');
@@ -1552,11 +1625,73 @@
   // ======= AUDIOS =======
   const audioClick = document.getElementById("clickSound");
   const audioSuccess = document.getElementById("successSound");
+  const audioError = document.getElementById("errorSound");
 
   function playClick() {
     if (audioClick) {
       audioClick.currentTime = 0;
       audioClick.play().catch(e => console.log("Audio bloqueado"));
+    }
+  }
+
+  // ======= LÓGICA DEL MINI JUEGO AMBIENTAL =======
+  const wasteItems = [
+    { text: "Botella de plástico limpia 🥤", bin: "blanco" },
+    { text: "Servilleta usada 🧻", bin: "negro" },
+    { text: "Cáscara de plátano 🍌", bin: "verde" },
+    { text: "Trapo con aceite de motor 🛢️", bin: "rojo" }
+  ];
+  let currentGameIndex = 0;
+
+  function initGame() {
+    currentGameIndex = 0;
+    updateGameUI();
+  }
+
+  function updateGameUI() {
+    const itemEl = document.getElementById("game-item-text");
+    const binsEl = document.getElementById("game-bins");
+    const feedbackEl = document.getElementById("game-feedback");
+
+    if (currentGameIndex >= wasteItems.length) {
+      itemEl.innerHTML = "🎉 ¡Excelente! Eres un experto reciclando.";
+      itemEl.style.color = "var(--verde)";
+      binsEl.style.display = "none";
+      feedbackEl.textContent = "";
+      if(audioSuccess) { audioSuccess.currentTime = 0; audioSuccess.play().catch(e=>{}); }
+      return;
+    }
+    
+    itemEl.style.color = "var(--naranja)";
+    itemEl.textContent = wasteItems[currentGameIndex].text;
+    binsEl.style.display = "flex";
+    feedbackEl.textContent = "";
+  }
+
+  function checkBin(selectedBin) {
+    const correctBin = wasteItems[currentGameIndex].bin;
+    const feedbackEl = document.getElementById("game-feedback");
+    const itemEl = document.getElementById("game-item-text");
+
+    if (selectedBin === correctBin) {
+      feedbackEl.style.color = "var(--verde)";
+      feedbackEl.textContent = "¡Correcto! ✅";
+      if(audioSuccess) { audioSuccess.currentTime = 0; audioSuccess.play().catch(e=>{}); }
+      
+      itemEl.style.transform = "scale(0.8)";
+      setTimeout(() => {
+        currentGameIndex++;
+        itemEl.style.transform = "scale(1)";
+        updateGameUI();
+      }, 700);
+    } else {
+      feedbackEl.style.color = "var(--rojo)";
+      feedbackEl.textContent = "Ups, esa no es la caneca. Intenta de nuevo ❌";
+      if(audioError) { audioError.currentTime = 0; audioError.play().catch(e=>{}); }
+      
+      itemEl.style.animation = 'shake 0.4s';
+      setTimeout(() => itemEl.style.animation = '', 400);
+      if (navigator.vibrate) navigator.vibrate(200);
     }
   }
 
@@ -1573,7 +1708,6 @@
     navDotsContainer.appendChild(dot);
   });
 
-  // Añadir sonido a los checkboxes del checklist
   function agregarSonidoCheckboxes() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(cb => {
@@ -1586,34 +1720,29 @@
     const total = items.length;
     const done = Array.from(items).filter(cb => cb.checked).length;
 
-    // Update progress bar
     const bar = document.getElementById('checkProgressBar');
     const count = document.getElementById('checkCount');
     if (bar) bar.style.width = (done / total * 100) + '%';
     if (count) count.textContent = done + ' de ' + total + ' completados';
 
-    // Highlight checked rows
     items.forEach((cb, idx) => {
       const li = document.getElementById('cli-' + idx);
       if (li) li.classList.toggle('checked-ok', cb.checked);
     });
 
-    // UX
     const allChecked = (done === total);
     
-    // Validar solo si estamos en la sección del checklist (índice 15)
     if (current === 15) {
       if (allChecked) {
         btnSiguiente.style.opacity = '1';
         btnSiguiente.style.cursor = 'pointer';
         
-        // Sonido de éxito al marcar todo por primera vez
         if(!window.checklistCompleted) {
             if(audioSuccess) { 
               audioSuccess.currentTime = 0;
               audioSuccess.play().catch(e => console.log("Audio bloqueado")); 
             }
-            window.checklistCompleted = true; // Evitar repetición si desmarca y vuelve a marcar
+            window.checklistCompleted = true; 
         }
       } else {
         btnSiguiente.style.opacity = '0.5';
@@ -1626,33 +1755,29 @@
   function show(index) {
     sections.forEach((s, i) => s.classList.toggle('active', i === index));
 
-    // Buttons visibility
     btnAnterior.style.visibility = index === 0 ? 'hidden' : 'visible';
     btnSiguiente.style.display = index === sections.length - 1 ? 'none' : 'inline-flex';
 
-    // Restablecer el botón "Siguiente" si NO estamos en el checklist
     if (index !== 15) {
       btnSiguiente.style.opacity = '1';
       btnSiguiente.style.cursor = 'pointer';
     } else {
-      updateChecklist(); // Fuerza la validación visual al entrar al checklist
+      updateChecklist(); 
     }
 
-    // Progress bar
-    barraProgreso.style.width = ((index + 1) / sections.length * 100) + '%';
+    // Iniciar juego si entra a la sección 9 (índice 8)
+    if (index === 8) {
+      initGame();
+    }
 
-    // Header info
+    barraProgreso.style.width = ((index + 1) / sections.length * 100) + '%';
     headerBadge.textContent = (index + 1) + ' / ' + sections.length;
     headerSectionName.textContent = sections[index].dataset.title || '';
     stepCounter.textContent = 'Sección ' + (index + 1) + ' de ' + sections.length;
 
-    // Nav dots
     document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === index));
-
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Sonido de victoria al llegar a la última sección
     if (index === sections.length - 1 && audioSuccess) {
       audioSuccess.currentTime = 0;
       audioSuccess.play().catch(e => console.log("Audio bloqueado"));
@@ -1681,10 +1806,8 @@
           }, 10);
         }
         
-        // Vibración en móviles si hay error
-        if (navigator.vibrate) {
-          navigator.vibrate(200);
-        }
+        if(audioError) { audioError.currentTime = 0; audioError.play().catch(e=>{}); }
+        if (navigator.vibrate) { navigator.vibrate(200); }
         return;
       } else {
         areaMensaje.innerHTML = '';
@@ -1706,13 +1829,11 @@
     }
   }
 
-  // Keyboard navigation
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSection();
     if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSection();
   });
 
-  // Init
   document.addEventListener('DOMContentLoaded', () => {
     show(0);
     updateChecklist();
