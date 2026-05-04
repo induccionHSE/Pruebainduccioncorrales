@@ -226,22 +226,7 @@
       font-size: 1rem;
       margin-bottom: 32px;
     }
-    .intro-stats {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin-bottom: 32px;
-    }
-    .stat-pill {
-      background: linear-gradient(135deg, #eef6ff, #ddeeff);
-      border: 1px solid #c0ddf9;
-      border-radius: 50px;
-      padding: 10px 22px;
-      text-align: center;
-    }
-    .stat-pill strong { display: block; font-size: 1.5rem; font-weight: 800; color: var(--azul-medio); line-height: 1; }
-    .stat-pill span { font-size: 0.72rem; color: var(--gris-medio); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+
     .intro-obligatorio {
       background: linear-gradient(135deg, #fff8e1, #fff3cd);
       border: 1px solid #ffd54f;
@@ -709,6 +694,43 @@
       display: flex; align-items: center; justify-content: center;
     }
 
+    /* ======= PERMISOS/ATS ======= */
+    .proceso-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 18px;
+    }
+    .paso-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding-bottom: 18px;
+      position: relative;
+    }
+    .paso-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 18px; top: 40px;
+      width: 2px;
+      bottom: 0;
+      background: linear-gradient(to bottom, var(--azul-claro), transparent);
+    }
+    .paso-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--azul-medio), var(--azul-claro));
+      color: white;
+      font-weight: 800;
+      font-size: 0.88rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 3px 8px rgba(0,90,156,0.35);
+    }
+    .paso-body { padding-top: 6px; }
+    .paso-body strong { display: block; font-size: 0.95rem; color: var(--azul-oscuro); margin-bottom: 2px; }
+    .paso-body span { font-size: 0.85rem; color: #666; }
+
     /* ======= CIERRE / COMPLETADO ======= */
     .cierre-hero {
       text-align: center;
@@ -913,7 +935,6 @@
       .nav-btn { padding: 12px 22px; font-size: 0.88rem; }
       #navDots { display: none; }
       .intro-hero h1 { font-size: 1.6rem; }
-      .intro-stats { gap: 12px; }
       .cierre-hero h2 { font-size: 1.4rem; }
       .final-button { padding: 15px 32px; font-size: 1rem; }
     }
@@ -956,21 +977,6 @@
       <img src="https://i.postimg.cc/gcX7rNgd/Logo-PBI.png" alt="Logo PBI" class="logo-grande">
       <h1>¡Bienvenido a<br><span>Planta Corrales!</span></h1>
       <p class="subtitle">Inducción HSEQ · Salud · Seguridad · Ambiente · Calidad</p>
-
-      <div class="intro-stats">
-        <div class="stat-pill">
-          <strong>17</strong>
-          <span>Secciones</span>
-        </div>
-        <div class="stat-pill">
-          <strong>10</strong>
-          <span>Reglas de oro</span>
-        </div>
-        <div class="stat-pill">
-          <strong>100%</strong>
-          <span>Obligatoria</span>
-        </div>
-      </div>
 
       <div class="intro-obligatorio">
         <span class="ico" aria-hidden="true">📌</span>
@@ -1474,33 +1480,40 @@
     </div>
   </section>
 
-  <section data-title="Seguridad Vial">
+  <section data-title="Seguridad Vial y Transporte">
     <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
-    <h2><span class="section-number">15</span>Seguridad Vial</h2>
-    <p>🚘 La seguridad vial es parte integral de nuestra cultura preventiva. Aplica estas normas en todo momento dentro de las instalaciones:</p>
+    <h2><span class="section-number">15</span>Seguridad Vial y Transporte</h2>
+    <p>🚘 Aplica estas normas básicas de movilidad en todo momento dentro de nuestras instalaciones:</p>
 
     <div class="vial-grid">
       <div class="vial-card">
         <span class="v-ico" aria-hidden="true">📵</span>
         <h4>Sin Distracciones</h4>
-        <p>No uses el celular mientras conduces ni durante desplazamientos a pie por zonas vehiculares.</p>
+        <p>No uses el celular mientras conduces ni caminas por zonas vehiculares.</p>
       </div>
       <div class="vial-card">
         <span class="v-ico" aria-hidden="true">⏱️</span>
         <h4>Límite de Velocidad</h4>
         <div class="velocidad-badge">10 km/h</div>
-        <p>Velocidad máxima dentro de la planta. Sin excepciones.</p>
+        <p>Velocidad máxima en planta. Sin excepciones.</p>
       </div>
       <div class="vial-card">
         <span class="v-ico" aria-hidden="true">✅</span>
         <h4>Cinturón Siempre</h4>
-        <p>Uso obligatorio para todos los ocupantes del vehículo, incluso en trayectos cortos.</p>
+        <p>Uso obligatorio para todos los ocupantes, incluso en trayectos cortos.</p>
       </div>
       <div class="vial-card">
         <span class="v-ico" aria-hidden="true">🅿️</span>
         <h4>Parqueo Seguro</h4>
-        <p>Parquea en reversa (posición de salida) únicamente en zonas autorizadas y demarcadas.</p>
+        <p>Parquea en reversa (posición de salida) en zonas autorizadas.</p>
       </div>
+    </div>
+
+    <div class="card" style="border-left-color: var(--rojo); margin-top: 24px; background: #fffcfc;">
+      <h3 style="color: var(--rojo); margin-top: 0; display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.5rem;">🚛</span> Vehículos de Carga y Transporte
+      </h3>
+      <p style="font-size: 0.9rem; color: #555; margin-bottom: 0;">Todo conductor que ingrese para cargue, descargue o entrega de materiales debe obedecer las señales de tránsito internas, parquear solo en zonas autorizadas, apagar el motor durante la espera y <strong>permanecer en la cabina o área de espera designada</strong>. No deambules por las zonas operativas.</p>
     </div>
   </section>
 
