@@ -918,6 +918,9 @@
 
 <div id="navDots"></div>
 
+<audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
+<audio id="successSound" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3" preload="auto"></audio>
+
 <div class="container">
 
   <section class="active" data-title="Bienvenida">
@@ -1534,10 +1537,6 @@
 
 </div>
 
-<audio id="snd-exito" src="https://www.soundjay.com/buttons/sounds/button-09.mp3" preload="auto"></audio>
-<audio id="snd-error" src="https://www.soundjay.com/buttons/sounds/button-10.mp3" preload="auto"></audio>
-<audio id="snd-victoria" src="https://www.soundjay.com/human/sounds/applause-01.mp3" preload="auto"></audio>
-
 <script>
   let current = 0;
   const sections = document.querySelectorAll('section');
@@ -1550,15 +1549,37 @@
   const stepCounter = document.getElementById('stepCounter');
   const navDotsContainer = document.getElementById('navDots');
 
+  // ======= AUDIOS =======
+  const audioClick = document.getElementById("clickSound");
+  const audioSuccess = document.getElementById("successSound");
+
+  function playClick() {
+    if (audioClick) {
+      audioClick.currentTime = 0;
+      audioClick.play().catch(e => console.log("Audio bloqueado"));
+    }
+  }
+
   // Build nav dots
   sections.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
     dot.title = sections[i].dataset.title || ('Sección ' + (i + 1));
     dot.setAttribute('aria-label', dot.title);
-    dot.onclick = () => goTo(i);
+    dot.onclick = () => {
+      playClick();
+      goTo(i);
+    };
     navDotsContainer.appendChild(dot);
   });
+
+  // Añadir sonido a los checkboxes del checklist
+  function agregarSonidoCheckboxes() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', playClick);
+    });
+  }
 
   function updateChecklist() {
     const items = checklistSection.querySelectorAll('.check-item');
@@ -1577,7 +1598,7 @@
       if (li) li.classList.toggle('checked-ok', cb.checked);
     });
 
-    // UX y Sonido
+    // UX
     const allChecked = (done === total);
     
     // Validar solo si estamos en la sección del checklist (índice 15)
@@ -1588,10 +1609,9 @@
         
         // Sonido de éxito al marcar todo por primera vez
         if(!window.checklistCompleted) {
-            const sndExito = document.getElementById('snd-exito');
-            if(sndExito) { 
-              sndExito.volume = 0.5; 
-              sndExito.play().catch(e => console.log("Audio bloqueado")); 
+            if(audioSuccess) { 
+              audioSuccess.currentTime = 0;
+              audioSuccess.play().catch(e => console.log("Audio bloqueado")); 
             }
             window.checklistCompleted = true; // Evitar repetición si desmarca y vuelve a marcar
         }
@@ -1633,12 +1653,9 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     // Sonido de victoria al llegar a la última sección
-    if (index === sections.length - 1) {
-      const sndVictoria = document.getElementById('snd-victoria');
-      if (sndVictoria) {
-        sndVictoria.volume = 0.5;
-        sndVictoria.play().catch(e => console.log("Audio bloqueado"));
-      }
+    if (index === sections.length - 1 && audioSuccess) {
+      audioSuccess.currentTime = 0;
+      audioSuccess.play().catch(e => console.log("Audio bloqueado"));
     }
   }
 
@@ -1648,25 +1665,25 @@
   }
 
   function nextSection() {
+    playClick();
+
     if (sections[current] === checklistSection) {
       const checkboxes = checklistSection.querySelectorAll('.check-item');
       const allChecked = Array.from(checkboxes).every(cb => cb.checked);
       const areaMensaje = document.getElementById('mensaje-alerta');
 
       if (!allChecked) {
-        // Reproducir sonido de error
-        const sndError = document.getElementById('snd-error');
-        if(sndError) {
-          sndError.volume = 0.4;
-          sndError.play().catch(e => console.log("Audio bloqueado"));
-        }
-
         if (!areaMensaje.querySelector('.advertencia-checklist')) {
           areaMensaje.innerHTML = "<div class='advertencia-checklist'>⚠️ Por favor marca todos los ítems antes de continuar.</div>";
           setTimeout(() => {
             const adv = areaMensaje.querySelector('.advertencia-checklist');
             if (adv) adv.style.animation = 'shake 0.4s';
           }, 10);
+        }
+        
+        // Vibración en móviles si hay error
+        if (navigator.vibrate) {
+          navigator.vibrate(200);
         }
         return;
       } else {
@@ -1681,6 +1698,8 @@
   }
 
   function prevSection() {
+    playClick();
+
     if (current > 0) {
       current--;
       show(current);
@@ -1697,6 +1716,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     show(0);
     updateChecklist();
+    agregarSonidoCheckboxes();
   });
 </script>
 
