@@ -7,63 +7,81 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ======= VARIABLES ======= */
     :root {
-      --azul-oscuro: #002b49;
-      --azul-medio: #005A9C;
-      --azul-claro: #007BFF;
-      --azul-bright: #0096FF;
-      --fondo: #eef2f7;
-      --texto: #2c3e50;
-      --naranja: #ff8c00;
-      --naranja-bright: #ffb300;
+      --azul-oscuro: #0a1e3d;
+      --azul-medio: #1a5096;
+      --azul-claro: #2b7cff;
+      --azul-bright: #4da3ff;
+      --azul-glow: rgba(43,124,255,0.15);
+      --fondo: #f0f3f8;
+      --fondo-warm: #f8f6f3;
+      --texto: #1e293b;
+      --texto-secondary: #64748b;
+      --naranja: #f97316;
+      --naranja-bright: #fb923c;
+      --naranja-glow: rgba(249,115,22,0.12);
       --blanco: #ffffff;
-      --verde: #28a745;
-      --verde-bright: #00c853;
-      --rojo: #dc3545;
-      --gris-claro: #dee2e8;
-      --gris-medio: #8d99ae;
-      --shadow-xs: 0 1px 3px rgba(0,0,0,0.08);
-      --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-      --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.12), 0 5px 10px -5px rgba(0,0,0,0.06);
-      --shadow-lg: 0 20px 40px -10px rgba(0,43,73,0.2);
-      --radio: 14px;
+      --verde: #16a34a;
+      --verde-bright: #22c55e;
+      --verde-glow: rgba(22,163,74,0.1);
+      --rojo: #dc2626;
+      --rojo-soft: #fef2f2;
+      --gris-claro: #e2e8f0;
+      --gris-medio: #94a3b8;
+      --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+      --shadow-glow: 0 0 40px rgba(26,80,150,0.08);
+      --radio: 12px;
       --radio-lg: 20px;
-      --header-h: 68px;
-      --progress-h: 5px;
-      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --radio-xl: 24px;
+      --header-h: 64px;
+      --progress-h: 4px;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
     }
 
-    *, *::before, *::after { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.65;
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.7;
       background-color: var(--fondo);
-      margin: 0; padding: 0;
       color: var(--texto);
       min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ======= ACCESIBILIDAD Y RENDIMIENTO ======= */
-    button:focus-visible, a:focus-visible, input[type="checkbox"]:focus-visible, details:focus-visible {
-      outline: 3px dashed var(--naranja);
-      outline-offset: 4px;
-      border-radius: 4px;
+    /* Subtle grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px;
     }
-    .mascota img, .cierre-trophy, .logo-grande { will-change: transform; }
-    .emergency-banner { will-change: box-shadow; }
 
     /* ======= HEADER ======= */
     header {
-      background: linear-gradient(110deg, var(--azul-oscuro) 0%, #004080 50%, var(--azul-medio) 100%);
+      background: var(--azul-oscuro);
       color: var(--blanco);
-      padding: 0 24px;
+      padding: 0 20px;
       height: var(--header-h);
       display: flex;
       align-items: center;
@@ -71,202 +89,292 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
-    .header-left { display: flex; align-items: center; gap: 14px; }
+    .header-left { display: flex; align-items: center; gap: 12px; }
 
     .header-badge {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 50px;
-      padding: 4px 14px;
-      font-size: 0.78rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 4px 12px;
+      font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: 0.3px;
-      backdrop-filter: blur(4px);
+      font-family: var(--font-display);
+      letter-spacing: 0.5px;
       white-space: nowrap;
-    }
-
-    .header-title {
-      font-weight: 700;
-      font-size: 1.05rem;
-      letter-spacing: 0.3px;
-      display: none;
+      transition: all var(--transition);
     }
 
     .header-section-name {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 500;
-      opacity: 0.85;
-      max-width: 260px;
+      opacity: 0.7;
+      max-width: 240px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      transition: opacity var(--transition);
     }
 
     .header-logos {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .header-logos img {
-      height: 42px;
+      height: 38px;
       object-fit: contain;
       border-radius: 8px;
       background-color: var(--blanco);
-      padding: 5px 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      padding: 4px 7px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     /* ======= BARRA DE PROGRESO ======= */
     #barraProgreso {
       height: var(--progress-h);
-      background: linear-gradient(90deg, var(--naranja) 0%, var(--naranja-bright) 60%, #ffe066 100%);
+      background: linear-gradient(90deg, var(--naranja), var(--naranja-bright), #fbbf24);
       width: 0%;
-      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: width 0.6s var(--ease-out-expo);
       position: sticky;
       top: var(--header-h);
       z-index: 1001;
-      box-shadow: 0 2px 8px rgba(255,140,0,0.4);
+      box-shadow: 0 0 12px rgba(249,115,22,0.5);
     }
+
+    /* Percentage tooltip */
+    .progress-pct {
+      position: sticky;
+      top: calc(var(--header-h) + var(--progress-h) + 4px);
+      z-index: 1001;
+      text-align: right;
+      padding-right: 16px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      font-family: var(--font-display);
+      color: var(--naranja);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      height: 0;
+    }
+    .progress-pct.visible { opacity: 1; }
 
     /* ======= NAV DOTS (lateral) ======= */
     #navDots {
       position: fixed;
-      right: 14px;
+      right: 12px;
       top: 50%;
       transform: translateY(-50%);
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
       z-index: 900;
     }
 
     .nav-dot {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: rgba(0,43,73,0.2);
+      background: rgba(10,30,61,0.15);
       cursor: pointer;
-      transition: all var(--transition);
+      transition: all var(--transition-spring);
       border: none;
       padding: 0;
+      position: relative;
     }
 
     .nav-dot:hover {
       background: var(--azul-medio);
-      transform: scale(1.4);
+      transform: scale(1.6);
     }
+
+    .nav-dot::before {
+      content: attr(aria-label);
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--azul-oscuro);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .nav-dot:hover::before { opacity: 1; }
 
     .nav-dot.active {
       background: var(--naranja);
-      transform: scale(1.5);
-      box-shadow: 0 0 0 3px rgba(255,140,0,0.25);
+      transform: scale(1.8);
+      box-shadow: 0 0 0 3px rgba(249,115,22,0.2);
     }
+
+    .nav-dot.visited { background: var(--azul-claro); }
 
     /* ======= CONTENEDOR ======= */
     .container {
       background-color: var(--blanco);
-      padding: 44px 48px;
-      max-width: 980px;
-      margin: 28px auto 90px;
-      border-radius: var(--radio-lg);
-      box-shadow: var(--shadow-lg);
+      padding: 40px 44px;
+      max-width: 920px;
+      margin: 24px auto 100px;
+      border-radius: var(--radio-xl);
+      box-shadow: var(--shadow-glow), var(--shadow-xl);
       position: relative;
       overflow: hidden;
+      touch-action: pan-y;
     }
 
     .container::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 4px;
+      height: 3px;
       background: linear-gradient(90deg, var(--azul-medio), var(--naranja), var(--azul-claro));
     }
 
     /* ======= SECCIONES ======= */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
+    section {
+      display: none;
+      opacity: 0;
     }
 
-    section { display: none; }
     section.active {
       display: block;
-      animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation: sectionEnter 0.55s var(--ease-out-expo) forwards;
+    }
+
+    section.exit-left {
+      display: block;
+      animation: exitLeft 0.35s var(--ease-out-expo) forwards;
+    }
+
+    section.exit-right {
+      display: block;
+      animation: exitRight 0.35s var(--ease-out-expo) forwards;
+    }
+
+    @keyframes sectionEnter {
+      from { opacity: 0; transform: translateY(24px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes exitLeft {
+      from { opacity: 1; transform: translateX(0); }
+      to   { opacity: 0; transform: translateX(-60px); }
+    }
+
+    @keyframes exitRight {
+      from { opacity: 1; transform: translateX(0); }
+      to   { opacity: 0; transform: translateX(60px); }
+    }
+
+    /* Staggered children */
+    section.active .stagger { animation: staggerIn 0.5s var(--ease-out-expo) both; }
+    section.active .stagger:nth-child(1) { animation-delay: 0.06s; }
+    section.active .stagger:nth-child(2) { animation-delay: 0.12s; }
+    section.active .stagger:nth-child(3) { animation-delay: 0.18s; }
+    section.active .stagger:nth-child(4) { animation-delay: 0.24s; }
+    section.active .stagger:nth-child(5) { animation-delay: 0.30s; }
+    section.active .stagger:nth-child(6) { animation-delay: 0.36s; }
+    section.active .stagger:nth-child(7) { animation-delay: 0.42s; }
+    section.active .stagger:nth-child(8) { animation-delay: 0.48s; }
+    section.active .stagger:nth-child(9) { animation-delay: 0.54s; }
+    section.active .stagger:nth-child(10) { animation-delay: 0.60s; }
+
+    @keyframes staggerIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ======= SECCIÓN INTRO ESPECIAL ======= */
     .intro-hero {
       text-align: center;
-      padding: 20px 0 30px;
+      padding: 16px 0 24px;
     }
     .intro-hero .logo-grande {
-      width: 170px;
-      margin-bottom: 28px;
-      filter: drop-shadow(0 4px 12px rgba(0,90,156,0.2));
-      animation: floatSlow 4s ease-in-out infinite;
+      width: 150px;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 8px 24px rgba(26,80,150,0.15));
+      animation: floatSlow 5s ease-in-out infinite;
     }
     @keyframes floatSlow {
       0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(-8px); }
+      50%       { transform: translateY(-6px); }
     }
     .intro-hero h1 {
-      font-size: 2.1rem;
-      font-weight: 800;
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
       color: var(--azul-oscuro);
-      margin: 0 0 8px;
-      line-height: 1.2;
+      margin: 0 0 6px;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
     }
-    .intro-hero h1 span { color: var(--naranja); }
+    .intro-hero h1 span {
+      background: linear-gradient(135deg, var(--naranja), #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .intro-hero .subtitle {
-      color: var(--gris-medio);
-      font-size: 1rem;
-      margin-bottom: 32px;
+      color: var(--texto-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+      font-weight: 400;
     }
-
     .intro-obligatorio {
-      background: linear-gradient(135deg, #fff8e1, #fff3cd);
-      border: 1px solid #ffd54f;
-      border-left: 5px solid var(--naranja);
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 4px solid var(--naranja);
       border-radius: var(--radio);
-      padding: 16px 22px;
+      padding: 16px 20px;
       display: flex;
       align-items: center;
       gap: 14px;
       text-align: left;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
-    .intro-obligatorio .ico { font-size: 2rem; flex-shrink: 0; }
-    .intro-obligatorio p { margin: 0; font-size: 0.95rem; color: #5d4e00; }
-    .intro-obligatorio p strong { color: #3d3000; }
+    .intro-obligatorio .ico { font-size: 1.8rem; flex-shrink: 0; }
+    .intro-obligatorio p { font-size: 0.9rem; color: #92400e; margin: 0;}
+    .intro-obligatorio p strong { color: #78350f; }
 
     .welcome-footer {
-      background: linear-gradient(135deg, #e8f5e9, #d4edda);
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border: 1px solid #bbf7d0;
       border-radius: var(--radio);
       padding: 16px;
-      color: #155724;
+      color: #166534;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.93rem;
     }
 
     /* ======= TITULOS ======= */
     h2 {
+      font-family: var(--font-display);
       color: var(--azul-oscuro);
-      font-weight: 800;
-      font-size: 1.45rem;
-      margin: 0 0 22px;
+      font-weight: 700;
+      font-size: 1.35rem;
+      margin: 0 0 20px;
       padding-bottom: 14px;
-      border-bottom: 2px solid var(--gris-claro);
+      border-bottom: 1px solid var(--gris-claro);
       position: relative;
+      letter-spacing: -0.3px;
     }
     h2::after {
       content: '';
       position: absolute;
-      bottom: -2px; left: 0;
-      width: 55px; height: 3px;
+      bottom: -1px; left: 0;
+      width: 48px; height: 3px;
       background: linear-gradient(90deg, var(--naranja), var(--naranja-bright));
       border-radius: 2px;
     }
@@ -274,95 +382,108 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 34px; height: 34px;
-      background: linear-gradient(135deg, var(--azul-medio), var(--azul-claro));
+      width: 32px; height: 32px;
+      background: var(--azul-oscuro);
       color: white;
-      border-radius: 50%;
-      font-size: 0.85rem;
+      border-radius: 9px;
+      font-size: 0.8rem;
       font-weight: 700;
       margin-right: 10px;
       vertical-align: middle;
       flex-shrink: 0;
-      box-shadow: 0 3px 8px rgba(0,90,156,0.3);
+      font-family: var(--font-display);
     }
-    h4 { margin: 0 0 10px; color: var(--azul-oscuro); font-weight: 700; font-size: 0.97rem; }
-    a { color: var(--azul-claro); text-decoration: none; font-weight: 600; transition: color var(--transition); }
-    a:hover { color: var(--azul-oscuro); text-decoration: underline; }
-    ul { padding-left: 20px; margin-bottom: 14px; }
-    li { margin-bottom: 7px; }
+    h4 {
+      font-family: var(--font-display);
+      margin: 0 0 8px;
+      color: var(--azul-oscuro);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    a {
+      color: var(--azul-claro);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--transition);
+      border-bottom: 1px solid transparent;
+    }
+    a:hover { color: var(--azul-oscuro); border-bottom-color: var(--azul-oscuro); }
+    ul { padding-left: 18px; margin-bottom: 12px; }
+    li { margin-bottom: 6px; }
     p { margin-top: 0; }
 
     /* ======= MASCOTA FLOTANTE ======= */
     .mascota {
       float: right;
-      width: 64px;
-      margin: 0 0 18px 20px;
+      width: 56px;
+      margin: 0 0 14px 16px;
     }
     .mascota img {
       width: 100%;
-      animation: floatSlow 3.5s ease-in-out infinite;
+      animation: floatSlow 4s ease-in-out infinite;
     }
 
     /* ======= IMAGEN SECCIÓN ======= */
-    .imagen-seccion { text-align: center; margin: 22px 0; }
+    .imagen-seccion { text-align: center; margin: 20px 0; }
     .imagen-seccion img {
-      max-width: 100%; height: auto; max-height: 380px;
+      max-width: 100%; height: auto; max-height: 340px;
       border-radius: var(--radio);
-      box-shadow: var(--shadow-md);
+      box-shadow: var(--shadow-lg);
       transition: transform var(--transition);
     }
-    .imagen-seccion img:hover { transform: scale(1.015); }
+    .imagen-seccion img:hover { transform: scale(1.01); }
 
     .plano-container {
       text-align: center;
-      border: 2px dashed var(--azul-claro);
+      border: 2px dashed var(--gris-claro);
       padding: 14px;
-      background: #f5f9ff;
+      background: var(--fondo);
       border-radius: var(--radio);
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
-    .plano-container img { width: 100%; max-height: 480px; object-fit: contain; }
+    .plano-container img { width: 100%; max-height: 440px; object-fit: contain; }
 
     /* ======= CARDS ======= */
     .card {
-      background: #ffffff;
+      background: var(--blanco);
       border: 1px solid var(--gris-claro);
-      border-left: 5px solid var(--azul-claro);
-      padding: 20px 22px;
-      margin-bottom: 18px;
+      border-left: 4px solid var(--azul-claro);
+      padding: 18px 20px;
+      margin-bottom: 14px;
       border-radius: var(--radio);
       box-shadow: var(--shadow-xs);
       transition: transform var(--transition), box-shadow var(--transition);
     }
     .card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       box-shadow: var(--shadow-md);
     }
     .card-icon {
-      width: 40px; height: 40px;
+      width: 38px; height: 38px;
       border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       margin-bottom: 10px;
-      background: #eef6ff;
+      background: var(--fondo);
     }
 
     /* ======= ACORDEÓN ======= */
     details {
-      background: #ffffff;
+      background: var(--blanco);
       border: 1px solid var(--gris-claro);
-      border-left: 5px solid var(--azul-medio);
-      padding: 16px 18px;
-      margin-bottom: 10px;
+      border-left: 4px solid var(--azul-medio);
+      padding: 14px 18px;
+      margin-bottom: 8px;
       border-radius: var(--radio);
       cursor: pointer;
       box-shadow: var(--shadow-xs);
       transition: all var(--transition);
     }
-    details:hover { background: #f8fbff; border-left-color: var(--azul-claro); }
+    details:hover { background: #fafcff; border-left-color: var(--azul-claro); }
     details summary {
+      font-family: var(--font-display);
       font-weight: 600;
-      font-size: 0.97rem;
+      font-size: 0.93rem;
       color: var(--azul-oscuro);
       display: flex;
       justify-content: space-between;
@@ -372,156 +493,112 @@
     }
     details summary::-webkit-details-marker { display: none; }
     details summary::after {
-      content: '›';
-      font-size: 1.3rem;
-      font-weight: 300;
-      transform: rotate(90deg);
+      content: '+';
+      font-size: 1.1rem;
+      font-weight: 400;
       transition: transform var(--transition);
-      opacity: 0.6;
+      opacity: 0.4;
       flex-shrink: 0;
+      font-family: var(--font-display);
     }
-    details[open] summary::after { transform: rotate(270deg); opacity: 1; }
+    details[open] summary::after { content: '−'; opacity: 0.8; }
     details[open] {
       border-left-color: var(--naranja);
-      background: #fffcf5;
+      background: #fffdf7;
       box-shadow: var(--shadow-sm);
     }
-    details > p, details > ul { margin-top: 12px; font-size: 0.93rem; }
+    details > p, details > ul { margin-top: 12px; font-size: 0.9rem; }
 
     /* ======= RISK CARDS ======= */
     .risk-badge {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 50px;
+      font-family: var(--font-display);
+      padding: 2px 10px;
+      border-radius: 6px;
       text-transform: uppercase;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.5px;
       margin-bottom: 8px;
     }
-    .risk-alto { background: #ffe0e0; color: #c62828; }
-    .risk-medio { background: #fff3e0; color: #e65100; }
+    .risk-alto { background: #fef2f2; color: #dc2626; }
+    .risk-medio { background: #fffbeb; color: #d97706; }
     .risk-preventiva {
-      background: #e8f5e9; color: #2e7d32;
-      font-size: 0.75rem; font-weight: 600;
-      padding: 6px 12px;
+      background: #f0fdf4; color: #16a34a;
+      font-size: 0.82rem; font-weight: 600;
+      padding: 8px 12px;
       border-radius: var(--radio);
-      margin-top: 8px;
+      margin-top: 10px;
       display: block;
+      border: 1px solid #bbf7d0;
     }
 
     /* ======= REGLAS DE ORO ======= */
     .rules-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
     }
     .rule-card {
-      background: #ffffff;
+      background: var(--blanco);
       border: 1px solid var(--gris-claro);
-      border-top: 4px solid var(--azul-oscuro);
-      padding: 22px 20px;
+      border-top: 3px solid var(--azul-oscuro);
+      padding: 22px 18px 16px;
       border-radius: var(--radio);
       box-shadow: var(--shadow-xs);
       transition: transform var(--transition), box-shadow var(--transition);
       position: relative;
     }
     .rule-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
       border-top-color: var(--naranja);
     }
     .rule-num {
       position: absolute;
-      top: -14px; left: 18px;
-      width: 28px; height: 28px;
-      background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-medio));
+      top: -12px; left: 16px;
+      width: 24px; height: 24px;
+      background: var(--azul-oscuro);
       color: white;
-      border-radius: 50%;
-      font-size: 0.8rem;
-      font-weight: 800;
+      border-radius: 7px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-family: var(--font-display);
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 3px 8px rgba(0,43,73,0.4);
     }
     .rule-card h4 {
-      font-size: 0.93rem;
-      color: var(--azul-oscuro);
-      padding-top: 4px;
-      margin-bottom: 12px;
+      font-size: 0.88rem;
+      padding-top: 2px;
+      margin-bottom: 10px;
       padding-bottom: 8px;
       border-bottom: 1px solid var(--gris-claro);
     }
-    .rule-card ul { padding-left: 16px; margin: 0; font-size: 0.88rem; color: #555; }
-    .rule-card li { margin-bottom: 6px; }
-
-    /* ======= EXTINTORES ======= */
-    .extintor-container {
-      display: flex; flex-wrap: wrap; gap: 18px; justify-content: center;
-    }
-    .extintor-card {
-      flex: 1 1 250px; max-width: 300px;
-      border-radius: var(--radio);
-      padding: 22px 18px;
-      box-shadow: var(--shadow-sm);
-      text-align: center;
-      background: white;
-      border: 1px solid var(--gris-claro);
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .extintor-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-md);
-    }
-    .ext-abc { border-bottom: 5px solid #f9c922; }
-    .ext-co2 { border-bottom: 5px solid #e60000; }
-    .ext-agua { border-bottom: 5px solid #27ae60; }
-    .extintor-card img {
-      height: 120px; object-fit: contain; margin-top: 14px;
-      transition: transform var(--transition);
-    }
-    .extintor-card:hover img { transform: scale(1.12); }
-    .extintor-uso {
-      font-size: 0.82rem; color: #666;
-      background: #f8f9fa; border-radius: 8px;
-      padding: 6px 10px; margin-top: 10px;
-    }
-    .alerta-extintor {
-      background: linear-gradient(135deg, #fff8e1, #fff3cd);
-      color: #856404;
-      border: 1px solid #ffd54f;
-      border-left: 5px solid var(--naranja);
-      padding: 14px 18px;
-      border-radius: var(--radio);
-      font-weight: 600;
-      margin-bottom: 22px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.92rem;
-    }
+    .rule-card ul { padding-left: 16px; margin: 0; font-size: 0.85rem; color: var(--texto-secondary); }
+    .rule-card li { margin-bottom: 5px; }
 
     /* ======= ESTILOS MINI JUEGOS ======= */
     .game-container {
-      background: #f8fbff;
-      border: 2px dashed var(--azul-claro);
-      border-radius: var(--radio);
+      background: var(--fondo-warm);
+      border: 2px dashed var(--naranja-bright);
+      border-radius: var(--radio-lg);
       padding: 24px 20px;
       text-align: center;
       margin-top: 24px;
       box-shadow: var(--shadow-sm);
     }
     .game-title {
+      font-family: var(--font-display);
       font-weight: 700;
       color: var(--azul-oscuro);
-      margin-bottom: 14px;
-      font-size: 1.1rem;
+      margin-bottom: 10px;
+      font-size: 1.15rem;
     }
     .game-item {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 700;
-      color: var(--naranja);
+      color: var(--azul-oscuro);
       background: white;
       padding: 14px 20px;
       border-radius: var(--radio);
@@ -541,129 +618,170 @@
       padding: 12px 16px;
       border-radius: 12px;
       font-weight: 700;
+      font-family: var(--font-display);
+      font-size: 0.88rem;
       cursor: pointer;
       border: 2px solid transparent;
       flex: 1 1 100px;
       transition: transform 0.2s, box-shadow 0.2s;
+      -webkit-tap-highlight-color: transparent;
     }
     .game-bin:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .game-bin:active { transform: translateY(0); }
     
     /* Colores Residuos */
-    .game-bin.blanco { background: #fff; border-color: #adb5bd; color: #333; }
-    .game-bin.verde { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
-    .game-bin.negro { background: #212529; color: #fff; }
-    .game-bin.rojo { background: #fff5f5; border-color: var(--rojo); color: #7f1d1d; }
+    .game-bin.blanco { background: #fff; border-color: #cbd5e1; color: #334155; }
+    .game-bin.verde { background: #f0fdf4; border-color: #4ade80; color: #166534; }
+    .game-bin.negro { background: #1e293b; border-color: #0f172a; color: #f1f5f9; }
+    .game-bin.rojo { background: #fef2f2; border-color: #f87171; color: #991b1b; }
 
     /* Colores Permisos */
-    .game-bin.rutina { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
-    .game-bin.permiso { background: #fff5f5; border-color: var(--rojo); color: #7f1d1d; }
+    .game-bin.rutina { background: #f0fdf4; border-color: #4ade80; color: #166534; }
+    .game-bin.permiso { background: #fef2f2; border-color: #f87171; color: #991b1b; }
 
     .game-feedback {
       margin-top: 18px;
       font-weight: 700;
       min-height: 24px;
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
 
-    /* ======= AMBIENTAL ======= */
-    .residuo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
-      margin-bottom: 18px;
+    /* ======= EXTINTORES ======= */
+    .extintor-container {
+      display: flex; flex-wrap: wrap; gap: 14px; justify-content: center;
     }
-    .residuo-card {
+    .extintor-card {
+      flex: 1 1 230px; max-width: 280px;
       border-radius: var(--radio);
-      padding: 18px 16px;
+      padding: 20px 16px;
+      box-shadow: var(--shadow-sm);
       text-align: center;
-      box-shadow: var(--shadow-xs);
+      background: white;
+      border: 1px solid var(--gris-claro);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .extintor-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .ext-abc { border-bottom: 4px solid #eab308; }
+    .ext-co2 { border-bottom: 4px solid #dc2626; }
+    .ext-agua { border-bottom: 4px solid #16a34a; }
+    .extintor-card img {
+      height: 110px; object-fit: contain; margin-top: 12px;
       transition: transform var(--transition);
     }
-    .residuo-card:hover { transform: scale(1.03); }
-    .residuo-card .r-ico { font-size: 2rem; margin-bottom: 6px; }
-    .residuo-card h4 { font-size: 0.88rem; margin-bottom: 4px; }
-    .residuo-card p { font-size: 0.82rem; margin: 0; }
-    .r-blanco { background: #f8f9fa; border: 2px solid #adb5bd; color: #333; }
-    .r-verde  { background: #e8f5e9; border: 2px solid #4caf50; color: #1b5e20; }
-    .r-negro  { background: #212529; border: 2px solid #000; color: #f8f9fa; }
-    .r-rojo   { background: #fff5f5; border: 2px solid var(--rojo); color: #7f1d1d; }
+    .extintor-card:hover img { transform: scale(1.08); }
+    .extintor-uso {
+      font-size: 0.8rem; color: var(--texto-secondary);
+      background: var(--fondo); border-radius: 8px;
+      padding: 8px 10px; margin-top: 10px;
+    }
+    .alerta-extintor {
+      background: #fffbeb;
+      color: #92400e;
+      border: 1px solid #fde68a;
+      border-left: 4px solid var(--naranja);
+      padding: 14px 18px;
+      border-radius: var(--radio);
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
 
     /* ======= CHECKLIST ======= */
     .checklist-list { list-style: none; padding: 0; margin-bottom: 0; }
     .checklist-list li {
-      margin-bottom: 10px;
-      background: #fff;
-      padding: 13px 16px;
+      margin-bottom: 8px;
+      background: var(--blanco);
+      padding: 12px 16px;
       border: 1px solid var(--gris-claro);
       border-radius: var(--radio);
       display: flex;
       align-items: center;
-      transition: background var(--transition), border-color var(--transition);
+      transition: all var(--transition);
     }
-    .checklist-list li:hover { background: #f8fbff; border-color: var(--azul-claro); }
+    .checklist-list li:hover { background: #fafcff; border-color: var(--azul-claro); }
     .checklist-list li.checked-ok {
-      background: #f0fff4;
+      background: #f0fdf4;
       border-color: var(--verde);
     }
-    .checklist-list label { cursor: pointer; width: 100%; display: flex; align-items: center; gap: 12px; font-size: 0.94rem; }
+    .checklist-list li.checked-ok label span {
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+    .checklist-list label {
+      cursor: pointer; width: 100%; display: flex;
+      align-items: center; gap: 12px; font-size: 0.9rem;
+    }
     .checklist-list input[type=checkbox] {
       width: 20px; height: 20px; flex-shrink: 0;
       accent-color: var(--verde);
       cursor: pointer;
+      border-radius: 4px;
     }
     .checklist-progress {
       background: var(--gris-claro);
-      border-radius: 50px; height: 8px;
-      margin-bottom: 18px; overflow: hidden;
+      border-radius: 50px; height: 6px;
+      margin-bottom: 16px; overflow: hidden;
     }
     .checklist-progress-bar {
       height: 100%;
       background: linear-gradient(90deg, var(--verde), var(--verde-bright));
       border-radius: 50px;
-      transition: width 0.4s ease;
+      transition: width 0.5s var(--ease-out-expo);
     }
     .checklist-count {
-      font-size: 0.82rem; color: var(--gris-medio);
+      font-size: 0.78rem; color: var(--texto-secondary);
       text-align: right; margin-bottom: 6px;
+      font-family: var(--font-display);
+      font-weight: 600;
     }
 
     .advertencia-checklist {
-      background: #fff5f5; color: #c53030;
+      background: #fef2f2; color: #dc2626;
       padding: 14px 18px;
-      border: 1px solid #feb2b2;
-      border-left: 5px solid var(--rojo);
+      border: 1px solid #fecaca;
+      border-left: 4px solid var(--rojo);
       border-radius: var(--radio);
-      margin-top: 18px;
+      margin-top: 16px;
       font-weight: 600;
-      animation: shake 0.4s;
-    }
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      20%       { transform: translateX(-5px); }
-      60%       { transform: translateX(5px); }
+      animation: shake 0.5s var(--ease-out-expo);
     }
 
     /* ======= EMERGENCIA ======= */
     .emergency-banner {
-      background: linear-gradient(135deg, #dc3545, #b71c1c);
+      background: linear-gradient(135deg, #dc2626, #991b1b);
       color: white;
-      padding: 18px 22px;
+      padding: 18px 20px;
       border-radius: var(--radio);
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       gap: 14px;
-      box-shadow: 0 4px 16px rgba(220,53,69,0.4);
-      animation: pulse-border 2.5s ease-in-out infinite;
+      box-shadow: 0 4px 16px rgba(220,38,38,0.3);
+      position: relative;
+      overflow: hidden;
     }
-    @keyframes pulse-border {
-      0%, 100% { box-shadow: 0 4px 16px rgba(220,53,69,0.4); }
-      50%       { box-shadow: 0 4px 30px rgba(220,53,69,0.7); }
+    .emergency-banner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: var(--radio);
+      pointer-events: none;
     }
-    .emergency-banner .e-ico { font-size: 2.2rem; flex-shrink: 0; }
-    .emergency-banner .e-text { font-size: 0.95rem; font-weight: 500; }
-    .emergency-banner .e-text strong { font-size: 1.1rem; display: block; margin-bottom: 2px; }
+    .emergency-banner .e-ico { font-size: 2rem; flex-shrink: 0; }
+    .emergency-banner .e-text { font-size: 0.9rem; font-weight: 400; }
+    .emergency-banner .e-text strong {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      display: block;
+      margin-bottom: 2px;
+    }
 
     .emergency-steps {
       counter-reset: estep;
@@ -673,26 +791,50 @@
     .emergency-steps li {
       counter-increment: estep;
       position: relative;
-      padding: 14px 16px 14px 58px;
+      padding: 14px 16px 14px 54px;
       background: white;
       border: 1px solid var(--gris-claro);
       border-radius: var(--radio);
-      margin-bottom: 10px;
-      font-size: 0.94rem;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
       transition: transform var(--transition);
     }
     .emergency-steps li:hover { transform: translateX(4px); }
     .emergency-steps li::before {
       content: counter(estep);
       position: absolute;
-      left: 16px; top: 50%; transform: translateY(-50%);
-      width: 28px; height: 28px;
-      background: linear-gradient(135deg, var(--rojo), #b71c1c);
+      left: 14px; top: 50%; transform: translateY(-50%);
+      width: 26px; height: 26px;
+      background: var(--rojo);
       color: white;
-      border-radius: 50%;
-      font-weight: 800; font-size: 0.85rem;
+      border-radius: 8px;
+      font-weight: 700; font-size: 0.78rem;
+      font-family: var(--font-display);
       display: flex; align-items: center; justify-content: center;
     }
+
+    /* ======= AMBIENTAL ======= */
+    .residuo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .residuo-card {
+      border-radius: var(--radio);
+      padding: 16px 14px;
+      text-align: center;
+      box-shadow: var(--shadow-xs);
+      transition: transform var(--transition);
+    }
+    .residuo-card:hover { transform: scale(1.03); }
+    .residuo-card .r-ico { font-size: 1.8rem; margin-bottom: 6px; }
+    .residuo-card h4 { font-size: 0.82rem; margin-bottom: 4px; }
+    .residuo-card p { font-size: 0.78rem; margin: 0; }
+    .r-blanco { background: #f8fafc; border: 2px solid #cbd5e1; color: #334155; }
+    .r-verde  { background: #f0fdf4; border: 2px solid #4ade80; color: #166534; }
+    .r-negro  { background: #1e293b; border: 2px solid #0f172a; color: #f1f5f9; }
+    .r-rojo   { background: #fef2f2; border: 2px solid #f87171; color: #991b1b; }
 
     /* ======= PERMISOS/ATS ======= */
     .proceso-steps {
@@ -703,141 +845,144 @@
     }
     .paso-item {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       align-items: flex-start;
-      padding-bottom: 18px;
+      padding-bottom: 16px;
       position: relative;
     }
     .paso-item:not(:last-child)::after {
       content: '';
       position: absolute;
-      left: 18px; top: 40px;
+      left: 17px; top: 38px;
       width: 2px;
       bottom: 0;
       background: linear-gradient(to bottom, var(--azul-claro), transparent);
     }
     .paso-num {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--azul-medio), var(--azul-claro));
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      background: var(--azul-oscuro);
       color: white;
-      font-weight: 800;
-      font-size: 0.88rem;
+      font-weight: 700;
+      font-size: 0.82rem;
+      font-family: var(--font-display);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 3px 8px rgba(0,90,156,0.35);
     }
-    .paso-body { padding-top: 6px; }
-    .paso-body strong { display: block; font-size: 0.95rem; color: var(--azul-oscuro); margin-bottom: 2px; }
-    .paso-body span { font-size: 0.85rem; color: #666; }
+    .paso-body { padding-top: 4px; }
+    .paso-body strong { display: block; font-size: 0.92rem; color: var(--azul-oscuro); margin-bottom: 2px; font-family: var(--font-display); }
+    .paso-body span { font-size: 0.84rem; color: var(--texto-secondary); }
 
     /* ======= CIERRE / COMPLETADO ======= */
     .cierre-hero {
       text-align: center;
-      padding: 10px 0 30px;
+      padding: 10px 0 24px;
     }
     .cierre-trophy {
-      font-size: 5rem;
+      font-size: 4rem;
       display: block;
       margin-bottom: 14px;
-      animation: bounce 1.5s ease-in-out infinite;
+      animation: bounce 2s ease-in-out infinite;
     }
     @keyframes bounce {
       0%, 100% { transform: translateY(0) scale(1); }
-      50%       { transform: translateY(-12px) scale(1.05); }
+      50%       { transform: translateY(-10px) scale(1.05); }
     }
     .cierre-hero h2 {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       border: none; padding: 0; margin-bottom: 8px;
     }
     .cierre-hero h2::after { display: none; }
-    .cierre-hero p { color: var(--gris-medio); }
+    .cierre-hero p { color: var(--texto-secondary); }
 
     .video-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 18px;
-      margin-bottom: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
     }
     .video-card {
-      background: #f8fbff;
-      border: 1px solid #c0ddf9;
+      background: var(--fondo);
+      border: 1px solid var(--gris-claro);
       border-radius: var(--radio);
       padding: 20px;
       text-align: center;
       transition: transform var(--transition), box-shadow var(--transition);
     }
     .video-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-    .video-card .v-ico { font-size: 2.5rem; margin-bottom: 8px; }
-    .video-card h4 { color: var(--azul-oscuro); margin-bottom: 8px; }
-    .video-card a { font-size: 0.9rem; }
+    .video-card .v-ico { font-size: 2rem; margin-bottom: 8px; }
+    .video-card h4 { color: var(--azul-oscuro); margin-bottom: 6px; font-size: 0.9rem; }
+    .video-card a { font-size: 0.85rem; }
 
     .final-button {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: linear-gradient(135deg, var(--verde), #1a9e3a);
+      background: var(--verde);
       color: white;
-      padding: 18px 48px;
-      border-radius: 50px;
+      padding: 16px 44px;
+      border-radius: var(--radio);
+      font-family: var(--font-display);
       font-weight: 700;
       text-decoration: none;
-      font-size: 1.1rem;
-      transition: transform var(--transition), box-shadow var(--transition);
-      box-shadow: 0 6px 20px rgba(40,167,69,0.45);
+      font-size: 1.05rem;
+      transition: all var(--transition);
+      box-shadow: 0 4px 14px rgba(22,163,74,0.35);
+      border: none;
     }
     .final-button:hover {
-      transform: scale(1.06) translateY(-2px);
-      box-shadow: 0 10px 28px rgba(40,167,69,0.55);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(22,163,74,0.45);
       color: white;
-      text-decoration: none;
+      border-bottom: none;
     }
 
     /* ======= QR TARJETA ======= */
     .qr-box {
       text-align: center;
-      background: #f8fbff;
-      padding: 32px 20px;
+      background: var(--fondo);
+      padding: 28px 20px;
       border-radius: var(--radio);
-      border: 2px dashed var(--azul-claro);
-      max-width: 360px;
+      border: 2px dashed var(--gris-claro);
+      max-width: 340px;
       margin: 0 auto;
     }
-    .qr-box p { font-weight: 700; color: var(--azul-oscuro); margin-bottom: 14px; }
+    .qr-box p { font-weight: 700; color: var(--azul-oscuro); margin-bottom: 14px; font-family: var(--font-display); }
     .qr-box img {
-      width: 170px;
-      border-radius: 12px;
+      width: 160px;
+      border-radius: var(--radio);
       box-shadow: var(--shadow-sm);
     }
-    .qr-hint { font-size: 0.8rem; color: var(--gris-medio); margin-top: 10px; }
+    .qr-hint { font-size: 0.75rem; color: var(--texto-secondary); margin-top: 10px; }
 
     /* ======= SEGURIDAD VIAL ======= */
     .vial-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
     }
     .vial-card {
       background: white;
       border: 1px solid var(--gris-claro);
       border-radius: var(--radio);
-      padding: 20px 16px;
+      padding: 18px 14px;
       text-align: center;
       box-shadow: var(--shadow-xs);
       transition: transform var(--transition);
     }
-    .vial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .vial-card .v-ico { font-size: 2.5rem; margin-bottom: 10px; display: block; }
-    .vial-card h4 { font-size: 0.9rem; margin-bottom: 6px; }
-    .vial-card p { font-size: 0.84rem; color: #666; margin: 0; }
+    .vial-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .vial-card .v-ico { font-size: 2rem; margin-bottom: 8px; display: block; }
+    .vial-card h4 { font-size: 0.85rem; margin-bottom: 6px; }
+    .vial-card p { font-size: 0.8rem; color: var(--texto-secondary); margin: 0; }
     .velocidad-badge {
       display: inline-block;
       background: var(--rojo);
       color: white;
-      font-size: 1.8rem;
-      font-weight: 800;
-      padding: 6px 18px;
-      border-radius: 10px;
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 8px;
       margin: 4px 0;
     }
 
@@ -846,21 +991,32 @@
       background: white;
       border: 1px solid var(--gris-claro);
       border-radius: var(--radio);
-      padding: 18px 16px;
+      padding: 16px 14px;
       box-shadow: var(--shadow-xs);
       transition: transform var(--transition), box-shadow var(--transition);
     }
     .norma-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-    .norma-card .n-ico { font-size: 2rem; display: block; margin-bottom: 8px; }
-    .norma-card h4 { font-size: 0.9rem; margin-bottom: 6px; }
-    .norma-card p { font-size: 0.85rem; color: #555; margin: 0; }
+    .norma-card .n-ico { font-size: 1.8rem; display: block; margin-bottom: 6px; }
+    .norma-card h4 { font-size: 0.85rem; margin-bottom: 6px; }
+    .norma-card p { font-size: 0.82rem; color: var(--texto-secondary); margin: 0; }
 
     /* ======= TAREAS ALTO RIESGO ======= */
     .risk-details summary { gap: 10px; }
     .risk-tag {
-      font-size: 0.7rem; font-weight: 700; padding: 2px 8px;
-      border-radius: 50px; background: #ffe0e0; color: #c62828;
+      font-size: 0.65rem; font-weight: 700; padding: 2px 8px;
+      border-radius: 5px; background: #fef2f2; color: #dc2626;
       white-space: nowrap;
+      font-family: var(--font-display);
+    }
+
+    /* ======= BADGE INFO ======= */
+    .badge-info {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--fondo); border: 1px solid var(--gris-claro);
+      border-radius: 8px; padding: 6px 12px;
+      font-size: 0.78rem; font-weight: 600; color: var(--azul-medio);
+      font-family: var(--font-display);
+      margin: 4px 4px 4px 0;
     }
 
     /* ======= BOTONES NAV ======= */
@@ -868,8 +1024,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 40px;
-      padding-top: 24px;
+      margin-top: 36px;
+      padding-top: 20px;
       border-top: 1px solid var(--gris-claro);
       gap: 12px;
     }
@@ -877,204 +1033,252 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: linear-gradient(135deg, var(--azul-medio), var(--azul-claro));
+      background: var(--azul-oscuro);
       color: white;
-      font-family: 'Poppins', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
-      padding: 13px 30px;
+      padding: 12px 28px;
       border: none;
-      border-radius: 50px;
+      border-radius: var(--radio);
       cursor: pointer;
       transition: all var(--transition);
-      box-shadow: 0 4px 12px rgba(0,90,156,0.3);
-      font-size: 0.95rem;
+      box-shadow: var(--shadow-md);
+      font-size: 0.9rem;
+      -webkit-tap-highlight-color: transparent;
     }
     .nav-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,90,156,0.4);
+      box-shadow: var(--shadow-lg);
     }
-    .nav-btn:active { transform: translateY(0); }
-    .nav-btn-prev { background: linear-gradient(135deg, #5a6a7e, #6c757d); }
-    .nav-btn-prev:hover { box-shadow: 0 8px 20px rgba(90,106,126,0.4); }
+    .nav-btn:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
+    .nav-btn-prev {
+      background: var(--blanco);
+      color: var(--texto);
+      border: 1px solid var(--gris-claro);
+    }
+    .nav-btn-prev:hover { background: var(--fondo); }
     .nav-step-counter {
-      font-size: 0.82rem;
-      color: var(--gris-medio);
+      font-size: 0.78rem;
+      color: var(--texto-secondary);
       font-weight: 600;
       text-align: center;
       flex: 1;
+      font-family: var(--font-display);
     }
 
     /* ======= GRID UTILITARIO ======= */
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
     /* ======= VIDEO EMBED ======= */
     .video-wrapper {
       position: relative; width: 100%; height: 0; padding-bottom: 56.25%;
-      margin-bottom: 22px; border-radius: var(--radio); overflow: hidden;
-      box-shadow: var(--shadow-md);
+      margin-bottom: 20px; border-radius: var(--radio); overflow: hidden;
+      box-shadow: var(--shadow-lg);
     }
     .video-wrapper iframe {
       position: absolute; width: 100%; height: 100%; border: none;
     }
 
-    /* ======= TOOLTIP ======= */
-    .badge-info {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: #eef6ff; border: 1px solid #c0ddf9;
-      border-radius: 50px; padding: 6px 14px;
-      font-size: 0.82rem; font-weight: 600; color: var(--azul-medio);
-      margin: 4px 4px 4px 0;
+    /* ======= SWIPE INDICATOR ======= */
+    .swipe-hint {
+      display: none;
+      text-align: center;
+      padding: 8px;
+      font-size: 0.72rem;
+      color: var(--texto-secondary);
+      opacity: 0.6;
+      animation: swipeHint 2s ease-in-out infinite;
     }
+    @keyframes swipeHint {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(8px); }
+    }
+
+    /* ======= SCREEN READER ONLY ======= */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* ======= LIVE REGION ======= */
+    #liveAnnouncer {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* ======= FOCUS VISIBLE ======= */
+    :focus-visible {
+      outline: 2px solid var(--azul-claro);
+      outline-offset: 2px;
+    }
+
+    button:focus:not(:focus-visible) { outline: none; }
 
     /* ======= RESPONSIVE ======= */
     @media screen and (max-width: 768px) {
-      .container { padding: 28px 20px; margin: 16px 10px 80px; border-radius: var(--radio); }
+      .container {
+        padding: 24px 18px;
+        margin: 12px 8px 80px;
+        border-radius: var(--radio-lg);
+      }
       .header-section-name { display: none; }
       .grid-2, .rules-grid { grid-template-columns: 1fr !important; }
       .nav-buttons { flex-wrap: wrap; }
-      .nav-btn { padding: 12px 22px; font-size: 0.88rem; }
+      .nav-btn { padding: 11px 20px; font-size: 0.85rem; }
       #navDots { display: none; }
-      .intro-hero h1 { font-size: 1.6rem; }
-      .cierre-hero h2 { font-size: 1.4rem; }
-      .final-button { padding: 15px 32px; font-size: 1rem; }
+      .intro-hero h1 { font-size: 1.5rem; }
+      .intro-stats { gap: 10px; }
+      .cierre-hero h2 { font-size: 1.3rem; }
+      .final-button { padding: 14px 28px; font-size: 0.95rem; }
+      .swipe-hint { display: block; }
     }
 
     @media screen and (max-width: 480px) {
-      header { padding: 0 16px; }
-      .header-logos img { height: 36px; }
-      .header-badge { font-size: 0.72rem; padding: 3px 10px; }
+      header { padding: 0 14px; }
+      .header-logos img { height: 32px; }
+      .header-badge { font-size: 0.7rem; padding: 3px 10px; }
+      .container { padding: 20px 14px; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 <body>
 
-<header>
+<div id="liveAnnouncer" aria-live="polite" aria-atomic="true"></div>
+
+<header role="banner">
   <div class="header-left">
-    <div class="header-badge" id="headerBadge">1 / 17</div>
+    <div class="header-badge" id="headerBadge" aria-label="Sección actual">1 / 17</div>
     <div>
-      <div class="header-title">Inducción HSEQ</div>
       <div class="header-section-name" id="headerSectionName">Bienvenida</div>
     </div>
   </div>
   <div class="header-logos">
-    <img src="https://i.postimg.cc/gcX7rNgd/Logo-PBI.png" alt="Logo PBI">
-    <img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="Personaje PBI">
+    <img src="https://i.postimg.cc/gcX7rNgd/Logo-PBI.png" alt="Logo PBI" loading="eager">
+    <img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="Personaje PBI" loading="eager">
   </div>
 </header>
 
-<div id="barraProgreso"></div>
+<div id="barraProgreso" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso de la inducción"></div>
+<div class="progress-pct" id="progressPct" aria-hidden="true"></div>
 
-<div id="navDots"></div>
+<nav id="navDots" aria-label="Navegación rápida entre secciones"></nav>
 
-<audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
-<audio id="successSound" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3" preload="auto"></audio>
-<audio id="errorSound" src="https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3" preload="auto"></audio>
+<main class="container" id="mainContainer" role="main">
 
-<div class="container">
-
-  <section class="active" data-title="Bienvenida">
+  <section class="active" data-title="Bienvenida" aria-label="Sección 1: Bienvenida">
     <div class="intro-hero">
-      <img src="https://i.postimg.cc/gcX7rNgd/Logo-PBI.png" alt="Logo PBI" class="logo-grande">
+      <img src="https://i.postimg.cc/gcX7rNgd/Logo-PBI.png" alt="Logo PBI" class="logo-grande" loading="eager">
       <h1>¡Bienvenido a<br><span>Planta Corrales!</span></h1>
       <p class="subtitle">Inducción HSEQ · Salud · Seguridad · Ambiente · Calidad</p>
 
-      <div class="intro-obligatorio">
-        <span class="ico" aria-hidden="true">📌</span>
+      <div class="intro-obligatorio stagger">
+        <span class="ico">📌</span>
         <p>Esta inducción es <strong>obligatoria</strong>. Su aprobación es requisito previo para cualquier ingreso o actividad dentro de nuestras instalaciones. Al finalizar deberás completar la evaluación.</p>
       </div>
 
-      <div class="welcome-footer">
+      <div class="welcome-footer stagger">
         🌱 Diseñada para que actúes de forma <strong>segura</strong>, <strong>responsable</strong> y coherente con nuestra cultura HSEQ.
       </div>
     </div>
   </section>
 
-  <section data-title="Objetivo de la Inducción">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco"></div>
+  <section data-title="Objetivo de la Inducción" aria-label="Sección 2: Objetivo de la Inducción">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="" loading="lazy"></div>
     <h2><span class="section-number">2</span>Objetivo de la Inducción</h2>
-    <p>Te invitamos a ver el siguiente video introductorio que refuerza el propósito de esta inducción.</p>
+    <p class="stagger">Te invitamos a ver el siguiente video introductorio que refuerza el propósito de esta inducción.</p>
 
-    <div class="video-wrapper">
-      <iframe src="https://streamable.com/e/uq5idk?" title="Video introductorio Inducción HSEQ" allowfullscreen></iframe>
+    <div class="video-wrapper stagger">
+      <iframe src="https://streamable.com/e/uq5idk?" allowfullscreen title="Video introductorio de la inducción HSEQ" loading="lazy"></iframe>
     </div>
 
-    <div class="imagen-seccion">
-      <img src="https://i.postimg.cc/nrQSBwyj/Whats-App-Image-2026-01-22-at-2-12-09-PM.png" alt="Foto Planta Corrales">
+    <div class="imagen-seccion stagger">
+      <img src="https://i.postimg.cc/nrQSBwyj/Whats-App-Image-2026-01-22-at-2-12-09-PM.png" alt="Vista panorámica de Planta Corrales" loading="lazy">
     </div>
 
-    <div class="card" style="border-left-color: var(--azul-medio);">
+    <div class="card stagger" style="border-left-color: var(--azul-medio);">
       <h4>🎯 Propósito</h4>
       <p style="margin:0;">Brindar a todo visitante o contratista las herramientas y conocimientos esenciales en materia de <strong>Seguridad, Salud, Ambiente y Calidad (HSEQ)</strong>, garantizando la integridad de las personas, el entorno y la continuidad operativa.</p>
     </div>
   </section>
 
-  <section data-title="Políticas Corporativas">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
+  <section data-title="Políticas Corporativas" aria-label="Sección 3: Políticas Corporativas">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="" loading="lazy"></div>
     <h2><span class="section-number">3</span>Políticas Corporativas</h2>
-    <p>Estas son las políticas esenciales que rigen nuestro actuar diario en PBI. Haz clic en cada una para conocer su alcance:</p>
+    <p class="stagger">Estas son las políticas esenciales que rigen nuestro actuar diario en PBI. Haz clic en cada una para conocer su alcance:</p>
 
-    <details>
+    <details class="stagger">
       <summary>📌 Política Integral HSEQ</summary>
       <p>Establece nuestro compromiso con la protección de la vida, la salud, el ambiente y la calidad en todos los procesos.</p>
-      <p><a href="https://drive.google.com/open?id=1To8ksi0_bzYq_hzyExQr8FiCRMw2FOy4" target="_blank">📄 Ver documento PDF completo →</a></p>
+      <p><a href="https://drive.google.com/open?id=1To8ksi0_bzYq_hzyExQr8FiCRMw2FOy4" target="_blank" rel="noopener">📄 Ver documento PDF completo →</a></p>
     </details>
 
-    <details>
+    <details class="stagger">
       <summary>🚫 Política de Prevención SPA</summary>
       <p>Fomenta ambientes seguros y saludables, orientadas a reducir los riesgos asociados al uso de sustancias psicoactivas. <strong>Cero alcohol · Cero drogas.</strong></p>
-      <p><a href="https://drive.google.com/open?id=19_eRtxWZ1DvwmY0pnxqImaBqKB7KbdRr" target="_blank">📄 Ver documento PDF completo →</a></p>
+      <p><a href="https://drive.google.com/open?id=19_eRtxWZ1DvwmY0pnxqImaBqKB7KbdRr" target="_blank" rel="noopener">📄 Ver documento PDF completo →</a></p>
     </details>
 
-    <details>
+    <details class="stagger">
       <summary>🚗 Política de Seguridad Vial</summary>
       <p>Promueve una cultura de movilidad segura dentro y fuera de nuestras instalaciones para todos los colaboradores y visitantes.</p>
-      <p><a href="https://drive.google.com/open?id=1NAmg1SaRJ_Rzt3DeqWVO9znXfWT3OZOA" target="_blank">📄 Ver documento PDF completo →</a></p>
+      <p><a href="https://drive.google.com/open?id=1NAmg1SaRJ_Rzt3DeqWVO9znXfWT3OZOA" target="_blank" rel="noopener">📄 Ver documento PDF completo →</a></p>
     </details>
   </section>
 
-  <section data-title="Peligros y Riesgos Generales">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
+  <section data-title="Peligros y Riesgos Generales" aria-label="Sección 4: Peligros y Riesgos Generales">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="" loading="lazy"></div>
     <h2><span class="section-number">4</span>Peligros y Riesgos Generales</h2>
-    <p>Durante tu visita a Planta Corrales podrías estar expuesto a los siguientes peligros. Despliega cada uno para conocer la medida preventiva:</p>
+    <p class="stagger">Durante tu visita podrías estar expuesto a los siguientes peligros. Despliega cada uno para conocer la medida preventiva:</p>
 
-    <details>
+    <details class="stagger">
       <summary>⚡ Riesgo Eléctrico <span class="risk-tag">ALTO</span></summary>
       <p>Tableros y equipos energizados representan peligro de electrocución o arco eléctrico. Las áreas eléctricas están debidamente señalizadas.</p>
       <span class="risk-preventiva">✅ No toques ni te acerques a equipos eléctricos sin autorización expresa del área técnica.</span>
     </details>
 
-    <details>
+    <details class="stagger">
       <summary>🧪 Riesgos Químicos <span class="risk-tag">ALTO</span></summary>
       <p>Exposición a combustibles, lubricantes, ácidos u otros productos que pueden causar quemaduras, intoxicación o reacciones alérgicas.</p>
       <span class="risk-preventiva">✅ Usa siempre el EPP correspondiente y no manipules sustancias químicas sin autorización y entrenamiento.</span>
     </details>
 
-    <details>
+    <details class="stagger">
       <summary>⚙️ Riesgos Mecánicos <span class="risk-tag">ALTO</span></summary>
       <p>Equipos rotativos, poleas, fajas y herramientas en operación pueden generar atrapamientos, cortes o golpes graves.</p>
       <span class="risk-preventiva">✅ Mantente fuera del alcance de equipos en movimiento y respeta las zonas demarcadas.</span>
     </details>
 
-    <details>
-      <summary>❄️ Riesgos Climáticos (Bajas Temperaturas) <span class="risk-tag">MEDIO</span></summary>
+    <details class="stagger">
+      <summary>❄️ Riesgos Climáticos (Bajas Temperaturas) <span class="risk-tag" style="background:#fffbeb;color:#d97706;">MEDIO</span></summary>
       <p>El clima frío de Corrales y las heladas matutinas pueden generar estrés térmico (hipotermia leve) y crear superficies o pasarelas metálicas resbalosas por escarcha.</p>
       <span class="risk-preventiva">✅ Acude siempre con ropa abrigada adecuada, camina con precaución en áreas metálicas y usa calzado antideslizante.</span>
     </details>
 
-    <details>
-      <summary>🏔️ Riesgo por Altitud (Soroche) <span class="risk-tag">MEDIO</span></summary>
+    <details class="stagger">
+      <summary>🏔️ Riesgo por Altitud (Soroche) <span class="risk-tag" style="background:#fffbeb;color:#d97706;">MEDIO</span></summary>
       <p>La altura sobre el nivel del mar puede generar fatiga rápida, mareos o dificultad respiratoria en visitantes no aclimatados, especialmente al subir escaleras.</p>
       <span class="risk-preventiva">✅ Mantente hidratado, evita movimientos bruscos o correr, y reporta inmediatamente si te sientes mareado.</span>
     </details>
   </section>
 
-  <section data-title="Las 10 Reglas de Oro">
-    <div class="mascota"><img src="https://i.postimg.cc/fRBGStH9/diez.png" alt="Escudo 10" loading="lazy"></div>
+  <section data-title="Las 10 Reglas de Oro" aria-label="Sección 5: Las 10 Reglas de Oro">
+    <div class="mascota"><img src="https://i.postimg.cc/fRBGStH9/diez.png" alt="Escudo 10 Reglas" loading="lazy"></div>
     <h2><span class="section-number">5</span>Las 10 Reglas de Oro</h2>
-    <p>Estos compromisos son <strong>innegociables</strong>. Su cumplimiento protege la vida de todos:</p>
+    <p class="stagger">Estos compromisos son <strong>innegociables</strong>. Su cumplimiento protege la vida de todos:</p>
 
     <div class="rules-grid">
-      <div class="rule-card">
+      <div class="rule-card stagger">
         <div class="rule-num">1</div>
         <h4>Antes de empezar, revisa y planifica</h4>
         <ul>
@@ -1083,7 +1287,7 @@
           <li>Verifica que exista el procedimiento PON y anexos.</li>
         </ul>
       </div>
-      <div class="rule-card">
+      <div class="rule-card stagger">
         <div class="rule-num">2</div>
         <h4>Aísla bien las energías peligrosas</h4>
         <ul>
@@ -1092,7 +1296,7 @@
           <li>No retires bloqueos sin autorización.</li>
         </ul>
       </div>
-      <div class="rule-card">
+      <div class="rule-card stagger">
         <div class="rule-num">3</div>
         <h4>Cuidado con trabajos en caliente</h4>
         <ul>
@@ -1101,7 +1305,7 @@
           <li>Retira materiales inflamables del área.</li>
         </ul>
       </div>
-      <div class="rule-card">
+      <div class="rule-card stagger">
         <div class="rule-num">4</div>
         <h4>Con cargas, no te la juegues</h4>
         <ul>
@@ -1110,7 +1314,7 @@
           <li>Mantén comunicación clara con el operador.</li>
         </ul>
       </div>
-      <div class="rule-card">
+      <div class="rule-card stagger">
         <div class="rule-num">5</div>
         <h4>Protégete al trabajar en altura</h4>
         <ul>
@@ -1119,7 +1323,7 @@
           <li>Verifica tu equipo antes de usarlo.</li>
         </ul>
       </div>
-      <div class="rule-card">
+      <div class="rule-card stagger">
         <div class="rule-num">6</div>
         <h4>Conduce con responsabilidad</h4>
         <ul>
@@ -1128,7 +1332,7 @@
           <li>Respeta los límites de velocidad.</li>
         </ul>
       </div>
-      <div class="rule-card">
+      <div class="rule-card stagger">
         <div class="rule-num">7</div>
         <h4>Usa siempre tu EPP</h4>
         <ul>
@@ -1137,7 +1341,7 @@
           <li>Aplica siempre, incluso en tareas cortas.</li>
         </ul>
       </div>
-      <div class="rule-card">
+      <div class="rule-card stagger">
         <div class="rule-num">8</div>
         <h4>Maneja sustancias peligrosas</h4>
         <ul>
@@ -1146,7 +1350,7 @@
           <li>Actúa de inmediato en caso de derrames.</li>
         </ul>
       </div>
-      <div class="rule-card">
+      <div class="rule-card stagger">
         <div class="rule-num">9</div>
         <h4>No toques equipos eléctricos sin permiso</h4>
         <ul>
@@ -1155,8 +1359,8 @@
           <li>Usa herramientas certificadas.</li>
         </ul>
       </div>
-      <div class="rule-card" style="border-top-color: var(--naranja);">
-        <div class="rule-num" style="background: linear-gradient(135deg, var(--naranja), var(--naranja-bright));">10</div>
+      <div class="rule-card stagger" style="border-top-color: var(--naranja);">
+        <div class="rule-num" style="background: var(--naranja);">10</div>
         <h4>Si no es seguro, detente</h4>
         <ul>
           <li>Tienes derecho y deber de detener tareas peligrosas.</li>
@@ -1167,48 +1371,51 @@
     </div>
   </section>
 
-  <section data-title="Permisos de Trabajo y ATS">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
-    <h2><span class="section-number">6</span>Rutina vs. Permisos de Trabajo</h2>
-    <p>Para evitar burocracia innecesaria y enfocarnos en el riesgo real, en Planta Corrales dividimos las tareas en dos categorías. <strong>El ATS siempre es obligatorio</strong>, pero el Permiso de Trabajo (PT) depende de la tarea:</p>
+  <section data-title="Permisos de Trabajo (INS-HSEQ-01)" aria-label="Sección 6: Permisos de Trabajo">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="" loading="lazy"></div>
+    <h2><span class="section-number">6</span>Permisos de Trabajo (INS-HSEQ-01) [cite: 1, 2, 4]</h2>
+    <p class="stagger">El Sistema de Permisos de Trabajo (SPT) es un pilar fundamental de seguridad[cite: 123]. Para asegurar la integridad en PBI, operamos bajo los siguientes roles y lineamientos:</p>
 
-    <div class="grid-2">
-      <div class="card" style="border-left-color: var(--verde);">
-        <h4>✅ Tareas Rutinarias</h4>
-        <p style="font-size:0.9rem; color:#555;">Actividades del día a día, repetitivas y de bajo impacto (ej. recorridos de inspección, limpieza general, toma de lecturas).</p>
-        <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
-        <strong style="color:var(--verde);">Requisitos obligatorios:</strong>
-        <ul style="font-size:0.9rem; margin-top:8px;">
-          <li>Procedimiento Operativo Normalizado (PON)</li>
-          <li>Análisis de Trabajo Seguro (ATS)</li>
-        </ul>
+    <div class="grid-2 stagger">
+      <div class="card">
+        <div class="card-icon" style="background:#fef2f2; color:#dc2626;">🛠️</div>
+        <h4>El Ejecutante (AE)</h4>
+        <p style="font-size:0.85rem; color:var(--texto-secondary);">Es el contratista o líder técnico que ejecuta la tarea. <strong>Su deber es solicitar el permiso</strong>, liderar al equipo y verificar que los controles se mantengan[cite: 27, 28, 92, 93, 180].</p>
       </div>
-
-      <div class="card" style="border-left-color: var(--rojo);">
-        <h4>⚠️ No Rutinarias o de Alto Riesgo</h4>
-        <p style="font-size:0.9rem; color:#555;">Trabajos que se salen de la operación normal o exponen al trabajador a energías peligrosas, alturas, soldadura, etc.</p>
-        <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
-        <strong style="color:var(--rojo);">Requisitos obligatorios:</strong>
-        <ul style="font-size:0.9rem; margin-top:8px;">
-          <li><strong>Permiso de Trabajo (PT) firmado</strong></li>
-          <li>Análisis de Trabajo Seguro (ATS) específico</li>
-          <li>Certificados (Alturas, LOTO, etc.)</li>
-        </ul>
+      <div class="card">
+        <div class="card-icon" style="background:#fffbeb; color:#d97706;">📍</div>
+        <h4>Autoridad Local (AAL)</h4>
+        <p style="font-size:0.85rem; color:var(--texto-secondary);">Operador o supervisor de campo de PBI. Valida en sitio que sea seguro, <strong>lidera la charla de inicio</strong> y entrega el área al AE[cite: 23, 24, 83, 84, 180].</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:#f0fdf4; color:#16a34a;">✍️</div>
+        <h4>Autoridad de Área (AA)</h4>
+        <p style="font-size:0.85rem; color:var(--texto-secondary);">Supervisor de Planta que tiene el control operativo. <strong>Revisa, aprueba y firma los permisos</strong> para que el trabajo inicie[cite: 25, 26, 75].</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:#f5f3ff; color:#7c3aed;">🔐</div>
+        <h4>Autoridad Aislante (AI)</h4>
+        <p style="font-size:0.85rem; color:var(--texto-secondary);">Especialista técnico que ejecuta y documenta los bloqueos (LOTO) físicos de equipos, aislando energía peligrosa[cite: 29, 107, 111, 288].</p>
       </div>
     </div>
 
-    <div class="card" style="border-left-color: var(--azul-medio); margin-top: 20px;">
-      <h4>⚙️ El proceso para un Permiso de Trabajo (PT)</h4>
-      <p style="font-size: 0.9rem; margin-bottom: 0;">Si tu labor cae en Alto Riesgo, el <strong>Contratista</strong> debe elaborar el ATS y solicitar el PT bajo el procedimiento INS-HSEQ-01. La <strong>Autoridad de Área (PBI)</strong> validará las condiciones en campo y firmará la autorización antes de que inicies.</p>
+    <div class="card stagger" style="border-left-color: var(--naranja); margin-top: 14px;">
+      <h4 style="color: var(--naranja);">⏳ Vigencias y Suspensión del Permiso</h4>
+      <ul style="font-size: 0.88rem; color: var(--texto-secondary);">
+        <li><strong>Trabajos en Frío y Eléctricos:</strong> Vigencia de 12 horas (un turno)[cite: 199, 318].</li>
+        <li><strong>Trabajos en Caliente:</strong> Vigencia máxima de 24 horas (dos turnos continuos)[cite: 198, 318].</li>
+        <li>Todos los permisos deben revalidarse obligatoriamente en cada cambio de turno de la Autoridad Ejecutante (AE) o de Área Local (AAL)[cite: 197, 252].</li>
+        <li>🚨 Si un trabajo es suspendido o hay inactividad por <strong>más de 48 horas</strong>, el permiso muere y se debe tramitar uno nuevo[cite: 272, 279].</li>
+      </ul>
     </div>
   </section>
 
-  <section data-title="Riesgos: Tratamiento y Compresión">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
+  <section data-title="Riesgos: Tratamiento y Compresión" aria-label="Sección 7: Riesgos de Tratamiento y Compresión">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="" loading="lazy"></div>
     <h2><span class="section-number">7</span>Riesgos Específicos: Tratamiento y Compresión</h2>
 
-    <div class="emergency-banner" style="background: linear-gradient(135deg, #e65100, #b71c1c); animation: none; box-shadow: 0 4px 16px rgba(230,81,0,0.4);">
-      <span class="e-ico" aria-hidden="true">⚠️</span>
+    <div class="emergency-banner stagger" style="background: linear-gradient(135deg, #ea580c, #b91c1c);">
+      <span class="e-ico">⚠️</span>
       <div class="e-text">
         <strong>Contexto de alto riesgo</strong>
         Estás en una planta de gas con procesos de alta presión y temperatura. Mantén la alerta permanente.
@@ -1216,160 +1423,160 @@
     </div>
 
     <div class="grid-2">
-      <div class="card" style="border-left-color: #7b2d8b;">
-        <div class="card-icon" style="background:#f3e5f5; font-size:1.5rem;" aria-hidden="true">🔊</div>
+      <div class="card stagger" style="border-left-color: #7c3aed;">
+        <div class="card-icon" style="background:#f5f3ff; font-size:1.4rem;">🔊</div>
         <h4>Ruido Industrial (Compresores)</h4>
-        <p style="font-size:0.9rem;">Las áreas de compresión generan niveles de ruido altos que superan los límites permitidos.</p>
+        <p style="font-size:0.88rem;">Las áreas de compresión generan niveles de ruido altos que superan los límites permitidos.</p>
         <span class="risk-preventiva">Uso permanente de protección auditiva. Doble protección si se indica en la zona.</span>
       </div>
 
-      <div class="card" style="border-left-color: #1565c0;">
-        <div class="card-icon" style="background:#e3f2fd; font-size:1.5rem;" aria-hidden="true">💨</div>
+      <div class="card stagger" style="border-left-color: #2563eb;">
+        <div class="card-icon" style="background:#eff6ff; font-size:1.4rem;">💨</div>
         <h4>Altas Presiones</h4>
-        <p style="font-size:0.9rem;">Tuberías y recipientes operando a alta presión con riesgo de proyección de fluidos.</p>
+        <p style="font-size:0.88rem;">Tuberías y recipientes operando a alta presión con riesgo de proyección de fluidos.</p>
         <span class="risk-preventiva">Prohibido golpear tuberías, abrir válvulas sin autorización o pararse frente a válvulas de alivio.</span>
       </div>
 
-      <div class="card" style="border-left-color: var(--rojo);">
-        <div class="card-icon" style="background:#fff5f5; font-size:1.5rem;" aria-hidden="true">🔥</div>
+      <div class="card stagger" style="border-left-color: var(--rojo);">
+        <div class="card-icon" style="background:#fef2f2; font-size:1.4rem;">🔥</div>
         <h4>Atmósferas Explosivas (Ex)</h4>
-        <p style="font-size:0.9rem;">Presencia potencial de gas inflamable en zonas clasificadas como áreas Ex.</p>
+        <p style="font-size:0.88rem;">Presencia potencial de gas inflamable en zonas clasificadas como áreas Ex.</p>
         <span class="risk-preventiva">Herramientas antichispa, ropa 100% algodón antiestática y dispositivos electrónicos certificados únicamente.</span>
       </div>
 
-      <div class="card" style="border-left-color: var(--naranja);">
-        <div class="card-icon" style="background:#fff8e1; font-size:1.5rem;" aria-hidden="true">🌡️</div>
+      <div class="card stagger" style="border-left-color: var(--naranja);">
+        <div class="card-icon" style="background:#fffbeb; font-size:1.4rem;">🌡️</div>
         <h4>Superficies Calientes</h4>
-        <p style="font-size:0.9rem;">Cabezales de compresores, motores y líneas de descarga alcanzan temperaturas peligrosas.</p>
+        <p style="font-size:0.88rem;">Cabezales de compresores, motores y líneas de descarga alcanzan temperaturas peligrosas.</p>
         <span class="risk-preventiva">Evita el contacto con tuberías expuestas. Usa guantes de protección térmica adecuados.</span>
       </div>
     </div>
   </section>
 
-  <section data-title="Tareas de Alto Riesgo">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
-    <h2><span class="section-number">8</span>Tareas de Alto Riesgo</h2>
-    <p>Estas tareas requieren controles rigurosos, personal competente y <strong>Permisos Especiales de Trabajo</strong> vigentes antes de iniciar:</p>
+  <section data-title="Tareas de Alto Riesgo" aria-label="Sección 8: Tareas de Alto Riesgo">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="" loading="lazy"></div>
+    <h2><span class="section-number">8</span>Tareas de Alto Riesgo [cite: 318, 319]</h2>
+    <p class="stagger">Estas tareas requieren controles rigurosos, personal competente y <strong>Certificados de Apoyo al Permiso de Trabajo</strong> vigentes antes del inicio[cite: 22, 333, 336]:</p>
 
-    <details class="risk-details">
+    <details class="risk-details stagger">
       <summary>🧗 Trabajo en Alturas <span class="risk-tag">PERMISO ESPECIAL</span></summary>
-      <p>Aplica para tareas desde <strong>2 metros</strong> de altura (Res 4272/2021). Requiere certificación de trabajo en alturas vigente, arnés homologado, líneas de vida certificadas y permiso aprobado.</p>
+      <p>Aplica para tareas desde <strong>2 metros</strong> de altura. Requiere certificación de trabajo en alturas vigente, arnés homologado, líneas de vida certificadas y Certificado de Apoyo (FOR-HSEQ-66) aprobado[cite: 337].</p>
     </details>
 
-    <details class="risk-details">
+    <details class="risk-details stagger">
       <summary>🚧 Espacios Confinados <span class="risk-tag">PERMISO ESPECIAL</span></summary>
-      <p>Tanques, recipientes o estructuras cerradas con ventilación limitada. Requiere medición de gases (O₂, CO, H₂S, LEL), ventilación mecánica, vigía externo permanente y plan de rescate activado.</p>
+      <p>Tanques o estructuras cerradas con ventilación limitada. Requiere medición de gases (O₂, CO, H₂S, LEL), ventilación mecánica, vigía externo, plan de rescate activado y Certificado de Apoyo (FOR-HSEQ-24)[cite: 338].</p>
     </details>
 
-    <details class="risk-details">
+    <details class="risk-details stagger">
       <summary>🔥 Trabajos en Caliente <span class="risk-tag">PERMISO ESPECIAL</span></summary>
-      <p>Soldadura, corte o esmerilado en áreas con potencial de atmósferas inflamables. Requiere monitoreo continuo de atmósferas explosivas, extintores listos y eliminación de materiales inflamables en la zona.</p>
+      <p>Soldadura, oxicorte, esmerilado o uso de llama abierta en áreas con potencial de atmósferas inflamables[cite: 318]. Requiere monitoreo continuo de atmósferas explosivas, extintores listos y eliminación de materiales inflamables.</p>
     </details>
 
-    <details class="risk-details">
-      <summary>🏗️ Izaje de Cargas <span class="risk-tag">PERMISO ESPECIAL</span></summary>
-      <p>Uso de grúas, polipastos o equipos de izado. Requiere inspección previa de aparejos y eslingas, plan de izaje firmado por profesional competente y zona demarcada con señalización.</p>
+    <details class="risk-details stagger">
+      <summary>🚜 Excavación <span class="risk-tag">PERMISO ESPECIAL</span></summary>
+      <p>Intervención del suelo que requiere estudio previo de interferencias y Certificado de Apoyo de Excavación (FOR-HSEQ-25)[cite: 339].</p>
     </details>
 
-    <details class="risk-details">
+    <details class="risk-details stagger">
       <summary>⚡ Energías Peligrosas – LOTO <span class="risk-tag">PERMISO ESPECIAL</span></summary>
-      <p>Intervención en sistemas eléctricos, mecánicos o hidráulicos. Requiere bloqueo físico con candado personal, etiquetado (LOTO) y verificación de energía cero.</p>
+      <p>Intervención en sistemas energizados o con presión residual[cite: 201]. Requiere bloqueo físico con candado personal, etiquetado, P&ID actualizado marcado con los puntos de aislamiento [cite: 218] y Certificado de Aislamiento firmado (FOR-HSEQ-113/114)[cite: 340].</p>
     </details>
 
-    <div class="game-container" style="border-color: var(--naranja);">
+    <div class="game-container stagger" style="border-color: var(--naranja);">
       <div class="game-title">🎮 Mini-Juego: ¿Requiere Permiso Especial?</div>
-      <p style="font-size: 0.9rem; margin-bottom: 15px;">Toca si la tarea es de Rutina (Solo ATS) o de Alto Riesgo (Requiere PT).</p>
+      <p style="font-size: 0.9rem; margin-bottom: 15px;">Toca si la tarea es de Rutina (Solo AST) o de Alto Riesgo (Exige Permiso de Trabajo firmado).</p>
       
       <div id="game2-item-text" class="game-item" style="color: var(--azul-oscuro);">Cargando...</div>
       
       <div class="game-bins" id="game2-bins">
-        <div class="game-bin rutina" onclick="checkRisk('rutina')">Rutina (Solo ATS)</div>
-        <div class="game-bin permiso" onclick="checkRisk('permiso')">Alto Riesgo (Exige PT)</div>
+        <div class="game-bin rutina" data-risk="rutina">Rutina (Solo AST)</div>
+        <div class="game-bin permiso" data-risk="permiso">Alto Riesgo (Exige PT)</div>
       </div>
 
       <div id="game2-feedback" class="game-feedback"></div>
     </div>
   </section>
 
-  <section data-title="Gestión Ambiental">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
+  <section data-title="Gestión Ambiental" aria-label="Sección 9: Gestión Ambiental">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="" loading="lazy"></div>
     <h2><span class="section-number">9</span>Gestión Ambiental</h2>
-    <p>La correcta clasificación de residuos es una responsabilidad de todos. En Planta Corrales utilizamos el siguiente código de colores:</p>
+    <p class="stagger">La correcta clasificación de residuos es una responsabilidad de todos. En Planta Corrales utilizamos el siguiente código de colores:</p>
 
     <div class="residuo-grid">
-      <div class="residuo-card r-blanco">
-        <div class="r-ico" aria-hidden="true">♻️</div>
+      <div class="residuo-card r-blanco stagger">
+        <div class="r-ico">♻️</div>
         <h4>BLANCO · Aprovechables</h4>
         <p>Papel, cartón, plástico limpio, vidrio.</p>
       </div>
-      <div class="residuo-card r-verde">
-        <div class="r-ico" aria-hidden="true">🌿</div>
+      <div class="residuo-card r-verde stagger">
+        <div class="r-ico">🌿</div>
         <h4>VERDE · Orgánicos</h4>
         <p>Restos de comida, cáscaras, poda.</p>
       </div>
-      <div class="residuo-card r-negro">
-        <div class="r-ico" aria-hidden="true">🗑️</div>
+      <div class="residuo-card r-negro stagger">
+        <div class="r-ico">🗑️</div>
         <h4>NEGRO · No Aprovechables</h4>
         <p>Papel higiénico, servilletas usadas.</p>
       </div>
-      <div class="residuo-card r-rojo">
-        <div class="r-ico" aria-hidden="true">☣️</div>
+      <div class="residuo-card r-rojo stagger">
+        <div class="r-ico">☣️</div>
         <h4>ROJO · Peligrosos</h4>
         <p>Trapos con aceite, pintura.</p>
       </div>
     </div>
 
-    <div class="game-container">
+    <div class="game-container stagger">
       <div class="game-title">🎮 Mini-Juego: ¿Dónde va este residuo?</div>
       <p style="font-size: 0.9rem; margin-bottom: 15px;">Toca la caneca correcta para avanzar.</p>
       
       <div id="game-item-text" class="game-item">Cargando...</div>
       
       <div class="game-bins" id="game-bins">
-        <div class="game-bin blanco" onclick="checkBin('blanco')">Blanco</div>
-        <div class="game-bin verde" onclick="checkBin('verde')">Verde</div>
-        <div class="game-bin negro" onclick="checkBin('negro')">Negro</div>
-        <div class="game-bin rojo" onclick="checkBin('rojo')">Rojo</div>
+        <div class="game-bin blanco" data-bin="blanco">Blanco</div>
+        <div class="game-bin verde" data-bin="verde">Verde</div>
+        <div class="game-bin negro" data-bin="negro">Negro</div>
+        <div class="game-bin rojo" data-bin="rojo">Rojo</div>
       </div>
 
       <div id="game-feedback" class="game-feedback"></div>
     </div>
   </section>
 
-  <section data-title="Plan de Emergencias">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
+  <section data-title="Plan de Emergencias" aria-label="Sección 10: Plan de Emergencias">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="" loading="lazy"></div>
     <h2><span class="section-number">10</span>Protocolo de Emergencias</h2>
 
-    <div class="emergency-banner" style="background: linear-gradient(135deg, #b71c1c, #7f0000);">
-      <span class="e-ico" aria-hidden="true">🚨</span>
+    <div class="emergency-banner stagger">
+      <span class="e-ico">🚨</span>
       <div class="e-text">
         <strong>Planta de Gas, Compresión y Generación</strong>
         Manejamos gas directo de pozo, altas presiones y generadores eléctricos. Un error puede causar fugas severas, arco eléctrico o explosión por nube de vapor (UVCE).
       </div>
     </div>
 
-    <p style="font-weight: 600; margin-bottom: 18px;">Si escuchas la alarma o presencias un incidente, aplica estas reglas innegociables:</p>
+    <p class="stagger" style="font-weight: 600; margin-bottom: 18px;">Si escuchas la alarma o presencias un incidente, aplica estas reglas innegociables:</p>
 
     <ol class="emergency-steps">
-      <li><strong>Parada de Planta (ESD):</strong> Si hay una fuga incontrolable de gas, el personal capacitado debe presionar el botón de Parada de Emergencia (ESD) para aislar la planta de forma segura.</li>
-      <li><strong>Cero Ignición:</strong> ¡NUNCA arranques un vehículo, uses un radio convencional o saques tu celular durante una fuga! Cualquier dispositivo no certificado puede generar la chispa que detone el gas.</li>
-      <li><strong>Evacúa observando el viento:</strong> Busca de inmediato la manga de viento (windsock). Dirígete al punto de encuentro caminando con el <strong>viento cruzado (perpendicular)</strong>, nunca a favor ni en contra de la dirección del gas.</li>
-      <li><strong>Fuego en Generadores:</strong> Si la emergencia es eléctrica (generadores), aléjate rápidamente. Nunca uses agua. Los brigadistas usarán extintores de CO2 (Gas carbónico) para sofocarlo.</li>
-      <li><strong>No regreses:</strong> Preséntate en el punto de encuentro detrás de las oficinas y espera el conteo. Nadie vuelve a entrar hasta que la Autoridad del Área declare el "Fin de Emergencia".</li>
+      <li class="stagger"><strong>Parada de Planta (ESD):</strong> Si hay una fuga incontrolable de gas, el personal capacitado debe presionar el botón de Parada de Emergencia (ESD) para aislar la planta de forma segura.</li>
+      <li class="stagger"><strong>Cero Ignición:</strong> ¡NUNCA arranques un vehículo, uses un radio convencional o saques tu celular durante una fuga! Cualquier dispositivo no certificado puede generar la chispa que detone el gas.</li>
+      <li class="stagger"><strong>Evacúa observando el viento:</strong> Busca de inmediato la manga de viento (windsock). Dirígete al punto de encuentro caminando con el <strong>viento cruzado (perpendicular)</strong>, nunca a favor ni en contra de la dirección del gas.</li>
+      <li class="stagger"><strong>Fuego en Generadores:</strong> Si la emergencia es eléctrica (generadores), aléjate rápidamente. Nunca uses agua. Los brigadistas usarán extintores de CO2 (Gas carbónico) para sofocarlo.</li>
+      <li class="stagger"><strong>No regreses:</strong> Preséntate en el punto de encuentro detrás de las oficinas y espera el conteo. Nadie vuelve a entrar hasta que la Autoridad del Área declare el "Fin de Emergencia".</li>
     </ol>
   </section>
 
-  <section data-title="Plano de Evacuación">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
+  <section data-title="Plano de Evacuación" aria-label="Sección 11: Plano de Evacuación">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="" loading="lazy"></div>
     <h2><span class="section-number">11</span>Plano de Evacuación</h2>
-    <p>Identifica las salidas de emergencia y el punto de encuentro de Planta Corrales antes de iniciar cualquier actividad.</p>
+    <p class="stagger">Identifica las salidas de emergencia y el punto de encuentro de Planta Corrales antes de iniciar cualquier actividad.</p>
 
-    <div class="plano-container">
-      <img src="https://i.postimg.cc/RhQfk7f6/Plano-de-evacuacion-Corrales.png" alt="Plano de Evacuación Corrales" loading="lazy">
-      <p style="font-size: 0.78rem; color: #888; margin-top: 8px; margin-bottom: 0;">Imagen de referencia. Ubica el plano físico en tu área de trabajo.</p>
+    <div class="plano-container stagger">
+      <img src="https://i.postimg.cc/RhQfk7f6/Plano-de-evacuacion-Corrales.png" alt="Plano de evacuación de Planta Corrales con rutas de salida y punto de encuentro" loading="lazy">
+      <p style="font-size: 0.75rem; color: var(--texto-secondary); margin-top: 8px; margin-bottom: 0;">Imagen de referencia. Ubica el plano físico en tu área de trabajo.</p>
     </div>
 
-    <div class="card" style="border-left-color: var(--verde);">
+    <div class="card stagger" style="border-left-color: var(--verde);">
       <h4>✅ Recomendaciones Clave</h4>
       <ul style="margin:0;">
         <li>Ubica el punto <em>"Usted está aquí"</em> en los mapas físicos de cada área.</li>
@@ -1380,43 +1587,43 @@
     </div>
   </section>
 
-  <section data-title="Tipos de Extintores">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
+  <section data-title="Tipos de Extintores" aria-label="Sección 12: Tipos de Extintores">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="" loading="lazy"></div>
     <h2><span class="section-number">12</span>Tipos de Extintores</h2>
 
-    <div class="alerta-extintor">
-      <span aria-hidden="true">⚠️</span>
+    <div class="alerta-extintor stagger">
+      <span>⚠️</span>
       Solo personal capacitado y entrenado debe manipular los extintores. Conoce su ubicación y tipo.
     </div>
 
     <div class="extintor-container">
-      <div class="extintor-card ext-abc">
+      <div class="extintor-card ext-abc stagger">
         <h4>🟡 ABC · Polvo Químico Seco</h4>
         <div class="extintor-uso">Fuegos de clase A, B y C: papel, madera, líquidos inflamables, equipos eléctricos.</div>
-        <img src="https://i.postimg.cc/Bny0bGmN/EXTINTOR-TIPO-ABC.jpg" alt="Extintor ABC" loading="lazy">
+        <img src="https://i.postimg.cc/Bny0bGmN/EXTINTOR-TIPO-ABC.jpg" alt="Extintor tipo ABC de polvo químico seco" loading="lazy">
       </div>
-      <div class="extintor-card ext-co2">
+      <div class="extintor-card ext-co2 stagger">
         <h4>🔴 CO2 · Gas Carbónico</h4>
         <div class="extintor-uso">Equipos eléctricos y electrónicos. No deja residuo. Ideal en salas técnicas.</div>
-        <img src="https://i.postimg.cc/V6fDcJXh/TIPO-CO2.png" alt="Extintor CO2" loading="lazy">
+        <img src="https://i.postimg.cc/V6fDcJXh/TIPO-CO2.png" alt="Extintor tipo CO2 de gas carbónico" loading="lazy">
       </div>
-      <div class="extintor-card ext-agua">
+      <div class="extintor-card ext-agua stagger">
         <h4>🟢 AGUA · Solkaflam</h4>
         <div class="extintor-uso">Combustibles sólidos (madera, papel) y superficies limpias. Clase A.</div>
-        <img src="https://i.postimg.cc/28HnJH5n/Extintor-tipo-A.png" alt="Extintor Agua" loading="lazy">
+        <img src="https://i.postimg.cc/28HnJH5n/Extintor-tipo-A.png" alt="Extintor tipo agua Solkaflam" loading="lazy">
       </div>
     </div>
   </section>
 
-  <section data-title="Tarjetas de Aporte">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
+  <section data-title="Tarjetas de Aporte" aria-label="Sección 13: Tarjetas de Aporte">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="" loading="lazy"></div>
     <h2><span class="section-number">13</span>Tarjetas de Aporte</h2>
-    <p>Son el medio oficial para <strong>reportar actos inseguros, condiciones peligrosas o incidentes ambientales</strong>. Tu reporte ayuda a prevenir accidentes.</p>
+    <p class="stagger">Son el medio oficial para <strong>reportar actos inseguros, condiciones peligrosas o incidentes ambientales</strong>. Tu reporte ayuda a prevenir accidentes.</p>
 
-    <div class="grid-2" style="margin-bottom: 24px;">
+    <div class="grid-2 stagger" style="margin-bottom: 20px;">
       <div class="card" style="border-left-color: var(--naranja);">
         <h4>📢 ¿Qué reportar?</h4>
-        <ul style="margin:0; font-size:0.9rem;">
+        <ul style="margin:0; font-size:0.88rem;">
           <li>Actos inseguros observados</li>
           <li>Condiciones peligrosas en el área</li>
           <li>Incidentes ambientales (derrames, etc.)</li>
@@ -1425,7 +1632,7 @@
       </div>
       <div class="card" style="border-left-color: var(--verde);">
         <h4>🎯 ¿Por qué es importante?</h4>
-        <ul style="margin:0; font-size:0.9rem;">
+        <ul style="margin:0; font-size:0.88rem;">
           <li>Previene accidentes antes de que ocurran</li>
           <li>Mejora las condiciones de trabajo</li>
           <li>Fortalece la cultura de seguridad</li>
@@ -1434,112 +1641,112 @@
       </div>
     </div>
 
-    <div class="qr-box">
+    <div class="qr-box stagger">
       <p>📱 Escanea el QR para reportar ahora:</p>
-      <img src="https://i.postimg.cc/0Nhp4dDd/Captura-de-pantalla-2025-06-17-093430.png" alt="QR Tarjetas de Aporte" loading="lazy">
+      <img src="https://i.postimg.cc/0Nhp4dDd/Captura-de-pantalla-2025-06-17-093430.png" alt="Código QR para acceder al formulario de Tarjetas de Aporte" loading="lazy">
       <p class="qr-hint">Apunta la cámara de tu celular al código QR</p>
     </div>
   </section>
 
-  <section data-title="Normas de Comportamiento">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
+  <section data-title="Normas de Comportamiento" aria-label="Sección 14: Normas de Comportamiento">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="" loading="lazy"></div>
     <h2><span class="section-number">14</span>Normas de Comportamiento</h2>
-    <p>Se espera que cada persona que ingresa a Planta Corrales mantenga un comportamiento seguro, respetuoso y coherente con nuestra cultura:</p>
+    <p class="stagger">Se espera que cada persona que ingresa a Planta Corrales mantenga un comportamiento seguro, respetuoso y coherente con nuestra cultura:</p>
 
     <div class="grid-2">
-      <div class="norma-card">
-        <span class="n-ico" aria-hidden="true">🚭</span>
+      <div class="norma-card stagger">
+        <span class="n-ico">🚭</span>
         <h4>Cero Humo / Vapers</h4>
         <p>Prohibido fumar y usar cigarrillos electrónicos en todas las instalaciones, de acuerdo con la política HSEQ.</p>
       </div>
-      <div class="norma-card">
-        <span class="n-ico" aria-hidden="true">🤝</span>
+      <div class="norma-card stagger">
+        <span class="n-ico">🤝</span>
         <h4>Respeto y Cortesía</h4>
         <p>Dirígete con amabilidad al personal y sigue siempre las indicaciones del personal autorizado.</p>
       </div>
-      <div class="norma-card">
-        <span class="n-ico" aria-hidden="true">📸</span>
+      <div class="norma-card stagger">
+        <span class="n-ico">📸</span>
         <h4>Fotografías Restringidas</h4>
         <p>Se requieren cámaras intrínsecamente seguras en áreas clasificadas y permiso previo para fotografiar.</p>
       </div>
-      <div class="norma-card">
-        <span class="n-ico" aria-hidden="true">🛑</span>
+      <div class="norma-card stagger">
+        <span class="n-ico">🛑</span>
         <h4>No Manipules Equipos</h4>
         <p>Prohibido tocar válvulas, botones o cualquier componente operativo sin autorización y entrenamiento.</p>
       </div>
-      <div class="norma-card">
-        <span class="n-ico" aria-hidden="true">📍</span>
+      <div class="norma-card stagger">
+        <span class="n-ico">📍</span>
         <h4>Respeta las Zonas</h4>
         <p>No te desvíes de las rutas señalizadas. Permanece siempre dentro de las áreas permitidas para tu ingreso.</p>
       </div>
-      <div class="norma-card">
-        <span class="n-ico" aria-hidden="true">📵</span>
+      <div class="norma-card stagger">
+        <span class="n-ico">📵</span>
         <h4>Cero Distracciones</h4>
         <p>No uses celulares mientras te desplazas por zonas operativas, técnicas o vías vehiculares.</p>
       </div>
     </div>
   </section>
 
-  <section data-title="Seguridad Vial y Transporte">
-    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="PBI Casco" loading="lazy"></div>
+  <section data-title="Seguridad Vial y Transporte" aria-label="Sección 15: Seguridad Vial">
+    <div class="mascota"><img src="https://i.postimg.cc/CLSFNhyN/LOGO-PBI-CASCO-BLANCO.png" alt="" loading="lazy"></div>
     <h2><span class="section-number">15</span>Seguridad Vial y Transporte</h2>
-    <p>🚘 Aplica estas normas básicas de movilidad en todo momento dentro de nuestras instalaciones:</p>
+    <p class="stagger">🚘 Aplica estas normas básicas de movilidad en todo momento dentro de nuestras instalaciones:</p>
 
     <div class="vial-grid">
-      <div class="vial-card">
-        <span class="v-ico" aria-hidden="true">📵</span>
+      <div class="vial-card stagger">
+        <span class="v-ico">📵</span>
         <h4>Sin Distracciones</h4>
         <p>No uses el celular mientras conduces ni caminas por zonas vehiculares.</p>
       </div>
-      <div class="vial-card">
-        <span class="v-ico" aria-hidden="true">⏱️</span>
+      <div class="vial-card stagger">
+        <span class="v-ico">⏱️</span>
         <h4>Límite de Velocidad</h4>
         <div class="velocidad-badge">10 km/h</div>
         <p>Velocidad máxima en planta. Sin excepciones.</p>
       </div>
-      <div class="vial-card">
-        <span class="v-ico" aria-hidden="true">✅</span>
+      <div class="vial-card stagger">
+        <span class="v-ico">✅</span>
         <h4>Cinturón Siempre</h4>
         <p>Uso obligatorio para todos los ocupantes, incluso en trayectos cortos.</p>
       </div>
-      <div class="vial-card">
-        <span class="v-ico" aria-hidden="true">🅿️</span>
+      <div class="vial-card stagger">
+        <span class="v-ico">🅿️</span>
         <h4>Parqueo Seguro</h4>
         <p>Parquea en reversa (posición de salida) en zonas autorizadas.</p>
       </div>
     </div>
 
-    <div class="card" style="border-left-color: var(--rojo); margin-top: 24px; background: #fffcfc;">
+    <div class="card stagger" style="border-left-color: var(--rojo); margin-top: 24px; background: #fef2f2;">
       <h3 style="color: var(--rojo); margin-top: 0; display: flex; align-items: center; gap: 8px;">
         <span style="font-size: 1.5rem;">🚛</span> Vehículos de Carga y Transporte
       </h3>
-      <p style="font-size: 0.9rem; color: #555; margin-bottom: 0;">Todo conductor que ingrese para cargue, descargue o entrega de materiales debe obedecer las señales de tránsito internas, parquear solo en zonas autorizadas, apagar el motor durante la espera y <strong>permanecer en la cabina o área de espera designada</strong>. No deambules por las zonas operativas.</p>
+      <p style="font-size: 0.9rem; color: var(--texto-secondary); margin-bottom: 0;">Todo conductor que ingrese para cargue, descargue o entrega de materiales debe obedecer las señales de tránsito internas, parquear solo en zonas autorizadas, apagar el motor durante la espera y <strong>permanecer en la cabina o área de espera designada</strong>. No deambules por las zonas operativas.</p>
     </div>
   </section>
 
-  <section id="checklist-section" data-title="Recomendaciones Finales">
-    <div class="mascota"><img src="https://i.postimg.cc/gcX7rNgd/Logo-PBI.png" alt="Logo PBI" loading="lazy"></div>
+  <section id="checklist-section" data-title="Recomendaciones Finales" aria-label="Sección 16: Recomendaciones Finales">
+    <div class="mascota"><img src="https://i.postimg.cc/gcX7rNgd/Logo-PBI.png" alt="" loading="lazy"></div>
     <h2><span class="section-number">16</span>Recomendaciones Finales</h2>
-    <p>Antes de ingresar a la planta, confirma que cumples con todos los puntos. <strong>Debes marcar todos los ítems para continuar.</strong></p>
+    <p class="stagger">Antes de ingresar a la planta, confirma que cumples con todos los puntos. <strong>Debes marcar todos los ítems para continuar.</strong></p>
 
-    <div class="checklist-count" id="checkCount">0 de 6 completados</div>
-    <div class="checklist-progress">
+    <div class="checklist-count stagger" id="checkCount">0 de 6 completados</div>
+    <div class="checklist-progress stagger">
       <div class="checklist-progress-bar" id="checkProgressBar" style="width:0%"></div>
     </div>
 
-    <ul class="checklist-list">
-      <li id="cli-0"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Entendí los riesgos de gas de pozo, UVCE y climas extremos.</span></label></li>
-      <li id="cli-1"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Porto mi EPP completo y ropa abrigada adecuada para el área.</span></label></li>
-      <li id="cli-2"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Sé ubicar la manga de viento para evacuar de forma cruzada ante fugas.</span></label></li>
-      <li id="cli-3"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Mi ropa es 100% Algodón y antiestática para ingresar a zonas Ex.</span></label></li>
-      <li id="cli-4"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>No portaré celular sin certificación intrínsecamente segura en planta.</span></label></li>
-      <li id="cli-5"><label><input type="checkbox" class="check-item" onchange="updateChecklist()"><span>Cumpliré la política de cero alcohol, cero drogas y cero humo/vapeo.</span></label></li>
+    <ul class="checklist-list" role="group" aria-label="Lista de verificación obligatoria">
+      <li id="cli-0" class="stagger"><label><input type="checkbox" class="check-item"><span>Entendí los riesgos de gas, ATEX y climas extremos.</span></label></li>
+      <li id="cli-1" class="stagger"><label><input type="checkbox" class="check-item"><span>Porto mi EPP completo y ropa abrigada adecuada para el área.</span></label></li>
+      <li id="cli-2" class="stagger"><label><input type="checkbox" class="check-item"><span>Sé ubicar la manga de viento para evacuar de forma cruzada ante fugas.</span></label></li>
+      <li id="cli-3" class="stagger"><label><input type="checkbox" class="check-item"><span>Mi ropa es 100% Algodón y antiestática para ingresar a zonas Ex.</span></label></li>
+      <li id="cli-4" class="stagger"><label><input type="checkbox" class="check-item"><span>No portaré celular sin certificación intrínsecamente segura en planta.</span></label></li>
+      <li id="cli-5" class="stagger"><label><input type="checkbox" class="check-item"><span>Cumpliré la política de cero alcohol, cero drogas y cero humo/vapeo.</span></label></li>
     </ul>
 
-    <div id="mensaje-alerta"></div>
+    <div id="mensaje-alerta" aria-live="assertive"></div>
   </section>
 
-  <section data-title="Cierre y Cultura">
+  <section data-title="Cierre y Cultura" aria-label="Sección 17: Cierre y Cultura">
     <div class="cierre-hero">
       <span class="cierre-trophy">🏆</span>
       <h2 style="color: var(--azul-oscuro);">¡Inducción Completada!</h2>
@@ -1547,65 +1754,139 @@
     </div>
 
     <div class="video-grid">
-      <div class="video-card">
-        <div class="v-ico" aria-hidden="true">🎥</div>
+      <div class="video-card stagger">
+        <div class="v-ico">🎥</div>
         <h4>Cultura de Seguridad Industrial</h4>
-        <p style="font-size:0.84rem; color:#666; margin-bottom:10px;">Refuerza los conceptos aprendidos</p>
-        <a href="https://youtu.be/faHop1FcGNE" target="_blank">▶ Ver video →</a>
+        <p style="font-size:0.82rem; color: var(--texto-secondary); margin-bottom:8px;">Refuerza los conceptos aprendidos</p>
+        <a href="https://youtu.be/faHop1FcGNE" target="_blank" rel="noopener">▶ Ver video →</a>
       </div>
-      <div class="video-card">
-        <div class="v-ico" aria-hidden="true">🏢</div>
+      <div class="video-card stagger">
+        <div class="v-ico">🏢</div>
         <h4>Quiénes Somos — PBI</h4>
-        <p style="font-size:0.84rem; color:#666; margin-bottom:10px;">Conoce el propósito y valores corporativos</p>
-        <a href="https://youtu.be/-gRjlWdwpao" target="_blank">▶ Ver video →</a>
+        <p style="font-size:0.82rem; color: var(--texto-secondary); margin-bottom:8px;">Conoce el propósito y valores corporativos</p>
+        <a href="https://youtu.be/-gRjlWdwpao" target="_blank" rel="noopener">▶ Ver video →</a>
       </div>
     </div>
 
-    <div style="text-align: center; padding: 30px 0 10px;">
-      <p style="color: var(--gris-medio); font-size:0.9rem; margin-bottom: 20px;">Haz clic para presentar la evaluación de conocimientos y obtener tu certificado de inducción:</p>
-      <a class="final-button" href="https://docs.google.com/forms/d/e/1FAIpQLSfAjJpeeycvWsdF_uxza6CA4-6IB9Wsny7-M6fHBr-SGm_9Eg/viewform?usp=publish-editor" target="_blank">
+    <div style="text-align: center; padding: 28px 0 10px;">
+      <p style="color: var(--texto-secondary); font-size:0.88rem; margin-bottom: 18px;">Haz clic para presentar la evaluación de conocimientos y obtener tu certificado de inducción:</p>
+      <a class="final-button" href="https://docs.google.com/forms/d/e/1FAIpQLSfAjJpeeycvWsdF_uxza6CA4-6IB9Wsny7-M6fHBr-SGm_9Eg/viewform?usp=publish-editor" target="_blank" rel="noopener">
         ✅ Presentar Evaluación
       </a>
     </div>
   </section>
 
-  <div class="nav-buttons">
-    <button class="nav-btn nav-btn-prev" id="btnAnterior" onclick="prevSection()">← Anterior</button>
-    <div class="nav-step-counter" id="stepCounter">Sección 1 de 17</div>
-    <button class="nav-btn" id="btnSiguiente" onclick="nextSection()">Siguiente →</button>
-  </div>
+  <div class="swipe-hint" id="swipeHint">👉 Desliza para navegar</div>
+  <nav class="nav-buttons" aria-label="Navegación entre secciones">
+    <button class="nav-btn nav-btn-prev" id="btnAnterior" aria-label="Ir a sección anterior">← Anterior</button>
+    <div class="nav-step-counter" id="stepCounter" aria-live="polite">Sección 1 de 17</div>
+    <button class="nav-btn" id="btnSiguiente" aria-label="Ir a siguiente sección">Siguiente →</button>
+  </nav>
 
-</div>
-
-<audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
-<audio id="successSound" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3" preload="auto"></audio>
-<audio id="errorSound" src="https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3" preload="auto"></audio>
+</main>
 
 <script>
+(function() {
+  'use strict';
+
+  // ======= STATE =======
   let current = 0;
+  let direction = 'forward'; // 'forward' | 'backward'
+  const visited = new Set([0]);
+
+  // ======= DOM REFS =======
   const sections = document.querySelectorAll('section');
   const btnAnterior = document.getElementById('btnAnterior');
   const btnSiguiente = document.getElementById('btnSiguiente');
   const barraProgreso = document.getElementById('barraProgreso');
+  const progressPct = document.getElementById('progressPct');
   const checklistSection = document.getElementById('checklist-section');
   const headerBadge = document.getElementById('headerBadge');
   const headerSectionName = document.getElementById('headerSectionName');
   const stepCounter = document.getElementById('stepCounter');
   const navDotsContainer = document.getElementById('navDots');
+  const liveAnnouncer = document.getElementById('liveAnnouncer');
+  const mainContainer = document.getElementById('mainContainer');
+  const swipeHint = document.getElementById('swipeHint');
 
-  // ======= AUDIOS =======
-  const audioClick = document.getElementById("clickSound");
-  const audioSuccess = document.getElementById("successSound");
-  const audioError = document.getElementById("errorSound");
+  // ======= AUDIO ENGINE (Web Audio API) =======
+  const AudioEngine = {
+    ctx: null,
+    enabled: true,
 
-  function playClick() {
-    if (audioClick) {
-      audioClick.currentTime = 0;
-      audioClick.play().catch(e => console.log("Audio bloqueado"));
+    init() {
+      if (this.ctx) return;
+      try {
+        this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+      } catch(e) {
+        this.enabled = false;
+      }
+    },
+
+    play(type) {
+      if (!this.enabled || !this.ctx) return;
+      if (this.ctx.state === 'suspended') this.ctx.resume();
+
+      switch(type) {
+        case 'next': this._playTone([520, 680], 0.06, 'sine', 0.12); break;
+        case 'prev': this._playTone([480, 380], 0.05, 'sine', 0.1); break;
+        case 'check': this._playTone([600, 800], 0.04, 'sine', 0.08); break;
+        case 'complete': this._playChord([523, 659, 784, 1047], 0.08, 0.35); break;
+        case 'error': this._playTone([300, 200], 0.06, 'square', 0.15); break;
+        case 'open': this._playTone([440, 550], 0.03, 'sine', 0.06); break;
+      }
+    },
+
+    _playTone(freqs, vol, wave, dur) {
+      const now = this.ctx.currentTime;
+      const gain = this.ctx.createGain();
+      gain.connect(this.ctx.destination);
+      gain.gain.setValueAtTime(vol, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+
+      freqs.forEach((f, i) => {
+        const osc = this.ctx.createOscillator();
+        osc.type = wave;
+        osc.frequency.setValueAtTime(f, now + i * dur * 0.4);
+        osc.connect(gain);
+        osc.start(now + i * dur * 0.35);
+        osc.stop(now + dur + 0.05);
+      });
+    },
+
+    _playChord(freqs, vol, dur) {
+      const now = this.ctx.currentTime;
+      freqs.forEach((f, i) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(f, now);
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(vol, now + 0.04 + i * 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now + i * 0.04);
+        osc.stop(now + dur + 0.1);
+      });
     }
-  }
+  };
 
-  // ======= MINI JUEGO 1 (AMBIENTAL - SEC 9) =======
+  document.addEventListener('click', () => AudioEngine.init(), { once: true });
+  document.addEventListener('touchstart', () => AudioEngine.init(), { once: true });
+
+  // ======= BUILD NAV DOTS =======
+  sections.forEach((sec, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    const title = sec.dataset.title || ('Sección ' + (i + 1));
+    dot.setAttribute('aria-label', title);
+    dot.title = title;
+    dot.onclick = () => goTo(i);
+    navDotsContainer.appendChild(dot);
+  });
+
+  // ======= GAME 1: AMBIENTAL (SECCIÓN 9) =======
   const wasteItems = [
     { text: "Botella de plástico limpia 🥤", bin: "blanco" },
     { text: "Servilleta usada 🧻", bin: "negro" },
@@ -1623,13 +1904,15 @@
     const itemEl = document.getElementById("game-item-text");
     const binsEl = document.getElementById("game-bins");
     const feedbackEl = document.getElementById("game-feedback");
+    
+    if (!itemEl) return;
 
     if (currentGameIndex >= wasteItems.length) {
       itemEl.innerHTML = "🎉 ¡Excelente! Eres un experto reciclando.";
       itemEl.style.color = "var(--verde)";
       binsEl.style.display = "none";
       feedbackEl.textContent = "";
-      if(audioSuccess) { audioSuccess.currentTime = 0; audioSuccess.play().catch(e=>{}); }
+      AudioEngine.play('complete');
       return;
     }
     
@@ -1647,7 +1930,7 @@
     if (selectedBin === correctBin) {
       feedbackEl.style.color = "var(--verde)";
       feedbackEl.textContent = "¡Correcto! ✅";
-      if(audioSuccess) { audioSuccess.currentTime = 0; audioSuccess.play().catch(e=>{}); }
+      AudioEngine.play('check');
       
       itemEl.style.transform = "scale(0.8)";
       setTimeout(() => {
@@ -1658,7 +1941,7 @@
     } else {
       feedbackEl.style.color = "var(--rojo)";
       feedbackEl.textContent = "Ups, esa no es la caneca. Intenta de nuevo ❌";
-      if(audioError) { audioError.currentTime = 0; audioError.play().catch(e=>{}); }
+      AudioEngine.play('error');
       
       itemEl.style.animation = 'shake 0.4s';
       setTimeout(() => itemEl.style.animation = '', 400);
@@ -1666,7 +1949,13 @@
     }
   }
 
-  // ======= MINI JUEGO 2 (RIESGOS - SEC 8) =======
+  // Attach event listeners for Game 1 safely
+  document.querySelectorAll('[data-bin]').forEach(btn => {
+    btn.addEventListener('click', (e) => checkBin(e.target.dataset.bin));
+  });
+
+
+  // ======= GAME 2: PERMISOS DE TRABAJO (SECCIÓN 8) =======
   const riskItems = [
     { text: "Soldadura cerca a compresores 🔥", type: "permiso" },
     { text: "Recorrido de inspección visual 👀", type: "rutina" },
@@ -1684,13 +1973,15 @@
     const itemEl = document.getElementById("game2-item-text");
     const binsEl = document.getElementById("game2-bins");
     const feedbackEl = document.getElementById("game2-feedback");
+    
+    if(!itemEl) return;
 
     if (currentRiskIndex >= riskItems.length) {
       itemEl.innerHTML = "🛡️ ¡Perfecto! Sabes identificar los trabajos críticos.";
       itemEl.style.color = "var(--verde)";
       binsEl.style.display = "none";
       feedbackEl.textContent = "";
-      if(audioSuccess) { audioSuccess.currentTime = 0; audioSuccess.play().catch(e=>{}); }
+      AudioEngine.play('complete');
       return;
     }
     
@@ -1708,7 +1999,7 @@
     if (selectedType === correctType) {
       feedbackEl.style.color = "var(--verde)";
       feedbackEl.textContent = "¡Bien clasificado! ✅";
-      if(audioSuccess) { audioSuccess.currentTime = 0; audioSuccess.play().catch(e=>{}); }
+      AudioEngine.play('check');
       
       itemEl.style.transform = "scale(0.8)";
       setTimeout(() => {
@@ -1719,7 +2010,7 @@
     } else {
       feedbackEl.style.color = "var(--rojo)";
       feedbackEl.textContent = "Cuidado. Revisa los conceptos ❌";
-      if(audioError) { audioError.currentTime = 0; audioError.play().catch(e=>{}); }
+      AudioEngine.play('error');
       
       itemEl.style.animation = 'shake 0.4s';
       setTimeout(() => itemEl.style.animation = '', 400);
@@ -1727,26 +2018,12 @@
     }
   }
 
-  // Build nav dots
-  sections.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
-    dot.title = sections[i].dataset.title || ('Sección ' + (i + 1));
-    dot.setAttribute('aria-label', dot.title);
-    dot.onclick = () => {
-      playClick();
-      goTo(i);
-    };
-    navDotsContainer.appendChild(dot);
+  // Attach event listeners for Game 2 safely
+  document.querySelectorAll('[data-risk]').forEach(btn => {
+    btn.addEventListener('click', (e) => checkRisk(e.target.dataset.risk));
   });
 
-  function agregarSonidoCheckboxes() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(cb => {
-      cb.addEventListener('change', playClick);
-    });
-  }
-
+  // ======= CHECKLIST =======
   function updateChecklist() {
     const items = checklistSection.querySelectorAll('.check-item');
     const total = items.length;
@@ -1762,88 +2039,114 @@
       if (li) li.classList.toggle('checked-ok', cb.checked);
     });
 
-    const allChecked = (done === total);
-    
-    if (current === 15) {
-      if (allChecked) {
-        btnSiguiente.style.opacity = '1';
-        btnSiguiente.style.cursor = 'pointer';
-        
-        if(!window.checklistCompleted) {
-            if(audioSuccess) { 
-              audioSuccess.currentTime = 0;
-              audioSuccess.play().catch(e => console.log("Audio bloqueado")); 
-            }
-            window.checklistCompleted = true; 
-        }
-      } else {
-        btnSiguiente.style.opacity = '0.5';
-        btnSiguiente.style.cursor = 'not-allowed';
-        window.checklistCompleted = false;
-      }
+    if (done === total) {
+      const areaMensaje = document.getElementById('mensaje-alerta');
+      if (areaMensaje) areaMensaje.innerHTML = '';
     }
   }
 
+  checklistSection.querySelectorAll('.check-item').forEach(cb => {
+    cb.addEventListener('change', () => {
+      AudioEngine.play('check');
+      updateChecklist();
+
+      const items = checklistSection.querySelectorAll('.check-item');
+      const done = Array.from(items).filter(c => c.checked).length;
+      if (done === items.length) {
+        setTimeout(() => AudioEngine.play('complete'), 200);
+      }
+    });
+  });
+
+  // ======= SECTION TRANSITION =======
   function show(index) {
-    sections.forEach((s, i) => s.classList.toggle('active', i === index));
+    const oldSection = sections[current !== index ? current : -1];
+
+    sections.forEach((s, i) => {
+      if (i === index) {
+        s.classList.remove('exit-left', 'exit-right');
+        s.classList.add('active');
+        s.removeAttribute('hidden');
+      } else {
+        s.classList.remove('active', 'exit-left', 'exit-right');
+        s.setAttribute('hidden', '');
+      }
+    });
 
     btnAnterior.style.visibility = index === 0 ? 'hidden' : 'visible';
     btnSiguiente.style.display = index === sections.length - 1 ? 'none' : 'inline-flex';
 
-    if (index !== 15) {
-      btnSiguiente.style.opacity = '1';
-      btnSiguiente.style.cursor = 'pointer';
-    } else {
-      updateChecklist(); 
-    }
+    // Progress bar
+    const pct = Math.round((index + 1) / sections.length * 100);
+    barraProgreso.style.width = pct + '%';
+    barraProgreso.setAttribute('aria-valuenow', pct);
+    progressPct.textContent = pct + '%';
+    progressPct.classList.add('visible');
+    clearTimeout(progressPct._timer);
+    progressPct._timer = setTimeout(() => progressPct.classList.remove('visible'), 1500);
 
-    // Iniciar Juego de Permisos (Sección 8 / Índice 7)
-    if (index === 7) {
-      initGame2();
-    }
-    // Iniciar Juego Ambiental (Sección 9 / Índice 8)
-    if (index === 8) {
-      initGame1();
-    }
-
-    barraProgreso.style.width = ((index + 1) / sections.length * 100) + '%';
+    // Header info
     headerBadge.textContent = (index + 1) + ' / ' + sections.length;
     headerSectionName.textContent = sections[index].dataset.title || '';
     stepCounter.textContent = 'Sección ' + (index + 1) + ' de ' + sections.length;
 
-    document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === index));
+    // Nav dots
+    const dots = document.querySelectorAll('.nav-dot');
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === index);
+      d.classList.toggle('visited', visited.has(i) && i !== index);
+    });
+
+    visited.add(index);
+
+    const title = sections[index].dataset.title || ('Sección ' + (index + 1));
+    liveAnnouncer.textContent = 'Sección ' + (index + 1) + ' de ' + sections.length + ': ' + title;
+
+    sections[index].setAttribute('tabindex', '-1');
+    setTimeout(() => sections[index].focus({ preventScroll: true }), 100);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    if (index === sections.length - 1 && audioSuccess) {
-      audioSuccess.currentTime = 0;
-      audioSuccess.play().catch(e => console.log("Audio bloqueado"));
-    }
+    if (swipeHint && index > 0) swipeHint.style.display = 'none';
+
+    // Inicializar juegos dinámicamente si entran a la sección respectiva
+    if (index === 7) initGame2(); // Sección 8: Tareas Alto Riesgo
+    if (index === 8) initGame1(); // Sección 9: Gestión Ambiental
   }
 
   function goTo(index) {
+    if (index === current) return;
+    
+    // Checklist gate block
+    if (current === Array.from(sections).indexOf(checklistSection) && index > current) {
+      const checkboxes = checklistSection.querySelectorAll('.check-item');
+      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+      if (!allChecked) {
+        AudioEngine.play('error');
+        const areaMensaje = document.getElementById('mensaje-alerta');
+        if (!areaMensaje.querySelector('.advertencia-checklist')) {
+          areaMensaje.innerHTML = "<div class='advertencia-checklist'>⚠️ Debes completar el checklist antes de acceder a la sección final.</div>";
+        }
+        return;
+      }
+    }
+
+    direction = index > current ? 'forward' : 'backward';
+    AudioEngine.play(direction === 'forward' ? 'next' : 'prev');
     current = index;
     show(current);
   }
 
   function nextSection() {
-    playClick();
-
     if (sections[current] === checklistSection) {
       const checkboxes = checklistSection.querySelectorAll('.check-item');
       const allChecked = Array.from(checkboxes).every(cb => cb.checked);
       const areaMensaje = document.getElementById('mensaje-alerta');
 
       if (!allChecked) {
+        AudioEngine.play('error');
         if (!areaMensaje.querySelector('.advertencia-checklist')) {
           areaMensaje.innerHTML = "<div class='advertencia-checklist'>⚠️ Por favor marca todos los ítems antes de continuar.</div>";
-          setTimeout(() => {
-            const adv = areaMensaje.querySelector('.advertencia-checklist');
-            if (adv) adv.style.animation = 'shake 0.4s';
-          }, 10);
         }
-        
-        if(audioError) { audioError.currentTime = 0; audioError.play().catch(e=>{}); }
-        if (navigator.vibrate) { navigator.vibrate(200); }
         return;
       } else {
         areaMensaje.innerHTML = '';
@@ -1851,30 +2154,70 @@
     }
 
     if (current < sections.length - 1) {
+      direction = 'forward';
+      AudioEngine.play('next');
       current++;
       show(current);
     }
   }
 
   function prevSection() {
-    playClick();
-
     if (current > 0) {
+      direction = 'backward';
+      AudioEngine.play('prev');
       current--;
       show(current);
     }
   }
 
+  btnSiguiente.addEventListener('click', nextSection);
+  btnAnterior.addEventListener('click', prevSection);
+
+  // ======= KEYBOARD NAV =======
   document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSection();
-    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSection();
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); nextSection(); }
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); prevSection(); }
   });
 
-  document.addEventListener('DOMContentLoaded', () => {
-    show(0);
-    updateChecklist();
-    agregarSonidoCheckboxes();
+  // ======= SWIPE SUPPORT =======
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+
+  mainContainer.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
+    touchStartTime = Date.now();
+  }, { passive: true });
+
+  mainContainer.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    const dt = Date.now() - touchStartTime;
+
+    if (Math.abs(dx) > Math.abs(dy) * 1.5 && Math.abs(dx) > 50 && dt < 500) {
+      if (dx < 0) nextSection();
+      else        prevSection();
+    }
+  }, { passive: true });
+
+  // ======= ACCORDION SOUND =======
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) AudioEngine.play('open');
+    });
   });
+
+  // ======= INIT =======
+  show(0);
+  updateChecklist();
+
+  sections.forEach((s, i) => {
+    if (i !== 0) s.setAttribute('hidden', '');
+  });
+
+})();
 </script>
 
 </body>
